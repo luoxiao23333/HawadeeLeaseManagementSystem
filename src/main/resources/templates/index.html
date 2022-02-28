@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome Page</title>
-</head>
-<body>
-Welcome to Hawadee Lease Management System
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <header th:replace="common::header"></header>
+        <aside th:replace="common::leftSide"></aside>
+
+        <div class="content-wrapper" style="min-height: 923px;">
+            在这里放上页面
+        </div>
+
+    </div>
 </body>
 </html>
