@@ -3,12 +3,15 @@ package com.group5.hawadeeleasemanagementsystem.controller;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-@RequestMapping("/dxl")
+@RestController
+
 public class dxlController {
-    public String dxlTest(){
+    @RequestMapping("/dxl")
+    public ModelAndView dxlTest(){
         System.out.println("fufufufufufu");
-        return "dxlTest";
+        return new ModelAndView("dxl/dxlTest");
     }
 }
