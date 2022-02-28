@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dxl")
 public class dxlController {
     public String dxlTest(){
+        System.out.println("fufufufufufu");
         return "dxlTest";
     }
 }
