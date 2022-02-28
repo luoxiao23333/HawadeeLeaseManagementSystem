@@ -28,6 +28,6 @@ create table contract_info(
     `current_handler_id` int(10) references user(id) on update cascade,
     `status` int(2) not null, /* 1-processing 2-finished */
     `title` varchar(1000) not null,
-    `content` varchar(65536),
+    `content` blob(65536),
     `create_data` datetime default now()
 )ENGINE = InnoDB, charset = UTF8;
