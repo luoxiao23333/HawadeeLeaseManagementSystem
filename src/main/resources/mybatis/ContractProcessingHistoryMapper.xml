@@ -8,7 +8,7 @@
     </select>
 
     <insert id="addNewRecord">
-        insert into contract_processing_history (`contract_id`, `reason`, `status`)
-        values (#{contractId}, #{reason}, #{status});
+        insert into contract_processing_history (`contract_id`, `reason`, `status`, `process_user_id`)
+        values (#{contractId}, #{reason}, #{status}, #{processUserId});
     </insert>
 </mapper>

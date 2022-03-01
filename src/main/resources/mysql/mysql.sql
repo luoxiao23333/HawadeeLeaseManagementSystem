@@ -50,6 +50,7 @@ create table contract_info(
 create table contract_processing_history(
     `id` int(10) primary key auto_increment,
     `contract_id` int(10) references contract_info(`id`) on update cascade on delete cascade,
+    `process_user_id` int(10) references user(`id`) on update cascade on delete cascade,
     `reason` blob(65536),
     `create_date` datetime default now(),
     `status` int(2) not null /* 1-approved 2-denied */

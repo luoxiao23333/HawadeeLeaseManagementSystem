@@ -16,8 +16,8 @@
     </insert>
 
     <update id="forwardContract">
-        update contract_info set current_handler_id = (select user_id from duty2user where duty_id = #{duty_id})
-        where current_handler_id = #{contractId}
+        update contract_info set current_handler_id = (select user_id from duty2user where duty_id = #{dutyId})
+        where id = #{contractId}
     </update>
 
     <update id="finishContract">

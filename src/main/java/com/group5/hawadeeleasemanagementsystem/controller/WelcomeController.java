@@ -48,13 +48,17 @@ public class WelcomeController {
     }
 
     private void updateContractInfo(ModelAndView mv, User user){
-        List<ContractInfo> contractInfoList = contractInfoService.getContractUserPromoted(user);
-        Map<ContractInfo, List<ContractProcessingHistory>> contractProcessingHistoryMap =
-                contractInfoHistoryService.getContractProcessingHistoryMap(contractInfoList);
+        List<ContractInfo> contractsPromoted = contractInfoService.getContractUserPromoted(user);
+        List<ContractInfo> contractsNeedToProcess = contractInfoService.getContractUserNeedToProcess(user);
+        Map<ContractInfo, List<ContractProcessingHistory>> contractPromotedProcessingHistoryMap =
+                contractInfoHistoryService.getContractProcessingHistoryMap(contractsPromoted);
+        Map<ContractInfo, List<ContractProcessingHistory>> contractNeedToProcessHistoryMap =
+                contractInfoHistoryService.getContractProcessingHistoryMap(contractsNeedToProcess);
 
-        mv.addObject("contractPromoted", contractInfoList);
+        mv.addObject("contractPromoted", contractsPromoted);
         mv.addObject("contractNeedToProcess", contractInfoService.getContractUserNeedToProcess(user));
-        mv.addObject("contractProcessingHistoryMap", contractProcessingHistoryMap);
+        mv.addObject("contractPromotedProcessingHistoryMap", contractPromotedProcessingHistoryMap);
+        mv.addObject("contractNeedToProcessHistoryMap", contractNeedToProcessHistoryMap);
     }
 
     @RequestMapping(value = "doLogin")
@@ -100,7 +104,7 @@ public class WelcomeController {
                                         HttpSession session){
         User user = (User) session.getAttribute("user");
         contractInfoService.processContract(contractId, user, isApprove, reason);
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("/index");
         this.updateContractInfo(mv, user);
         return mv;
     }

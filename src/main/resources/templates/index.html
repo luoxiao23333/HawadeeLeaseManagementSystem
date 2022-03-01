@@ -87,7 +87,7 @@
                                                       th:if="${contractInfo.getStatus()}==2">Finished</span>
                                             </td>
                                             <td th:text="${contractInfo.getContent()}"></td>
-                                            <td th:text="${contractInfo.getCreateTime()}"></td>
+                                            <td th:text="${contractInfo.getCreateDate()}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -111,10 +111,10 @@
                                             <th>CreateDate</th>
                                             <th>Status</th>
                                         </tr>
-                                        <tr th:each="contractHistory:${contractProcessingHistoryMap.get(contractInfo.getId())}">
-                                            <td th:text="contractHistory.getId()"></td>
-                                            <td th:text="contractHistory.getReason()"></td>
-                                            <td th:text="contractHistory.getCreateDate()"></td>
+                                        <tr th:each="contractHistory:${contractPromotedProcessingHistoryMap.get(contractInfo)}">
+                                            <td th:text="${contractHistory.getId()}"></td>
+                                            <td th:text="${contractHistory.getReason()}"></td>
+                                            <td th:text="${contractHistory.getCreateDate()}"></td>
                                             <td>
                                                 <span class="label label-success"
                                                       th:if="${contractHistory.getStatus()}==1">Approved</span>
@@ -176,7 +176,7 @@
                                                       th:if="${contractInfo.getStatus()}==2">Finished</span>
                                             </td>
                                             <td th:text="${contractInfo.getContent()}"></td>
-                                            <td th:text="${contractInfo.getCreateTime()}"></td>
+                                            <td th:text="${contractInfo.getCreateDate()}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -190,8 +190,11 @@
                         </div>
                         <div class="col-xs-12">
                             <form th:action="@{/processing}">
-                                <div name="contractId" th:value="${contractInfo.getId()}"></div>
-                                <input type="text" name="reason">
+                                <input name="contractId" type="hidden" th:value="${contractInfo.getId()}">
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Reason" name="reason">
+                                </div>
+
                                 <button type="submit" name="isApprove" class="btn btn-success pull-right" th:value=true>
                                     Approve
                                 </button>
@@ -216,10 +219,10 @@
                                             <th>CreateDate</th>
                                             <th>Status</th>
                                         </tr>
-                                        <tr th:each="contractHistory:${contractProcessingHistoryMap.get(contractInfo.getId())}">
-                                            <td th:text="contractHistory.getId()"></td>
-                                            <td th:text="contractHistory.getReason()"></td>
-                                            <td th:text="contractHistory.getCreateDate()"></td>
+                                        <tr th:each="contractHistory:${contractNeedToProcessHistoryMap.get(contractInfo)}">
+                                            <td th:text="${contractHistory.getId()}"></td>
+                                            <td th:text="${contractHistory.getReason()}"></td>
+                                            <td th:text="${contractHistory.getCreateDate()}"></td>
                                             <td>
                                                 <span class="label label-success"
                                                       th:if="${contractHistory.getStatus()}==1">Approved</span>

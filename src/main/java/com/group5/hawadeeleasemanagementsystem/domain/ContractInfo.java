@@ -16,5 +16,5 @@ public class ContractInfo {
     private Integer status;
     private String title;
     private String content;
-    private Date createTime;
+    private Date createDate;
 }

@@ -81,6 +81,6 @@ public class ContractInfoService {
             }
         }
 
-        contractProcessingHistoryDao.addNewRecord(contractId, status, reason);
+        contractProcessingHistoryDao.addNewRecord(contractId, status, reason, user.getId());
     }
 }

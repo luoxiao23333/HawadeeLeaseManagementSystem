@@ -34,7 +34,7 @@ public class ContractProcessingHistoryService {
         return contractProcessingHistoryMap;
     }
 
-    void addNewRecord(Integer contractId, Integer status, String reason){
-        contractProcessingHistoryDao.addNewRecord(contractId, status, reason);
+    void addNewRecord(Integer contractId, Integer status, String reason, Integer processUserId){
+        contractProcessingHistoryDao.addNewRecord(contractId, status, reason, processUserId);
     }
 }
