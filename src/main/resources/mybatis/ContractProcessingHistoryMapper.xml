@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ContractProcessingHistoryDao">
+    <select id="getContractProcessingHistoryByContractId"
+            resultType="com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory">
+        select * from contract_processing_history where `contract_id` = #{contractId}
+    </select>
+
+    <insert id="addNewRecord">
+        insert into contract_processing_history (`contract_id`, `reason`, `status`)
+        values (#{contractId}, #{reason}, #{status});
+    </insert>
+</mapper>

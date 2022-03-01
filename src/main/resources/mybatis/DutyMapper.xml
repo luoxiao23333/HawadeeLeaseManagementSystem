@@ -2,5 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.DutyDao">
-
+    <select id="getDutyByUserId" resultType="com.group5.hawadeeleasemanagementsystem.domain.Duty">
+        select * from duty where duty.id in (select duty_id from duty2user where user_id = #{userId})
+    </select>
 </mapper>

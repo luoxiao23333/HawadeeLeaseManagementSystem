@@ -12,8 +12,9 @@ public class ContractInfo {
 
     private Integer id;
     private Integer currentHandlerId;
+    private Integer promoterId;
     private Integer status;
     private String title;
     private String content;
-    private Date create_time;
+    private Date createTime;
 }
