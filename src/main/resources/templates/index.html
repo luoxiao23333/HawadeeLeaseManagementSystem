@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head th:replace="common::linkHead"></head>
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
 <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+<div layout:fragment="contentWrapper">
 
-        <header th:replace="common::header"></header>
-        <aside th:replace="common::leftSide"></aside>
+    <section class="content">
+        <h4>Hello World</h4>
+    </section>
 
-        <div class="content-wrapper" style="min-height: 923px;">
-            在这里放上页面
-        </div>
+</div>
 
-    </div>
 </body>
 </html>
