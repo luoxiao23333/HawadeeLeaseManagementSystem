@@ -11,9 +11,7 @@ public class WelcomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView welcome(){
-        ModelAndView mv = new ModelAndView("/account/login");
-        mv.addObject("isShowLoginFailed", false);
-        return mv;
+        return new ModelAndView("/index");
     }
 
 }
