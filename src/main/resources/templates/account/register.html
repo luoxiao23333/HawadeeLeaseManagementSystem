@@ -80,12 +80,14 @@
         <p class="register-box-msg text-center" style="color: #ff081b" th:if="${isShowCodeWrong}==true">
             Verification Code Wrong
         </p>
+        <p class="register-box-msg text-center" style="color: #ff081b" th:if="${isShowDuplicate}==true">
+            Username has existed
+        </p>
 
     </div>
     <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
-
 <script>
     $(function () {
         $('input').iCheck({

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.UserDao">
+
+    <select id="verifyUser" resultType="com.group5.hawadeeleasemanagementsystem.domain.User">
+        select `id`, `name`, `password` from `user` where`name` = "${name}" and `password` = "${password}"
+    </select>
+
+    <select id="getUserByDuty" resultType="com.group5.hawadeeleasemanagementsystem.domain.User">
+        select * from user where `id` = (select user_id from duty2user where duty_id = #{dutyId})
+    </select>
+
+    <insert id="addUser">
+        insert into user (name, password, phone)
+        values ("${name}","${password}","${phone}");
+    </insert>
+
+</mapper>

@@ -22,7 +22,7 @@ public class SMSService {
     }
 
     private String generateCode(){
-        return String.valueOf((int)(Math.random()*9+1)*100000);
+        return String.valueOf((int)((Math.random()*9+1)*100000));
     }
 
     public String sendVerificationCode(String phoneNumber){
@@ -32,8 +32,8 @@ public class SMSService {
             com.aliyun.dysmsapi20170525.Client client =
                     createClient(AccessKeyId, AccessKeySecret);
             SendSmsRequest request = new SendSmsRequest()
-                    .setSignName("阿里云短信测试")
-                    .setTemplateCode("SMS_154950909")
+                    .setSignName("ABC商城")
+                    .setTemplateCode("SMS_197871297")
                     .setPhoneNumbers(phoneNumber)
                     .setTemplateParam("{\"code\":\"" + code + "\"}");
             client.sendSms(request);
