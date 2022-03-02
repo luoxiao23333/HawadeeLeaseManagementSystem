@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -17,21 +17,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String welcomePage(){
-        return "/login/login";
-    }
 
-
+/*
+登录
+ */
     @RequestMapping("/login")
-    public ModelAndView login(HttpServletRequest request, ModelAndView modelAndView) {
+    public ModelAndView login(HttpServletRequest request, HttpSession session, ModelAndView modelAndView) {
         UserEntity user = userService.getById(request.getParameter("userid"));
-        System.out.println(user.getEmail());
-        System.out.println("11111111111111111111111111111111111111111111111111");
-        System.out.println(user.getPassword());
-        System.out.println(request.getParameter("password"));
         if (user != null && user.getPassword().equals(request.getParameter("password"))) {
-            modelAndView.addObject("user",user);
+            //modelAndView.addObject("user",user);
+            session.setAttribute("user", user);
             modelAndView.setViewName("/index");
             return modelAndView;
         }

@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -17,19 +17,17 @@ import lombok.EqualsAndHashCode;
  * @since 2022-03-02
  */
 @Data
+@Repository
+public class PositionEntity implements Serializable {
 
-@TableName("department")
-    public class DepartmentEntity implements Serializable {
+    @TableId("position_id")
+    private Integer positionId;
 
-
-    @TableId("department_id")
+    @TableField("department_id")
     private Integer departmentId;
 
-    @TableField("department_name")
-    private String departmentName;
-
-    @TableField("chairman_number")
-    private String chairmanNumber;
+    @TableField("position_name")
+    private String positionName;
 
 
 }

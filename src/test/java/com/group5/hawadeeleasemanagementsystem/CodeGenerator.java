@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 //自动生成entity,controller,mapper,service
 public class CodeGenerator {
@@ -18,11 +20,11 @@ public class CodeGenerator {
         String projectPath = System.getProperty("user.dir");//获取项目所在目录
         globalConfig.setOutputDir(projectPath+"/src/main/java");//设置代码生成输出目录
         globalConfig.setAuthor("杜小龙");
-        globalConfig.setFileOverride(false);
+        globalConfig.setFileOverride(true);
         globalConfig.setServiceName("%sService");
-        globalConfig.setIdType(IdType.ASSIGN_UUID);
+        //globalConfig.setIdType(IdType.ASSIGN_UUID);
         globalConfig.setDateType(DateType.ONLY_DATE);
-        globalConfig.setSwagger2(true);
+        //globalConfig.setSwagger2(true);
         autoGenerator.setGlobalConfig(globalConfig);
 
         //2.设置数据源
@@ -43,5 +45,16 @@ public class CodeGenerator {
         packageConfig.setService("service");
         autoGenerator.setPackageInfo(packageConfig);
 
+        //4.策略配置
+        StrategyConfig strategy = new StrategyConfig();
+        strategy.setInclude("contrast");//设置要读取的表名，可以有多个表名
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setEntityLombokModel(true);//自动生成lombok
+        autoGenerator.setStrategy(strategy);
+
+
+        //开始生成
+        autoGenerator.execute();
     }
 }

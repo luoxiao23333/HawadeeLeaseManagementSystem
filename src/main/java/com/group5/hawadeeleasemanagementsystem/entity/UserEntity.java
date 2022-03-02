@@ -17,7 +17,7 @@ public class UserEntity {
     变量名不能有下划线，如employee_id的属性名为employeeid
      */
     @TableId("user_id")
-    private String userid;
+    private Integer userid;
     /*
     部门id
      */
