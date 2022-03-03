@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
         "com.group5.hawadeeleasemanagementsystem.controller",
         "com.group5.hawadeeleasemanagementsystem.service",
-        "com.group5.hawadeeleasemanagementsystem.domain"})
+        "com.group5.hawadeeleasemanagementsystem.domain",
+        "com.group5.hawadeeleasemanagementsystem.dao"})
 public class HawadeeLeaseManagementSystemApplication {
 
     public static void main(String[] args) {
