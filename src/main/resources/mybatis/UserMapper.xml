@@ -16,4 +16,12 @@
         values ("${name}","${password}","${phone}");
     </insert>
 
+    <update id="updatePassword">
+        update user set hawadee.user.`password` = #{newPassword} where hawadee.user.name = #{username}
+    </update>
+
+    <update id="updatePhone">
+        update user set hawadee.user.`phone` = #{newPhone} where hawadee.user.name = #{username}
+    </update>
+
 </mapper>

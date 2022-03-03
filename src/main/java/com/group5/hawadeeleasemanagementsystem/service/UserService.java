@@ -36,4 +36,12 @@ public class UserService {
         }
         return false;
     }
+
+    public void resetPassword(String username, String newPassword){
+        userDao.updatePassword(username, newPassword);
+    }
+
+    public void resetPhone(String username, String newPhone){
+        userDao.updatePhone(username, newPhone);
+    }
 }

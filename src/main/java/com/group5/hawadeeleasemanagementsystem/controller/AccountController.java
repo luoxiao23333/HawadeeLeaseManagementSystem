@@ -36,7 +36,7 @@ public class AccountController {
         ModelAndView mv = new ModelAndView();
         // login fail
         if (user == null) {
-            mv.setViewName("/login");
+            mv.setViewName("/account/login");
             mv.addObject("isShowLoginFailed", true);
             return mv;
         }
@@ -47,7 +47,7 @@ public class AccountController {
 
     }
 
-    @RequestMapping(value = "/account/registerCancel")
+    @RequestMapping(value = "/account/cancel")
     public ModelAndView registerCancel(){
         return new ModelAndView("/account/login");
     }
@@ -93,7 +93,7 @@ public class AccountController {
 
             String code = (String) session.getAttribute("code");
             if(!code.equals(verificationCode)){
-                mv.addObject("isShowCodeWrong");
+                mv.addObject("isShowCodeWrong", true);
                 return mv;
             }
 
@@ -114,5 +114,50 @@ public class AccountController {
     @RequestMapping(value = "/account/reset")
     public ModelAndView reset(){
         return new ModelAndView("/account/resetPassword");
+    }
+
+    @RequestMapping(value = "/account/doReset")
+    public ModelAndView doReset(@RequestParam String username,
+                                @RequestParam String password,
+                                @RequestParam String retypePassword,
+                                @RequestParam String phone,
+                                @RequestParam String verificationCode,
+                                @RequestParam String button,
+                                HttpSession session) throws Exception{
+        ModelAndView mv = new ModelAndView();
+
+        if(button.equals("code")){
+            String generatingCode = smsService.sendVerificationCode(phone);
+            session.setAttribute("code", generatingCode);
+            mv.setViewName("/account/resetPassword");
+            mv.addObject("isShowCodeAdded", true);
+            mv.addObject("username", username);
+            mv.addObject("password", password);
+            mv.addObject("retypePassword", retypePassword);
+            mv.addObject("phone", phone);
+            return mv;
+        }
+        else if(button.equals("reset")){
+            mv.setViewName("/account/resetPassword");
+            if(!password.equals(retypePassword)){
+                mv.addObject("isShowPasswordNotEqual", true);
+                return mv;
+            }
+
+            String code = (String) session.getAttribute("code");
+            if(!code.equals(verificationCode)){
+                mv.addObject("isShowCodeWrong", true);
+                return mv;
+            }
+
+            userService.resetPassword(username, password);
+            userService.resetPhone(username, phone);
+
+            mv.setViewName("/index");
+            return mv;
+        }
+        else{
+            throw new Exception("UnSupported button");
+        }
     }
 }

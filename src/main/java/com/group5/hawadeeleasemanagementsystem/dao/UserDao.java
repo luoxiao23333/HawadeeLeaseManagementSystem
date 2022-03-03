@@ -8,4 +8,6 @@ public interface UserDao {
     User verifyUser(User user);
     User getUserByDuty(Integer dutyId);
     void addUser(User user);
+    void updatePassword(String username, String newPassword);
+    void updatePhone(String username, String newPhone);
 }
