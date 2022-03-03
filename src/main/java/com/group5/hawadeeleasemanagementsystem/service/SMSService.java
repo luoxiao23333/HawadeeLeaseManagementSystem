@@ -18,6 +18,9 @@ public class SMSService {
         return String.valueOf((int)((Math.random()*9+1)*100000));
     }
 
+    /**
+     * @warning: 发送短信client.sendSms注释掉了，发一次5分钱，写完了测试时再开。应该发送的信息现在会打印到控制台
+     */
     public String sendVerificationCode(String phoneNumber){
         String code = generateCode();
         System.out.println("Code: " + code + "  has sent to: " + phoneNumber);
@@ -29,7 +32,7 @@ public class SMSService {
                     .setTemplateCode("SMS_197871297")
                     .setPhoneNumbers(phoneNumber)
                     .setTemplateParam("{\"code\":\"" + code + "\"}");
-            client.sendSms(request);
+            // client.sendSms(request);
         }catch (Exception e){
             e.printStackTrace();
         }
