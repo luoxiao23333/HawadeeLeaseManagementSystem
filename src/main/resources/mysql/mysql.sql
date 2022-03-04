@@ -5,7 +5,7 @@ use hawadee;
 create table department(
     `id` int(3) primary key auto_increment,
     `name` varchar(100) not null
-)ENGINE = InnoDN, charset = UTF8;
+)ENGINE = InnoDB, charset = UTF8;
 
 insert into department (name)
 values ("Directors"),("Law"),("Business");
