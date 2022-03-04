@@ -41,7 +41,6 @@ public class FileService {
     public void loadToServlet(String fileName, HttpServletResponse response)
             throws IOException {
         File file = new File(FileService.FilePath + fileName);
-        System.out.println(file.getName());
         FileInputStream inputStream = new FileInputStream(file);
         response.reset();
         response.setHeader("content-disposition", "attachment;filename=" +
