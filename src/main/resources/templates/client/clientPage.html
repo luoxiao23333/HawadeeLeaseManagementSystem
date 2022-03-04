@@ -10,7 +10,48 @@
     <aside th:replace="common::leftSide"></aside>
 
     <div class="content-wrapper" style="min-height: 923px;">
-        这是展示客户页面
+        <!-- 发起新合同 -->
+        <div class="box-header with-border">
+            <h3 class="box-title">添加客户</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" action="#" th:action="@{/client/add}">
+            <div class="box-body">
+                <!--输入客户姓名-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="name" name="name">
+                    </div>
+                </div>
+                <!--输入客户手机号码-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phone</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Phone" name="phone">
+                    </div>
+                </div>
+                <!--输入客户邮箱-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Email" name="email">
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-info pull-right">Submit</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+
+
     </div>
 
 </div>

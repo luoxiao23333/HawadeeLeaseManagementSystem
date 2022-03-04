@@ -38,7 +38,7 @@ class HawadeeLeaseManagementSystemApplicationTests {
         Iterator<Client> clientIterator = clients.iterator();
         while(clientIterator.hasNext()){
             client = clientIterator.next();
-            System.out.println(client.getName()+" "+client.getPhone()+" "+client.getEmail());
+            System.out.println(client.getId()+" "+client.getName()+" "+client.getPhone()+" "+client.getEmail());
         }
     }
 }
