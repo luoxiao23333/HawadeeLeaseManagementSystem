@@ -5,6 +5,7 @@ import com.group5.hawadeeleasemanagementsystem.dao.ContractProcessingHistoryDao;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractHistoryWithUser;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractInfo;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory;
+import com.group5.hawadeeleasemanagementsystem.domain.ContractWithUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +25,13 @@ public class ContractProcessingHistoryService {
         return contractProcessingHistoryDao.getContractProcessingHistoryByContractId(contractInfo.getId());
     }
 
-    public Map<ContractInfo,List<ContractHistoryWithUser>>
-    getContractProcessingHistoryMap(List<ContractInfo> contractInfoList){
-        Map<ContractInfo, List<ContractHistoryWithUser>> contractProcessingHistoryMap = new HashMap<>();
-        for(ContractInfo contractInfo: contractInfoList){
+    public Map<ContractWithUser,List<ContractHistoryWithUser>>
+    getContractProcessingHistoryMap(List<ContractWithUser> contractInfoList){
+        Map<ContractWithUser, List<ContractHistoryWithUser>> contractProcessingHistoryMap = new HashMap<>();
+        for(ContractWithUser contractInfo: contractInfoList){
             List<ContractHistoryWithUser> historyList =
-                    contractProcessingHistoryDao.getContractsWithUser(contractInfo.getId());
+                    contractProcessingHistoryDao.getContractsWithUser(contractInfo.getContract().getId());
             contractProcessingHistoryMap.put(contractInfo,historyList);
-            List<ContractHistoryWithUser> hus = contractProcessingHistoryDao.getContractsWithUser(contractInfo.getId());
         }
         return contractProcessingHistoryMap;
     }

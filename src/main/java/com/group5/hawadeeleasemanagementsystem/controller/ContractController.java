@@ -1,9 +1,6 @@
 package com.group5.hawadeeleasemanagementsystem.controller;
 
-import com.group5.hawadeeleasemanagementsystem.domain.ContractHistoryWithUser;
-import com.group5.hawadeeleasemanagementsystem.domain.ContractInfo;
-import com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory;
-import com.group5.hawadeeleasemanagementsystem.domain.User;
+import com.group5.hawadeeleasemanagementsystem.domain.*;
 import com.group5.hawadeeleasemanagementsystem.service.ContractInfoService;
 import com.group5.hawadeeleasemanagementsystem.service.ContractProcessingHistoryService;
 import com.group5.hawadeeleasemanagementsystem.service.UserService;
@@ -32,11 +29,11 @@ public class ContractController {
     }
 
     private void updateContractInfo(ModelAndView mv, User user){
-        List<ContractInfo> contractsPromoted = contractInfoService.getContractUserPromoted(user);
-        List<ContractInfo> contractsNeedToProcess = contractInfoService.getContractUserNeedToProcess(user);
-        Map<ContractInfo, List<ContractHistoryWithUser>> contractPromotedProcessingHistoryMap =
+        List<ContractWithUser> contractsPromoted = contractInfoService.getContractUserPromoted(user);
+        List<ContractWithUser> contractsNeedToProcess = contractInfoService.getContractUserNeedToProcess(user);
+        Map<ContractWithUser, List<ContractHistoryWithUser>> contractPromotedProcessingHistoryMap =
                 contractInfoHistoryService.getContractProcessingHistoryMap(contractsPromoted);
-        Map<ContractInfo, List<ContractHistoryWithUser>> contractNeedToProcessHistoryMap =
+        Map<ContractWithUser, List<ContractHistoryWithUser>> contractNeedToProcessHistoryMap =
                 contractInfoHistoryService.getContractProcessingHistoryMap(contractsNeedToProcess);
 
         mv.addObject("contractPromoted", contractsPromoted);

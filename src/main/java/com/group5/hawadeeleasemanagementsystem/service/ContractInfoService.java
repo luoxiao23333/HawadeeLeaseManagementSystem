@@ -4,10 +4,7 @@ import com.group5.hawadeeleasemanagementsystem.dao.ContractInfoDao;
 import com.group5.hawadeeleasemanagementsystem.dao.ContractProcessingHistoryDao;
 import com.group5.hawadeeleasemanagementsystem.dao.DutyDao;
 import com.group5.hawadeeleasemanagementsystem.dao.UserDao;
-import com.group5.hawadeeleasemanagementsystem.domain.ContractInfo;
-import com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory;
-import com.group5.hawadeeleasemanagementsystem.domain.Duty;
-import com.group5.hawadeeleasemanagementsystem.domain.User;
+import com.group5.hawadeeleasemanagementsystem.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +36,16 @@ public class ContractInfoService {
         this.dutyDao = dutyDao;
     }
 
-    public List<ContractInfo> getContractUserPromoted(User user){
+    public List<ContractWithUser> getContractUserPromoted(User user){
+        List<ContractWithUser> contractsPromoted = contractInfoDao.getContractUserPromoted(user.getId());
+        System.out.println(user.getId());
+        for(ContractWithUser c: contractsPromoted){
+            System.out.println(c.getContract().getCreateDate());
+        }
         return contractInfoDao.getContractUserPromoted(user.getId());
     }
 
-    public List<ContractInfo> getContractUserNeedToProcess(User user){
+    public List<ContractWithUser> getContractUserNeedToProcess(User user){
         return contractInfoDao.getContractUserNeedToProcess(user.getId());
     }
 

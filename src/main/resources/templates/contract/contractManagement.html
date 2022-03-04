@@ -50,12 +50,12 @@
         </div>
 
         <div th:each="contractInfo:${contractPromoted}">
-            <div class="box box-default">
+            <div class="box box-default collapsed-box">
                 <div class="box-header with-border">
-                    <h3 class="box-title" th:text="${contractInfo.getTitle()}"></h3>
+                    <h3 class="box-title" th:text="${contractInfo.getContract().getTitle()}"></h3>
 
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                         </button>
                     </div>
                     <!-- /.box-tools -->
@@ -77,17 +77,20 @@
                                         <th>Current Status</th>
                                         <th>Content</th>
                                         <th>CreateDate</th>
+                                        <th>Current Handler</th>
                                     </tr>
                                     <tr>
-                                        <td th:text="${contractInfo.getId()}"></td>
+                                        <td th:text="${contractInfo.getContract().getId()}"></td>
                                         <td>
                                                 <span class="label label-primary"
-                                                      th:if="${contractInfo.getStatus()}==1">Processing</span>
+                                                      th:if="${contractInfo.getContract().getStatus()}==1">Processing</span>
                                             <span class="label label-success"
-                                                  th:if="${contractInfo.getStatus()}==2">Finished</span>
+                                                  th:if="${contractInfo.getContract().getStatus()}==2">Finished</span>
                                         </td>
-                                        <td th:text="${contractInfo.getContent()}"></td>
-                                        <td th:text="${contractInfo.getCreateDate()}"></td>
+                                        <td th:text="${contractInfo.getContract().getContent()}"></td>
+                                        <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
+                                        <td th:if="${contractInfo.getUser()}!=null" th:text="${contractInfo.getUser().getName()}"></td>
+                                        <td th:if="${contractInfo.getUser()}==null">No Handler</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -141,12 +144,12 @@
         </div>
 
         <div th:each="contractInfo:${contractNeedToProcess}">
-            <div class="box box-default">
+            <div class="box box-default collapsed-box">
                 <div class="box-header with-border">
-                    <h3 class="box-title" th:text="${contractInfo.getTitle()}"></h3>
+                    <h3 class="box-title" th:text="${contractInfo.getContract().getTitle()}"></h3>
 
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                         </button>
                     </div>
                     <!-- /.box-tools -->
@@ -168,17 +171,19 @@
                                         <th>Current Status</th>
                                         <th>Content</th>
                                         <th>CreateDate</th>
+                                        <th>Current Handler</th>
                                     </tr>
                                     <tr>
-                                        <td th:text="${contractInfo.getId()}"></td>
+                                        <td th:text="${contractInfo.getContract().getId()}"></td>
                                         <td>
                                                 <span class="label label-primary"
-                                                      th:if="${contractInfo.getStatus()}==1">Processing</span>
+                                                      th:if="${contractInfo.getContract().getStatus()}==1">Processing</span>
                                             <span class="label label-success"
-                                                  th:if="${contractInfo.getStatus()}==2">Finished</span>
+                                                  th:if="${contractInfo.getContract().getStatus()}==2">Finished</span>
                                         </td>
-                                        <td th:text="${contractInfo.getContent()}"></td>
-                                        <td th:text="${contractInfo.getCreateDate()}"></td>
+                                        <td th:text="${contractInfo.getContract().getContent()}"></td>
+                                        <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
+                                        <td th:text="${contractInfo.getUser().getName()}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
