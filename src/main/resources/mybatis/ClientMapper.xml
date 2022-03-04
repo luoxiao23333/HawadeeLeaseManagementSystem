@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ClientDao">
+
+    <insert id="addClient">
+        insert into client (name, phone, email)
+        values ("${name}","${phone}","${email}");
+    </insert>
+
+    <select id="getClients" resultType="com.group5.hawadeeleasemanagementsystem.domain.Client">
+        select * from client;
+    </select>
+</mapper>
