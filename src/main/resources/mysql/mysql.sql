@@ -26,8 +26,8 @@ create table user(
     index(`name`)
 )ENGINE = InnoDB, charset = UTF8;
 
-insert into user (`id`,name, password) VALUES
-(1,"David Manager","1234"),(2,"John Lawyer","1234"),(3,"Bob Stuff","1234");
+insert into user (`id`,name, password, phone) VALUES
+(1,"David Manager","1234", "19981486268"),(2,"John Lawyer","1234", "19981486268"),(3,"Bob Stuff","1234", "19981486268");
 
 create table duty2user(
     `duty_id` int(3) references duty(`id`) on update cascade on delete cascade,

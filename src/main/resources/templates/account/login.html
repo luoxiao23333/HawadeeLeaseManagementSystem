@@ -38,7 +38,7 @@
       </div>
     </form>
 
-    <p th:if="${isShowLoginFailed}==true">login failed! please check your username <or></or> password</p>
+    <p th:if="${isShowLoginFailed}==true" style="color: #ff081b">login failed! please check your username <or></or> password</p>
 
     <a th:href="@{/account/reset}">I forgot my password</a><br>
     <a th:href="@{/account/register}" class="text-center">Register a new account</a>

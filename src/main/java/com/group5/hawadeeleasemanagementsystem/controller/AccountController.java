@@ -12,6 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * 账号管理
+ * 用户登陆后user会被添加到session中-> session.setAttribute("user",user);
+ * 用户登出后user会被session移除-> session.removeAttribute("user");
+ */
+
 @Controller
 public class AccountController {
 
@@ -92,7 +98,7 @@ public class AccountController {
             }
 
             String code = (String) session.getAttribute("code");
-            if(!code.equals(verificationCode)){
+            if(code == null || !code.equals(verificationCode)){
                 mv.addObject("isShowCodeWrong", true);
                 return mv;
             }
@@ -103,7 +109,7 @@ public class AccountController {
                 return mv;
             }
 
-            mv.setViewName("/index");
+            mv.setViewName("/account/login");
             return mv;
         }
         else{
@@ -159,5 +165,11 @@ public class AccountController {
         else{
             throw new Exception("UnSupported button");
         }
+    }
+
+    @RequestMapping(value = "/account/logout")
+    public ModelAndView logout(HttpSession session){
+        session.removeAttribute("user");
+        return new ModelAndView("/account/login");
     }
 }
