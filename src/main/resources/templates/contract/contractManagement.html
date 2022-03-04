@@ -110,17 +110,19 @@
                                         <th>Reason</th>
                                         <th>CreateDate</th>
                                         <th>Status</th>
+                                        <th>Handler</th>
                                     </tr>
                                     <tr th:each="contractHistory:${contractPromotedProcessingHistoryMap.get(contractInfo)}">
-                                        <td th:text="${contractHistory.getId()}"></td>
-                                        <td th:text="${contractHistory.getReason()}"></td>
-                                        <td th:text="${contractHistory.getCreateDate()}"></td>
+                                        <td th:text="${contractHistory.getHistory().getId()}"></td>
+                                        <td th:text="${contractHistory.getHistory().getReason()}"></td>
+                                        <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
                                         <td>
                                                 <span class="label label-success"
-                                                      th:if="${contractHistory.getStatus()}==1">Approved</span>
+                                                      th:if="${contractHistory.getHistory().getStatus()}==1">Approved</span>
                                             <span class="label label-danger"
-                                                  th:if="${contractHistory.getStatus()}==2">Denied</span>
+                                                  th:if="${contractHistory.getHistory().getStatus()}==2">Denied</span>
                                         </td>
+                                        <td th:text="${contractHistory.getUser().getName()}"></td>
                                     </tr>
                                     </tbody></table>
                             </div>
@@ -218,17 +220,19 @@
                                         <th>Reason</th>
                                         <th>CreateDate</th>
                                         <th>Status</th>
+                                        <th>Handler</th>
                                     </tr>
                                     <tr th:each="contractHistory:${contractNeedToProcessHistoryMap.get(contractInfo)}">
-                                        <td th:text="${contractHistory.getId()}"></td>
-                                        <td th:text="${contractHistory.getReason()}"></td>
-                                        <td th:text="${contractHistory.getCreateDate()}"></td>
+                                        <td th:text="${contractHistory.getHistory().getId()}"></td>
+                                        <td th:text="${contractHistory.getHistory().getReason()}"></td>
+                                        <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
                                         <td>
                                                 <span class="label label-success"
                                                       th:if="${contractHistory.getStatus()}==1">Approved</span>
                                             <span class="label label-danger"
                                                   th:if="${contractHistory.getStatus()}==2">Denied</span>
                                         </td>
+                                        <td th:text="${contractHistory.getUser().getName()}"></td>
                                     </tr>
                                     </tbody></table>
                             </div>
