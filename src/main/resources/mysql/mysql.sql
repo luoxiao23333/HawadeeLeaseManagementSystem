@@ -1,3 +1,4 @@
+drop database if exists hawadee;
 create database hawadee;
 use hawadee;
 
@@ -23,6 +24,7 @@ create table user(
     `name` varchar(1000) not null,
     unique(`name`),
     `password` varchar(20) not null,
+    `phone` varchar(20),
     index(`name`)
 )ENGINE = InnoDB, charset = UTF8;
 
