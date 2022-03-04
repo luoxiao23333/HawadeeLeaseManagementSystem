@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition register-page">
+<div class="register-box">
+    <!-- /.login-logo -->
+    <div class="register-logo">
+        <a href="#"><b>Hawadee </b>Lease Management System</a>
+    </div>
+
+    <div class="register-box-body" style="min-height: 400px;">
+        <p class="register-box-msg text-center">Register a new account</p>
+
+        <form action="#" th:action="@{/account/doRegister}" method="post">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="username" name="username"
+                       th:value="${username}" required>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="password" name="password"
+                       th:value="${password}" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="retype password" name="retypePassword"
+                       th:value="${retypePassword}" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+
+
+            <div class="form-group has-feedback">
+                <input type="tel" class="form-control" placeholder="Phone" name="phone"
+                       th:value="${phone}" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="tel" class="form-control" placeholder="Verification Code"
+                                   name="verificationCode">
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat"
+                            name="button" th:value="code">Send Code
+                    </button>
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <div class="col-xs-8">
+                <button type="submit" class="btn btn-primary btn-block btn-flat" name="button" th:value="register">
+                    Register
+                </button>
+            </div>
+        </form>
+        <div class="col-xs-4">
+            <form th:action="@{/account/cancel}">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">
+                    Cancel
+                </button>
+            </form>
+        </div>
+
+        <p class="register-box-msg text-center" style="color: #3d6eff" th:if="${isShowCodeAdded}==true">
+            Verification Code Has Been Sent
+        </p>
+
+        <p class="register-box-msg text-center" style="color: #ff081b" th:if="${isShowPasswordNotEqual}==true">
+            Passwords do not equal, please check
+        </p>
+
+        <p class="register-box-msg text-center" style="color: #ff081b" th:if="${isShowCodeWrong}==true">
+            Verification Code Wrong
+        </p>
+        <p class="register-box-msg text-center" style="color: #ff081b" th:if="${isShowDuplicate}==true">
+            Username has existed
+        </p>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+    });
+</script>
+</body>
+</html>
