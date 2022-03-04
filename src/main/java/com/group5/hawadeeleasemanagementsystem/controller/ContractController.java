@@ -1,5 +1,6 @@
 package com.group5.hawadeeleasemanagementsystem.controller;
 
+import com.group5.hawadeeleasemanagementsystem.domain.ContractHistoryWithUser;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractInfo;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory;
 import com.group5.hawadeeleasemanagementsystem.domain.User;
@@ -33,9 +34,9 @@ public class ContractController {
     private void updateContractInfo(ModelAndView mv, User user){
         List<ContractInfo> contractsPromoted = contractInfoService.getContractUserPromoted(user);
         List<ContractInfo> contractsNeedToProcess = contractInfoService.getContractUserNeedToProcess(user);
-        Map<ContractInfo, List<ContractProcessingHistory>> contractPromotedProcessingHistoryMap =
+        Map<ContractInfo, List<ContractHistoryWithUser>> contractPromotedProcessingHistoryMap =
                 contractInfoHistoryService.getContractProcessingHistoryMap(contractsPromoted);
-        Map<ContractInfo, List<ContractProcessingHistory>> contractNeedToProcessHistoryMap =
+        Map<ContractInfo, List<ContractHistoryWithUser>> contractNeedToProcessHistoryMap =
                 contractInfoHistoryService.getContractProcessingHistoryMap(contractsNeedToProcess);
 
         mv.addObject("contractPromoted", contractsPromoted);
