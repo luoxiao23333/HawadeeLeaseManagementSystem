@@ -19,13 +19,14 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" action="#" th:action="@{/contract/newContract}">
+        <form class="form-horizontal" action="#" th:action="@{/contract/newContract}"
+              method="post" enctype="multipart/form-data">
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Title</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Title" name="title">
+                        <input type="text" class="form-control" placeholder="Title" name="title" required>
                     </div>
                 </div>
 
@@ -33,7 +34,15 @@
                     <label class="col-sm-2 control-label">Content</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Content" name="content">
+                        <input type="text" class="form-control" placeholder="Content" name="content" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Contract</label>
+
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" placeholder="Contract File" name="file" required>
                     </div>
                 </div>
 
@@ -78,6 +87,7 @@
                                         <th>Content</th>
                                         <th>CreateDate</th>
                                         <th>Current Handler</th>
+                                        <th>Contract</th>
                                     </tr>
                                     <tr>
                                         <td th:text="${contractInfo.getContract().getId()}"></td>
@@ -91,6 +101,12 @@
                                         <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
                                         <td th:if="${contractInfo.getUser()}!=null" th:text="${contractInfo.getUser().getName()}"></td>
                                         <td th:if="${contractInfo.getUser()}==null">No Handler</td>
+                                        <td>
+                                            <form th:action="@{/contract/download}">
+                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                                <input type="hidden" name="fileLoc" th:value="${contractInfo.getContract().getFileLoc()}">
+                                            </form>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
