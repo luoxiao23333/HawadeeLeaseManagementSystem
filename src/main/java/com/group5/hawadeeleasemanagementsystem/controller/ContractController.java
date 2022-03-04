@@ -103,7 +103,6 @@ public class ContractController {
     @RequestMapping(value = "/contract/download")
     public ModelAndView download(@RequestParam(name = "fileLoc") String fileLoc,
                                  HttpServletResponse response) throws IOException {
-        System.out.println(fileLoc);
         fileService.loadToServlet(fileLoc, response);
         return new ModelAndView("/contract/contractManagement");
     }
