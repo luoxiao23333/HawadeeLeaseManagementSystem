@@ -46,6 +46,7 @@ create table contract_info(
     `status` int(2) not null default 1, /* 1-processing 2-finished */
     `title` varchar(1000) not null,
     `content` blob(65536),
+    `file_loc` varchar(10000),
     `create_date` datetime default now()
 )ENGINE = InnoDB, charset = UTF8;
 
