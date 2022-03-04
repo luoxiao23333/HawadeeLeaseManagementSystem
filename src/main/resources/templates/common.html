@@ -28,13 +28,8 @@
     <link rel="stylesheet" th:href="@{/static/bower_components/bootstrap-daterangepicker/daterangepicker.css}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" th:href="@{/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- iCheck -->
+    <link rel="stylesheet" th:href="@{/static/plugins/iCheck/square/blue.css"}>
 
 </head>
 <body>
@@ -333,6 +328,30 @@
         </form>
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+
+            <li class="header">合同管理</li>
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>合同审批</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a th:href="@{/contract/contractManagement}"><i class="fa fa-circle-o"></i>制氏合同审批</a></li>
+                </ul>
+            </li>
+
+            <li class="header">项目租赁</li>
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>项目管理</span>
+                    <span class="pull-right-container">
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu tree" data-widget="tree">
             <li class="header">项目租赁</li>
             <li class="active treeview">
@@ -363,7 +382,7 @@
                 </ul>
             </li>
 
-            <li class="header">代办信息</li>
+            <li class="header">待办信息</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
@@ -411,5 +430,13 @@
     <!-- AdminLTE for demo purposes -->
     <script th:src="@{/static/dist/js/demo.js}"></script>
 </div>
+            <li class="header">待办信息</li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
 </body>
 </html>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
+
 @Service
 public class UserService {
     private UserDao userDao;

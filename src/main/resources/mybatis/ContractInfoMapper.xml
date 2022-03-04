@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ContractInfoDao">
+    <select id="getContractUserPromoted" resultType="com.group5.hawadeeleasemanagementsystem.domain.ContractInfo">
+        select * from contract_info where promoter_id = #{userId}
+    </select>
+
+    <select id="getContractUserNeedToProcess" resultType="com.group5.hawadeeleasemanagementsystem.domain.ContractInfo">
+        select * from contract_info where current_handler_id = #{userId}
+    </select>
+
+    <insert id="addNewContract">
+        insert into contract_info (promoter_id,current_handler_id, title, content) values
+        (${promoterId},${currentHandlerId},"${title}","${content}")
+    </insert>
+
+    <update id="forwardContract">
+        update contract_info set current_handler_id = (select user_id from duty2user where duty_id = #{dutyId})
+        where id = #{contractId}
+    </update>
+
+    <update id="finishContract">
+        update hawadee.contract_info set status = 2, current_handler_id=-1 where id = #{contractId}
+    </update>
+
+    <delete id="removeContract">
+        delete from hawadee.contract_info where id = #{contractId}
+    </delete>
+</mapper>
+
+
