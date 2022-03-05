@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ReimbursementInfoDao">
+
+    <resultMap id="WithUserResultMap" type="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementWithUser">
+        <association property="reimbursement" javaType="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementInfo">
+            <id property="id" column="cid"/>
+            <result property="currentHandlerId" column="current_handler_id"/>
+            <result property="promoterId" column="promoter_id"/>
+            <result property="status" column="status"/>
+            <result property="title" column="title"/>
+            <result property="content" column="content"/>
+            <result property="createDate" column="create_date"/>
+            <result property="provFileLoc" column="file_loc" />
+        </association>
+        <association property="user" javaType="com.group5.hawadeeleasemanagementsystem.domain.User">
+            <id property="id" column="uid"/>
+            <result property="name" column="name"/>
+            <result property="password" column="password"/>
+            <result property="phone" column="phone"/>
+        </association>
+    </resultMap>
+
+    <select id="getReimbursementUserPromoted" resultMap="WithUserResultMap">
+        select u.id as uid, u.name, u.password, u.phone,
+               c.id as cid, c.current_handler_id,
+               c.promoter_id, c.status, c.file_loc,
+               c.title, c.content, c.create_date
+        from user as u right join reimbursement_info as c on u.id = c.current_handler_id
+        where c.promoter_id = #{userId}
+    </select>
+
+    <select id="getReimbursementUserNeedToProcess" resultMap="WithUserResultMap">
+        select u.id as uid, u.name, u.password, u.phone,
+               c.id as cid, c.current_handler_id,
+               c.promoter_id, c.status, c.file_loc,
+               c.title, c.content, c.create_date
+        from user as u inner join reimbursement_info as c on u.id = c.current_handler_id
+        where c.current_handler_id = #{userId}
+    </select>
+
+    <insert id="addNewReimbursement">
+        insert into reimbursement_info (promoter_id,current_handler_id, title, content, file_loc) values
+            (${promoterId},${currentHandlerId},"${title}","${content}", "${provFileLoc}")
+    </insert>
+
+    <update id="forwardReimbursement">
+        update reimbursement_info set current_handler_id = (select user_id from duty2user where duty_id = #{dutyId})
+        where id = #{reimbursementId}
+    </update>
+
+    <update id="finishReimbursement">
+        update hawadee.reimbursement_info set status = 2, current_handler_id=-1 where id = #{reimbursementId}
+    </update>
+
+    <delete id="removeReimbursement">
+        delete from hawadee.reimbursement_info where id = #{reimbursementId}
+    </delete>
+</mapper>
+
+
