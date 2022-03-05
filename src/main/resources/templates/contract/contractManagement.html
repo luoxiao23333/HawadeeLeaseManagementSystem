@@ -249,9 +249,9 @@
                                         <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
                                         <td>
                                                 <span class="label label-success"
-                                                      th:if="${contractHistory.getStatus()}==1">Approved</span>
+                                                      th:if="${contractHistory.getHistory().getStatus()}==1">Approved</span>
                                             <span class="label label-danger"
-                                                  th:if="${contractHistory.getStatus()}==2">Denied</span>
+                                                  th:if="${contractHistory.getHistory().getStatus()}==2">Denied</span>
                                         </td>
                                         <td th:text="${contractHistory.getUser().getName()}"></td>
                                     </tr>
