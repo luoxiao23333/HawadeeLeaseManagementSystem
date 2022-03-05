@@ -64,3 +64,26 @@ create table comment(
     nickname varchar(1000) not null,
     content varchar(1000)
 )
+
+CREATE TABLE `reimbursement_info`  (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `current_handler_id` int NULL DEFAULT NULL,
+    `promoter_id` int NULL DEFAULT NULL,
+    `status` int NOT NULL DEFAULT 1,
+    `title` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+    `content` mediumblob NULL,
+    `file_loc` varchar(10000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+    `create_date` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE `reimbursement_processing_history`  (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `reimbursement_id` int NULL DEFAULT NULL,
+    `process_user_id` int NULL DEFAULT NULL,
+    `reason` mediumblob NULL,
+    `create_date` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+    `status` int NOT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
