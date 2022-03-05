@@ -1,5 +1,6 @@
 package com.group5.hawadeeleasemanagementsystem.service;
 
+import com.group5.hawadeeleasemanagementsystem.dao.ProjectInfoDao;
 import com.group5.hawadeeleasemanagementsystem.dao.ProjectProcessingHistoryDao;
 import com.group5.hawadeeleasemanagementsystem.domain.ProjectHistoryWithUser;
 import com.group5.hawadeeleasemanagementsystem.domain.ProjectInfo;
@@ -14,28 +15,28 @@ import java.util.Map;
 
 @Service
 public class ProjectProcessingHistoryService {
-    private ProjectProcessingHistoryDao ProjectProcessingHistoryDao;
+    private ProjectProcessingHistoryDao projectProcessingHistoryDao;
     @Autowired
-    private void setUserDao(ProjectProcessingHistoryDao ProjectProcessingHistoryDao){
-        this.ProjectProcessingHistoryDao = ProjectProcessingHistoryDao;
+    private void setUserDao(ProjectProcessingHistoryDao projectProcessingHistoryDao){
+        this.projectProcessingHistoryDao = projectProcessingHistoryDao;
     }
 
-    public List<ProjectProcessingHistory> getProjectProcessingHistoryByProject(ProjectInfo ProjectInfo){
-        return ProjectProcessingHistoryDao.getProjectProcessingHistoryByProjectId(ProjectInfo.getId());
+    public List<ProjectProcessingHistory> getProjectProcessingHistoryByProject(ProjectInfo projectInfo){
+        return projectProcessingHistoryDao.getProjectProcessingHistoryByProjectId(projectInfo.getId());
     }
 
     public Map<ProjectWithUser,List<ProjectHistoryWithUser>>
-    getProjectProcessingHistoryMap(List<ProjectWithUser> ProjectInfoList){
-        Map<ProjectWithUser, List<ProjectHistoryWithUser>> ProjectProcessingHistoryMap = new HashMap<>();
-        for(ProjectWithUser ProjectInfo: ProjectInfoList){
+    getProjectProcessingHistoryMap(List<ProjectWithUser> projectInfoList){
+        Map<ProjectWithUser, List<ProjectHistoryWithUser>> projectProcessingHistoryMap = new HashMap<>();
+        for(ProjectWithUser projectInfo: projectInfoList){
             List<ProjectHistoryWithUser> historyList =
-                    ProjectProcessingHistoryDao.getProjectsWithUser(ProjectInfo.getProject().getId());
-            ProjectProcessingHistoryMap.put(ProjectInfo,historyList);
+                    projectProcessingHistoryDao.getProjectsWithUser(projectInfo.getProject().getId());
+            projectProcessingHistoryMap.put(projectInfo,historyList);
         }
-        return ProjectProcessingHistoryMap;
+        return projectProcessingHistoryMap;
     }
 
-    void addNewRecord(Integer ProjectId, Integer status, String reason, Integer processUserId){
-        ProjectProcessingHistoryDao.addNewRecord(ProjectId, status, reason, processUserId);
+    void addNewRecord(Integer projectId, Integer status, String reason, Integer processUserId){
+        projectProcessingHistoryDao.addNewRecord(projectId, status, reason, processUserId);
     }
 }

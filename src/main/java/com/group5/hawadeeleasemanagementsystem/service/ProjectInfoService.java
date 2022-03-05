@@ -12,16 +12,16 @@ import java.util.List;
 
 @Service
 public class ProjectInfoService {
-    private ProjectInfoDao ProjectInfoDao;
+    private ProjectInfoDao projectInfoDao;
     @Autowired
-    private void setProjectInfoDao(ProjectInfoDao ProjectInfoDao){
-        this.ProjectInfoDao = ProjectInfoDao;
+    private void setProjectInfoDao(ProjectInfoDao projectInfoDao){
+        this.projectInfoDao = projectInfoDao;
     }
 
-    private ProjectProcessingHistoryDao ProjectProcessingHistoryDao;
+    private ProjectProcessingHistoryDao projectProcessingHistoryDao;
     @Autowired
-    private void setProjectProcessingHistoryDao(ProjectProcessingHistoryDao ProjectProcessingHistoryDao){
-        this.ProjectProcessingHistoryDao = ProjectProcessingHistoryDao;
+    private void setProjectProcessingHistoryDao(ProjectProcessingHistoryDao projectProcessingHistoryDao){
+        this.projectProcessingHistoryDao = projectProcessingHistoryDao;
     }
 
     private UserDao userDao;
@@ -37,52 +37,52 @@ public class ProjectInfoService {
     }
 
     public List<ProjectWithUser> getProjectUserPromoted(User user){
-        List<ProjectWithUser> ProjectsPromoted = ProjectInfoDao.getProjectUserPromoted(user.getId());
+        List<ProjectWithUser> projectsPromoted = projectInfoDao.getProjectUserPromoted(user.getId());
         System.out.println(user.getId());
-        for(ProjectWithUser c: ProjectsPromoted){
+        for(ProjectWithUser c: projectsPromoted){
             System.out.println(c.getProject().getCreateDate());
         }
-        return ProjectInfoDao.getProjectUserPromoted(user.getId());
+        return projectInfoDao.getProjectUserPromoted(user.getId());
     }
 
     public List<ProjectWithUser> getProjectUserNeedToProcess(User user){
-        return ProjectInfoDao.getProjectUserNeedToProcess(user.getId());
+        return projectInfoDao.getProjectUserNeedToProcess(user.getId());
     }
 
-    public void addNewProject(ProjectInfo ProjectInfo){
+    public void addNewProject(ProjectInfo projectInfo){
         User user = userDao.getUserByDuty(Duty.LawyerDirector.getId());
-        ProjectInfo.setCurrentHandlerId(user.getId());
-        ProjectInfoDao.addNewProject(ProjectInfo);
+        projectInfo.setCurrentHandlerId(user.getId());
+        projectInfoDao.addNewProject(projectInfo);
     }
 
-    public void forwardProject(Integer ProjectId, Duty duty){
-        ProjectInfoDao.forwardProject(ProjectId,duty.getId());
+    public void forwardProject(Integer projectId, Duty duty){
+        projectInfoDao.forwardProject(projectId,duty.getId());
     }
 
-    public void finishProject(Integer ProjectId){
-        ProjectInfoDao.finishProject(ProjectId);
+    public void finishProject(Integer projectId){
+        projectInfoDao.finishProject(projectId);
     }
 
-    public void processProject(Integer ProjectId, User user, boolean isApproved, String reason){
+    public void processProject(Integer projectId, User user, boolean isApproved, String reason){
         Integer status = isApproved? ProjectProcessingHistory.Approved : ProjectProcessingHistory.Denied;
         List<Duty> dutyList = dutyDao.getDutyByUserId(user.getId());
 
         if(isApproved){
             if(dutyList.contains(Duty.GeneralManager)){
-                this.finishProject(ProjectId);
+                this.finishProject(projectId);
             }
             else if(dutyList.contains(Duty.LawyerDirector)){
-                this.forwardProject(ProjectId, Duty.GeneralManager);
+                this.forwardProject(projectId, Duty.GeneralManager);
             }
         }else{
             if(dutyList.contains(Duty.GeneralManager)){
-                this.forwardProject(ProjectId, Duty.LawyerDirector);
+                this.forwardProject(projectId, Duty.LawyerDirector);
             }
             else if(dutyList.contains(Duty.LawyerDirector)){
-                ProjectInfoDao.removeProject(ProjectId);
+                projectInfoDao.removeProject(projectId);
             }
         }
 
-        ProjectProcessingHistoryDao.addNewRecord(ProjectId, status, reason, user.getId());
+        projectProcessingHistoryDao.addNewRecord(projectId, status, reason, user.getId());
     }
 }
