@@ -58,3 +58,23 @@ create table contract_processing_history(
     `create_date` datetime default now(),
     `status` int(2) not null /* 1-approved 2-denied */
 )ENGINE = InnoDB, charset UTF8;
+
+create table project_info(
+                              `id` int(10) primary key auto_increment,
+                              `current_handler_id` int(10) references user(id) on update cascade,
+                              `promoter_id` int(10) references user(id) on update cascade,
+                              `status` int(2) not null default 1, /* 1-processing 2-finished */
+                              `title` varchar(1000) not null,
+                              `content` blob(65536),
+                              `file_loc` varchar(10000),
+                              `create_date` datetime default now()
+)ENGINE = InnoDB, charset = UTF8;
+
+create table project_processing_history(
+                                            `id` int(10) primary key auto_increment,
+                                            `project_id` int(10) references contract_info(`id`) on update cascade on delete cascade,
+                                            `process_user_id` int(10) references user(`id`) on update cascade on delete cascade,
+                                            `reason` blob(65536),
+                                            `create_date` datetime default now(),
+                                            `status` int(2) not null /* 1-approved 2-denied */
+)ENGINE = InnoDB, charset UTF8;

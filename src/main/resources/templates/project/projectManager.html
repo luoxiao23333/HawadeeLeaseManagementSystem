@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header th:replace="common::header"></header>
+  <aside th:replace="common::leftSide"></aside>
+
+  <div class="content-wrapper" style="min-height: 923px;">
+    Welcome
+    <span th:text="${session.user.name}"></span>
+
+    <!-- 发起新合同 -->
+    <div class="box-header with-border">
+      <h3 class="box-title">New Project</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal" action="#" th:action="@{/project/newProject}"
+          method="post" enctype="multipart/form-data">
+      <div class="box-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Title" name="title" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Content</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Content" name="content" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Project</label>
+
+          <div class="col-sm-10">
+            <input type="file" class="form-control" placeholder="Contract File" name="file" required>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" class="btn btn-info pull-right">Submit</button>
+      </div>
+      <!-- /.box-footer -->
+    </form>
+
+    <div class="box-header with-border">
+      <h3 class="box-title">project What I Promoted</h3>
+    </div>
+
+    <div th:each="contractInfo:${contractPromoted}">
+      <div class="box box-default collapsed-box">
+        <div class="box-header with-border">
+          <h3 class="box-title" th:text="${contractInfo.getContract().getTitle()}"></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Detail Information</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Current Status</th>
+                    <th>Content</th>
+                    <th>CreateDate</th>
+                    <th>Current Handler</th>
+                    <th>Contract</th>
+                  </tr>
+                  <tr>
+                    <td th:text="${contractInfo.getContract().getId()}"></td>
+                    <td>
+                                                <span class="label label-primary"
+                                                      th:if="${contractInfo.getContract().getStatus()}==1">Processing</span>
+                      <span class="label label-success"
+                            th:if="${contractInfo.getContract().getStatus()}==2">Finished</span>
+                    </td>
+                    <td th:text="${contractInfo.getContract().getContent()}"></td>
+                    <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
+                    <td th:if="${contractInfo.getUser()}!=null" th:text="${contractInfo.getUser().getName()}"></td>
+                    <td th:if="${contractInfo.getUser()}==null">No Handler</td>
+                    <td>
+                      <form th:action="@{/contract/download}">
+                        <button type="submit" class="btn btn-block btn-info">Download</button>
+                        <input type="hidden" name="fileLoc" th:value="${contractInfo.getContract().getFileLoc()}">
+                      </form>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Process Track</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tbody><tr>
+                    <th>ID</th>
+                    <th>Reason</th>
+                    <th>CreateDate</th>
+                    <th>Status</th>
+                    <th>Handler</th>
+                  </tr>
+                  <tr th:each="contractHistory:${contractPromotedProcessingHistoryMap.get(contractInfo)}">
+                    <td th:text="${contractHistory.getHistory().getId()}"></td>
+                    <td th:text="${contractHistory.getHistory().getReason()}"></td>
+                    <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
+                    <td>
+                                                <span class="label label-success"
+                                                      th:if="${contractHistory.getHistory().getStatus()}==1">Approved</span>
+                      <span class="label label-danger"
+                            th:if="${contractHistory.getHistory().getStatus()}==2">Denied</span>
+                    </td>
+                    <td th:text="${contractHistory.getUser().getName()}"></td>
+                  </tr>
+                  </tbody></table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+
+    <div class="box-header with-border">
+      <h3 class="box-title">Contract What I Need to Process</h3>
+    </div>
+
+    <div th:each="contractInfo:${contractNeedToProcess}">
+      <div class="box box-default collapsed-box">
+        <div class="box-header with-border">
+          <h3 class="box-title" th:text="${contractInfo.getContract().getTitle()}"></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Detail Information</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Current Status</th>
+                    <th>Content</th>
+                    <th>CreateDate</th>
+                    <th>Current Handler</th>
+                  </tr>
+                  <tr>
+                    <td th:text="${contractInfo.getContract().getId()}"></td>
+                    <td>
+                                                <span class="label label-primary"
+                                                      th:if="${contractInfo.getContract().getStatus()}==1">Processing</span>
+                      <span class="label label-success"
+                            th:if="${contractInfo.getContract().getStatus()}==2">Finished</span>
+                    </td>
+                    <td th:text="${contractInfo.getContract().getContent()}"></td>
+                    <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
+                    <td th:text="${contractInfo.getUser().getName()}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <div class="col-xs-12">
+            <form th:action="@{/contract/processing}">
+              <input name="contractId" type="hidden" th:value="${contractInfo.getId()}">
+              <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Reason" name="reason">
+              </div>
+
+              <button type="submit" name="isApprove" class="btn btn-success pull-right" th:value=true>
+                Approve
+              </button>
+              <button type="submit" name="isApprove" class="btn btn-danger pull-right" style="margin-right: 5px;"
+                      th:value=false>
+                Denied
+              </button>
+            </form>
+          </div>
+
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Process Track</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tbody><tr>
+                    <th>ID</th>
+                    <th>Reason</th>
+                    <th>CreateDate</th>
+                    <th>Status</th>
+                    <th>Handler</th>
+                  </tr>
+                  <tr th:each="contractHistory:${contractNeedToProcessHistoryMap.get(contractInfo)}">
+                    <td th:text="${contractHistory.getHistory().getId()}"></td>
+                    <td th:text="${contractHistory.getHistory().getReason()}"></td>
+                    <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
+                    <td>
+                                                <span class="label label-success"
+                                                      th:if="${contractHistory.getStatus()}==1">Approved</span>
+                      <span class="label label-danger"
+                            th:if="${contractHistory.getStatus()}==2">Denied</span>
+                    </td>
+                    <td th:text="${contractHistory.getUser().getName()}"></td>
+                  </tr>
+                  </tbody></table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+
+        </div>
+
+        <!-- /.box-body -->
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+</body>
+</html>
