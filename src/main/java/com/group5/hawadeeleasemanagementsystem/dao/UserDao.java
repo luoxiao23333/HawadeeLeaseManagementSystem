@@ -10,5 +10,4 @@ public interface UserDao {
     void addUser(User user);
     void updatePassword(String username, String newPassword);
     void updatePhone(String username, String newPhone);
-
 }
