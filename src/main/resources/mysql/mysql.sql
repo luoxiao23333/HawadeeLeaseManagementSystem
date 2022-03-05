@@ -59,6 +59,12 @@ create table contract_processing_history(
     `status` int(2) not null /* 1-approved 2-denied */
 )ENGINE = InnoDB, charset UTF8;
 
+create table comment(
+    commentID int(10) primary key auto_increment,
+    nickname varchar(1000) not null,
+    content varchar(1000)
+)
+
 CREATE TABLE `reimbursement_info`  (
     `id` int NOT NULL AUTO_INCREMENT,
     `current_handler_id` int NULL DEFAULT NULL,
@@ -80,3 +86,4 @@ CREATE TABLE `reimbursement_processing_history`  (
     `status` int NOT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
