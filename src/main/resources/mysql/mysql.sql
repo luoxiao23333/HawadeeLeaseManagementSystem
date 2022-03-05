@@ -63,7 +63,7 @@ create table comment(
     commentID int(10) primary key auto_increment,
     nickname varchar(1000) not null,
     content varchar(1000)
-)
+)ENGINE = InnoDB, charset UTF8;
 
 CREATE TABLE `reimbursement_info`  (
     `id` int NOT NULL AUTO_INCREMENT,
