@@ -5,10 +5,14 @@
 
     <insert id="addClient">
         insert into client (name, phone, email)
-        values ("${name}","${phone}","${email}");
+        values ("${name}","${phone}","${email}")
     </insert>
 
     <select id="getClients" resultType="com.group5.hawadeeleasemanagementsystem.domain.Client">
-        select * from client;
+        select * from client
+    </select>
+
+    <select id="getAllEmail" resultType="String">
+        select email from client
     </select>
 </mapper>

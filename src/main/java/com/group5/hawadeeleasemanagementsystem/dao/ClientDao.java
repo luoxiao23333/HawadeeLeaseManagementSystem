@@ -7,4 +7,5 @@ import java.util.List;
 public interface ClientDao {
     void addClient(Client client);
     List<Client> getClients();
+    List<String> getAllEmail();
 }
