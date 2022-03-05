@@ -51,11 +51,11 @@
     </update>
 
     <update id="finishReimbursement">
-        update hawadee.reimbursement_info set status = 2, current_handler_id=-1 where id = #{reimbursementId}
+        update hawadee.reimbursement_info set status = 2, current_handler_id=-1 where id = #{reimbursementInfoID}
     </update>
 
     <delete id="removeReimbursement">
-        delete from hawadee.reimbursement_info where id = #{reimbursementId}
+        delete from hawadee.reimbursement_info where id = #{reimbursementInfoID}
     </delete>
 </mapper>
 
