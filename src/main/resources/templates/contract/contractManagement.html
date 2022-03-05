@@ -188,6 +188,7 @@
                                         <th>Content</th>
                                         <th>CreateDate</th>
                                         <th>Current Handler</th>
+                                        <th>Contract</th>
                                     </tr>
                                     <tr>
                                         <td th:text="${contractInfo.getContract().getId()}"></td>
@@ -200,6 +201,12 @@
                                         <td th:text="${contractInfo.getContract().getContent()}"></td>
                                         <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
                                         <td th:text="${contractInfo.getUser().getName()}"></td>
+                                        <td>
+                                            <form th:action="@{/contract/download}">
+                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                                <input type="hidden" name="fileLoc" th:value="${contractInfo.getContract().getFileLoc()}">
+                                            </form>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
