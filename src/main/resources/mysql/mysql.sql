@@ -58,3 +58,9 @@ create table contract_processing_history(
     `create_date` datetime default now(),
     `status` int(2) not null /* 1-approved 2-denied */
 )ENGINE = InnoDB, charset UTF8;
+
+create table comment(
+    commentID int(10) primary key auto_increment,
+    nickname varchar(1000) not null,
+    content varchar(1000)
+)
