@@ -213,7 +213,7 @@
                     </div>
                     <div class="col-xs-12">
                         <form th:action="@{/contract/processing}">
-                            <input name="contractId" type="hidden" th:value="${contractInfo.getId()}">
+                            <input name="contractId" type="hidden" th:value="${contractInfo.getContract().getId()}">
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="Reason" name="reason">
                             </div>
