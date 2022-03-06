@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header th:replace="common::header"></header>
+  <aside th:replace="common::leftSide"></aside>
+
+  <div class="content-wrapper" style="min-height: 923px;">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Email Ads</h3>
+      </div>
+      <!-- /.box-header -->
+      <form th:action="@{/client/sendemail}" method="post">
+        <div class="box-body">
+          <div class="form-group">
+            <label>邮件主题</label>
+            <input class="form-control" style="height: 60px" name="subject">
+          </div>
+          <div class="form-group">
+            <label>邮件内容</label>
+            <textarea id="compose-textarea" class="form-control" style="height: 600px; display: block" name="content">
+                 </textarea>
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <div class="pull-right">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+          </div>
+        </div>
+      </form>
+      <!-- /.box-footer -->
+    </div>
+  </div>
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+<script th:src="@{/static/plugins/iCheck/icheck.min.js}"></script>
+<script th:src="@{/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+</body>
+</html>
