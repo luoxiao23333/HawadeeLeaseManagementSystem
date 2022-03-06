@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ContractInfoDao">
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ProjectInfoDao">
 
-    <resultMap id="WithUserResultMap" type="com.group5.hawadeeleasemanagementsystem.domain.ContractWithUser">
-        <association property="contract" javaType="com.group5.hawadeeleasemanagementsystem.domain.ContractInfo">
+    <resultMap id="WithUserResultMap" type="com.group5.hawadeeleasemanagementsystem.domain.ProjectWithUser">
+        <association property="project" javaType="com.group5.hawadeeleasemanagementsystem.domain.ProjectInfo">
             <id property="id" column="cid"/>
             <result property="currentHandlerId" column="current_handler_id"/>
             <result property="promoterId" column="promoter_id"/>
@@ -22,40 +22,40 @@
         </association>
     </resultMap>
 
-    <select id="getContractUserPromoted" resultMap="WithUserResultMap">
+    <select id="getProjectUserPromoted" resultMap="WithUserResultMap">
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
                c.promoter_id, c.status, c.file_loc,
                c.title, c.content, c.create_date
-        from user as u right join contract_info as c on u.id = c.current_handler_id
+        from user as u right join project_info as c on u.id = c.current_handler_id
         where c.promoter_id = #{userId}
     </select>
 
-    <select id="getContractUserNeedToProcess" resultMap="WithUserResultMap">
+    <select id="getProjectUserNeedToProcess" resultMap="WithUserResultMap">
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
                c.promoter_id, c.status, c.file_loc,
                c.title, c.content, c.create_date
-        from user as u inner join contract_info as c on u.id = c.current_handler_id
+        from user as u inner join project_info as c on u.id = c.current_handler_id
         where c.current_handler_id = #{userId}
     </select>
 
-    <insert id="addNewContract">
-        insert into contract_info (promoter_id,current_handler_id, title, content, file_loc) values
+    <insert id="addNewProject">
+        insert into project_info (promoter_id,current_handler_id, title, content, file_loc) values
         (${promoterId},${currentHandlerId},"${title}","${content}", "${fileLoc}")
     </insert>
 
-    <update id="forwardContract">
-        update contract_info set current_handler_id = (select user_id from duty2user where duty_id = #{dutyId})
-        where id = #{contractId}
+    <update id="forwardProject">
+        update project_info set current_handler_id = (select user_id from duty2user where duty_id = #{dutyId})
+        where id = #{projectId}
     </update>
 
-    <update id="finishContract">
-        update hawadee.contract_info set status = 2, current_handler_id=-1 where id = #{contractId}
+    <update id="finishProject">
+        update hawadee.project_info set status = 2, current_handler_id=-1 where id = #{projectId}
     </update>
 
-    <delete id="removeContract">
-        delete from hawadee.contract_info where id = #{contractId}
+    <delete id="removeProject">
+        delete from hawadee.project_info where id = #{projectId}
     </delete>
 </mapper>
 

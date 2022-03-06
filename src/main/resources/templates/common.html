@@ -29,7 +29,6 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" th:href="@{/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}">
 
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -84,12 +83,13 @@
                                     <a href="#">
                                         <div class="pull-left">
                                             <img th:src="@{/static/dist/img/user3-128x128.jpg}" class="img-circle" alt="User Image">
-                                        <h4>
+                                        </div>
+                                            <h4>
                                             AdminLTE Design Team
                                             <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
-                                        </div></a>
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="#">
@@ -344,19 +344,35 @@
                 </ul>
             </li>
 
-            <li class="header">项目租赁</li>
+            <li class="header">项目管理</li>
             <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>项目管理</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a th:href="@{/project/projectManagement}"><i class="fa fa-circle-o"></i>项目申请/审批</a></li>
+                </ul>
+            </li>
+
+            <li class="header">项目租赁</li>
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>费用报销</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>项目管理1</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>项目管理2</a></li>
+                    <li class="active"><a th:href="@{/reimbursement/reimbursementManagement}"><i class="fa fa-circle-o"></i>费用报销</a></li>
+
                 </ul>
             </li>
+
+            <li class="header">留言板</li>
+            <li class="active treeview">
 
             <li class="header">客户推广</li>
             <li class="active treeview">
@@ -374,17 +390,13 @@
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>租赁管理</span>
+                    <i class="fa fa-dashboard"></i> <span>工作相关</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>租赁管理1</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>租赁管理2</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>租赁管理3</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>租赁管理4</a></li>
+                    <li class="active"><a th:href="@{/comment/commentManagement}"><i class="fa fa-circle-o"></i>工作内容</a></li>
                 </ul>
             </li>
 

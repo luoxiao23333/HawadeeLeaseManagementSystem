@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header th:replace="common::header"></header>
+  <aside th:replace="common::leftSide"></aside>
+
+  <div class="content-wrapper" style="min-height: 923px;">
+    Welcome
+    <span th:text="${session.user.name}"></span>
+
+    <!-- 发起新合同 -->
+    <div class="box-header with-border">
+      <h3 class="box-title">New Comment</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal" action="#" th:action="@{/comment/newComment}"
+          method="post" enctype="multipart/form-data">
+      <div class="box-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">nickname</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="nickname" name="nickname" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Content</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Content" name="content" required>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" class="btn btn-info pull-right">Submit</button>
+      </div>
+      <!-- /.box-footer -->
+    </form>
+
+    <div class="box-header with-border">
+      <h3 class="box-title">All Comments</h3>
+    </div>
+
+    <div th:each="comment:${commentList}">
+      <div class="box box-default collapsed-box">
+        <div class="box-header with-border">
+          <h3 class="box-title" th:text="${comment.getContent()}"></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Detail Information</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Content</th>
+                    <th>Nickname</th>
+                  </tr>
+                  <tr>
+                    <td th:text="${comment.getCommentID}"></td>
+                    <td th:text="${comment.getContent()}"></td>
+                    <td th:text="${comment.getNickname()}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+    
+
+  </div>    
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+</div>
+</body>
+
+</html>

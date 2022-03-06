@@ -17,4 +17,5 @@ public class ContractInfo {
     private String title;
     private String content;
     private Date createDate;
+    private String fileLoc;
 }
