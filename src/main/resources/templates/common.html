@@ -3,7 +3,7 @@
 <head th:fragment="linkHead">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Hawadee</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -84,7 +84,7 @@
                                         <div class="pull-left">
                                             <img th:src="@{/static/dist/img/user3-128x128.jpg}" class="img-circle" alt="User Image">
                                         </div>
-                                            <h4>
+                                        <h4>
                                             AdminLTE Design Team
                                             <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                         </h4>
@@ -265,6 +265,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
+                            <img th:src="@{/static/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
                             <p th:text="'Welcome ' + ${session.user.name}">
                                 Alexander Pierce - Web Developer
                             </p>
@@ -336,8 +337,8 @@
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>合同审批</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a th:href="@{/contract/contractManagement}"><i class="fa fa-circle-o"></i>制氏合同审批</a></li>
@@ -371,9 +372,6 @@
                 </ul>
             </li>
 
-            <li class="header">留言板</li>
-            <li class="active treeview">
-
             <li class="header">客户推广</li>
             <li class="active treeview">
                 <a href="#">
@@ -388,7 +386,8 @@
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="header">留言板</li>
+            <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>工作相关</span>
                     <span class="pull-right-container">
@@ -399,6 +398,7 @@
                     <li class="active"><a th:href="@{/comment/commentManagement}"><i class="fa fa-circle-o"></i>工作内容</a></li>
                 </ul>
             </li>
+
 
             <li class="header">待办信息</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

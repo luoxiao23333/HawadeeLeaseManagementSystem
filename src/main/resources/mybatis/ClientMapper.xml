@@ -17,6 +17,6 @@
     </select>
 
     <select id="selectClient" resultType="com.group5.hawadeeleasemanagementsystem.domain.Client">
-        select * from client where (name,phone,email) = ("${name}","${phone}","${email}");
+        select * from client where email = "${email}"
     </select>
 </mapper>

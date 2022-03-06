@@ -135,3 +135,12 @@ INSERT INTO `userInfo` VALUES (1,'scu',20,14,'i am a pig and i love scu');
 INSERT INTO `userInfo` VALUES (2,'sjtu',20,18,'work hard and you will get promoted');
 INSERT INTO `userInfo` VALUES (3,'pku',20,20,'i am really good at pua');
 
+/*
+客户管理表,小龙部分
+ */
+create table client(
+id    int(10) auto_increment primary key,
+name  varchar(1000) not null,
+phone varchar(200)  null,
+email varchar(500)  null
+)ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
