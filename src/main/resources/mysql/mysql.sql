@@ -87,3 +87,29 @@ CREATE TABLE `reimbursement_processing_history`  (
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE `userRel`  (
+`id` int references  `user`(id),
+`colleague` int references `user`(id),
+`leader` int references `user`(id),
+`subordinate` int references `user`(id),
+PRIMARY KEY (`id`) USING BTREE,
+INDEX `id2`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `userRel` VALUES (1, 2, 3, null);
+INSERT INTO `userRel` VALUES (2, 1, 3, null);
+INSERT INTO `userRel` VALUES (3, 2, 1, null);
+
+CREATE TABLE `userInfo`  (
+`id` int references  `user`(id),
+`school` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci,
+`age` int,
+`level` int,
+`self_intro` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+PRIMARY KEY (`id`) USING BTREE,
+INDEX `id2`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `userInfo` VALUES (1,'scu',20,14,'i am a pig and i love scu');
+INSERT INTO `userInfo` VALUES (2,'sjtu',20,18,'work hard and you will get promoted');
+INSERT INTO `userInfo` VALUES (3,'pku',20,20,'i am really good at pua');
