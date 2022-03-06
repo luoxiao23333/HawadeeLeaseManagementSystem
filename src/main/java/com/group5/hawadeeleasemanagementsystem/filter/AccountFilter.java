@@ -20,6 +20,11 @@ public class AccountFilter implements Filter {
     private boolean isBeforeLogin(String path){
         return path.equals("") || path.startsWith("/account/");
     }
+    private boolean isCSS(String path) {return path.endsWith(".css");}
+    private boolean isJS(String path) {return path.endsWith(".js");}
+    private boolean isNotTarget(String path){
+        return isBeforeLogin(path) || isCSS(path) || isJS(path);
+    }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -32,7 +37,7 @@ public class AccountFilter implements Filter {
 
         boolean loggedIn = (session != null && session.getAttribute("user") != null);
 
-        if (loggedIn || isBeforeLogin(path)) {
+        if (loggedIn || isNotTarget(path)) {
             chain.doFilter(req, res);
         }
         else {
