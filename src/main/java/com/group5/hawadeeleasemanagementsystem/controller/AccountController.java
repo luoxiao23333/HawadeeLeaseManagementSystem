@@ -21,11 +21,17 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class AccountController {
 
-    @Autowired
     SMSService smsService;
-
     @Autowired
+    private void setSmsService(SMSService smsService){
+        this.smsService = smsService;
+    }
+
     UserService userService;
+    @Autowired
+    private void setUserService(UserService userService){
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/account/login")
     public ModelAndView login(){
