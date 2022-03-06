@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ProjectProcessingHistoryDao">
+
+    <resultMap id="WithUserResultMap" type="com.group5.hawadeeleasemanagementsystem.domain.ProjectHistoryWithUser">
+        <association property="history" javaType="com.group5.hawadeeleasemanagementsystem.domain.ProjectProcessingHistory">
+            <id property="id" column="hid"/>
+            <result property="projectId" column="project_id"/>
+            <result property="reason" column="reason"/>
+            <result property="createDate" column="create_date"/>
+            <result property="status" column="status"/>
+        </association>
+        <association property="user" javaType="com.group5.hawadeeleasemanagementsystem.domain.User">
+            <id property="id" column="uid"/>
+            <result property="name" column="name"/>
+            <result property="password" column="password"/>
+            <result property="phone" column="phone"/>
+        </association>
+    </resultMap>
+
+    <select id="getProjectProcessingHistoryByProjectId"
+            resultType="com.group5.hawadeeleasemanagementsystem.domain.ProjectProcessingHistory">
+        select * from project_processing_history where `project_id` = #{projectId}
+    </select>
+
+    <insert id="addNewRecord">
+        insert into project_processing_history (`project_id`, `reason`, `status`, `process_user_id`)
+        values (#{projectId}, #{reason}, #{status}, #{processUserId});
+    </insert>
+
+    <select id="getProjectsWithUser" resultMap="WithUserResultMap">
+        select u.id as uid, u.name, u.password, u.phone,
+               h.id as hid, h.project_id,
+               h.process_user_id, h.reason,
+               h.create_date, h.status
+        from user as u inner join project_processing_history as h on u.id = h.process_user_id
+        where h.project_id = #{projectId}
+    </select>
+</mapper>
