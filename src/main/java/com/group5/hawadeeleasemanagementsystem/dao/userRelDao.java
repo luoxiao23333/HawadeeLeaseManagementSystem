@@ -1,6 +1,5 @@
 package com.group5.hawadeeleasemanagementsystem.dao;
 
-import com.group5.hawadeeleasemanagementsystem.domain.User;
 import com.group5.hawadeeleasemanagementsystem.domain.userRel;
 import org.apache.ibatis.annotations.Mapper;
 
