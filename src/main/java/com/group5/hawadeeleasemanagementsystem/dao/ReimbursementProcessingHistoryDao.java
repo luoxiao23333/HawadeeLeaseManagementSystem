@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 public interface ReimbursementProcessingHistoryDao {
     List<ReimbursementProcessingHistory> getReimbursementProcessingHistoryByReimbursementId(Integer ReimbursementId);
-    void addNewRecord(Integer ReimbursementId, Integer status, String reason, Integer processUserId);
+    void addNewRecord(Integer reimbursementId, Integer status, String reason, Integer processUserId);
     List<ReimbursementHistoryWithUser> getReimbursementsWithUser(Integer contractId);
 }
