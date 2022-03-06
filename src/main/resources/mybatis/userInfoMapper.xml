@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.userRelDao">
+
+    <select id="getUserInfo" resultType="com.group5.hawadeeleasemanagementsystem.domain.userInfo">
+        select `id`,`school`,`age`,`level`,`self_intro` from userRel where `id` = #{userId}
+    </select>
+
+    <update id="updateSchool">
+        update userInfo set `school` = #{school} where `id` = #{uId}
+    </update>
+
+    <update id="updateAge">
+        update userInfo set `age` = #{age} where `id` = #{uId}
+    </update>
+
+    <update id="updateLevel">
+        update userInfo set `level` = #{level} where `id` = #{uId}
+    </update>
+
+    <update id="updateSelfIntro">
+        update userInfo set `self_intro` = #{intro} where `id` = #{uId}
+    </update>
+
+
+
+</mapper>

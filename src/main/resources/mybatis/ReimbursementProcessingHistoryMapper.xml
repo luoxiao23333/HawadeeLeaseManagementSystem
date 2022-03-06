@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.ReimbursementProcessingHistoryDao">
+
+    <resultMap id="WithUserResultMap" type="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementHistoryWithUser">
+        <association property="history" javaType="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementProcessingHistory">
+            <id property="id" column="hid"/>
+            <result property="reimbursementId" column="reimbursement_id"/>
+            <result property="reason" column="reason"/>
+            <result property="createDate" column="create_date"/>
+            <result property="status" column="status"/>
+        </association>
+        <association property="user" javaType="com.group5.hawadeeleasemanagementsystem.domain.User">
+            <id property="id" column="uid"/>
+            <result property="name" column="name"/>
+            <result property="password" column="password"/>
+            <result property="phone" column="phone"/>
+        </association>
+    </resultMap>
+
+    <select id="getReimbursementProcessingHistoryByReimbursementId"
+            resultType="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementProcessingHistory">
+        select * from reimbursement_processing_history where `reimbursement_id` = #{reimbursementId}
+    </select>
+
+    <insert id="addNewRecord">
+        insert into reimbursement_processing_history (`reimbursement_id`, `reason`, `status`, `process_user_id`)
+        values (#{reimbursementId}, #{reason}, #{status}, #{processUserId});
+    </insert>
+
+    <select id="getReimbursementsWithUser" resultMap="WithUserResultMap">
+        select u.id as uid, u.name, u.password, u.phone,
+               h.id as hid, h.reimbursement_id,
+               h.process_user_id, h.reason,
+               h.create_date, h.status
+        from user as u inner join reimbursement_processing_history as h on u.id = h.process_user_id
+        where h.reimbursement_id = #{reimbursementId}
+    </select>
+</mapper>

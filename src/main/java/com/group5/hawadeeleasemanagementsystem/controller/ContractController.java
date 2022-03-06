@@ -26,24 +26,27 @@ import java.util.Map;
 @Controller
 public class ContractController {
     private ContractInfoService contractInfoService;
+
     @Autowired
-    private void setUserService(ContractInfoService contractInfoService){
+    private void setUserService(ContractInfoService contractInfoService) {
         this.contractInfoService = contractInfoService;
     }
 
     private ContractProcessingHistoryService contractInfoHistoryService;
+
     @Autowired
-    private void setUserService(ContractProcessingHistoryService contractInfoHistoryService){
+    private void setUserService(ContractProcessingHistoryService contractInfoHistoryService) {
         this.contractInfoHistoryService = contractInfoHistoryService;
     }
 
     private FileService fileService;
+
     @Autowired
-    private void setFileService(FileService fileService){
+    private void setFileService(FileService fileService) {
         this.fileService = fileService;
     }
 
-    private void updateContractInfo(ModelAndView mv, User user){
+    private void updateContractInfo(ModelAndView mv, User user) {
         List<ContractWithUser> contractsPromoted = contractInfoService.getContractUserPromoted(user);
         List<ContractWithUser> contractsNeedToProcess = contractInfoService.getContractUserNeedToProcess(user);
         Map<ContractWithUser, List<ContractHistoryWithUser>> contractPromotedProcessingHistoryMap =
@@ -58,7 +61,7 @@ public class ContractController {
     }
 
     @RequestMapping(value = "/contract/contractManagement")
-    public ModelAndView contractManagement(HttpSession session){
+    public ModelAndView contractManagement(HttpSession session) {
         User user = (User) session.getAttribute("user");
         ModelAndView mv = new ModelAndView("/contract/contractManagement");
         this.updateContractInfo(mv, user);
@@ -92,7 +95,7 @@ public class ContractController {
     public ModelAndView processContract(@RequestParam(name = "isApprove") boolean isApprove,
                                         @RequestParam(name = "contractId") Integer contractId,
                                         @RequestParam(name = "reason") String reason,
-                                        HttpSession session){
+                                        HttpSession session) {
         User user = (User) session.getAttribute("user");
         contractInfoService.processContract(contractId, user, isApprove, reason);
         ModelAndView mv = new ModelAndView("/contract/contractManagement");
