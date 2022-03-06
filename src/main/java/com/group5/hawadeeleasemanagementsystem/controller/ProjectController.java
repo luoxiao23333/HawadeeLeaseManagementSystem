@@ -95,6 +95,7 @@ public class ProjectController {
                                         @RequestParam(name = "reason") String reason,
                                         HttpSession session){
         User user = (User) session.getAttribute("user");
+        System.out.println("hello");
         projectInfoService.processProject(projectId, user, isApprove, reason);
         ModelAndView mv = new ModelAndView("/project/projectManagement");
         this.updateProjectInfo(mv, user);
