@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface ProjectProcessingHistoryDao {
-    List<ProjectProcessingHistory> getProjectProcessingHistoryByProjectId(Integer ProjectId);
-    void addNewRecord(Integer ProjectId, Integer status, String reason, Integer processUserId);
-    List<ProjectHistoryWithUser> getProjectsWithUser(Integer ProjectId);
+    List<ProjectProcessingHistory> getProjectProcessingHistoryByProjectId(Integer projectId);
+    void addNewRecord(Integer projectId, Integer status, String reason, Integer processUserId);
+    List<ProjectHistoryWithUser> getProjectsWithUser(Integer projectId);
 }
