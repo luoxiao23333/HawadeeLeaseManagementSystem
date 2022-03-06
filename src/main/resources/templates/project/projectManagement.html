@@ -263,6 +263,15 @@
                     <td th:text="${projectHistory.getUser().getName()}"></td>
                   </tr>
                   </tbody></table>
+
+                <form th:action="@{/project/delete}">
+                  <button type="submit" class="btn btn-danger pull-right" style="margin-right: 5px;"
+                          th:value=false>
+                    Delete
+                  </button>
+                  <input name="projectId" type="hidden" th:value="${projectInfo.getProject().getId()}">
+                </form>
+
               </div>
               <!-- /.box-body -->
             </div>

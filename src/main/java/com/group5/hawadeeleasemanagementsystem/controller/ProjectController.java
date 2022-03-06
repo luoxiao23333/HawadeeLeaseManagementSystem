@@ -108,4 +108,11 @@ public class ProjectController {
         fileService.loadToServlet(fileLoc, response);
         return new ModelAndView("/project/projectManagement");
     }
+
+    @RequestMapping(value = "/project/delete")
+    public ModelAndView delete(@RequestParam(name = "projectId") Integer projectId,
+                                 HttpServletResponse response) throws IOException {
+        projectInfoService.deleteProject(projectId);
+        return new ModelAndView("/project/projectManagement");
+    }
 }

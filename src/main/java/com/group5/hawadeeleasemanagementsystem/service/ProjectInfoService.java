@@ -63,6 +63,10 @@ public class ProjectInfoService {
         projectInfoDao.finishProject(projectId);
     }
 
+    public void deleteProject(Integer projectId){
+        projectInfoDao.removeProject(projectId);
+    }
+
     public void processProject(Integer projectId, User user, boolean isApproved, String reason){
         Integer status = isApproved? ProjectProcessingHistory.Approved : ProjectProcessingHistory.Denied;
         List<Duty> dutyList = dutyDao.getDutyByUserId(user.getId());
@@ -75,12 +79,13 @@ public class ProjectInfoService {
                 this.forwardProject(projectId, Duty.GeneralManager);
             }
         }else{
-            if(dutyList.contains(Duty.GeneralManager)){
-                this.forwardProject(projectId, Duty.LawyerDirector);
-            }
-            else if(dutyList.contains(Duty.LawyerDirector)){
-                projectInfoDao.removeProject(projectId);
-            }
+//            if(dutyList.contains(Duty.GeneralManager)){
+//                this.forwardProject(projectId, Duty.LawyerDirector);
+//            }
+//            else if(dutyList.contains(Duty.LawyerDirector)){
+//                projectInfoDao.removeProject(projectId);
+//            }
+            this.finishProject(projectId);
         }
 
         projectProcessingHistoryDao.addNewRecord(projectId, status, reason, user.getId());
