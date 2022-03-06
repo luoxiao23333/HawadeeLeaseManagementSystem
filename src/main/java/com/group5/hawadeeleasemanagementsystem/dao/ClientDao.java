@@ -6,6 +6,7 @@ import java.util.List;
 @Mapper
 public interface ClientDao {
     void addClient(Client client);
+    Client selectClient(Client client);
     List<Client> getClients();
     List<String> getAllEmail();
 }

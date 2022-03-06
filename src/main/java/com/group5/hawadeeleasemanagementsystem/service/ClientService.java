@@ -28,9 +28,20 @@ public class ClientService {
     }
 
     /*
+    判断前端传入的数据是否为重复，解决刷新重复提交的问题
+     */
+    public boolean isRepeated(Client client){
+        if(clientDao.selectClient(client) == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /*
     向client表中插入一条数据
      */
     public void addClient(Client client){
+
         clientDao.addClient(client);
     }
 

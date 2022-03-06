@@ -35,7 +35,7 @@ public class ClientController {
     private ModelAndView addClient(HttpServletRequest request){
         Client client = new Client();
         client.setName(request.getParameter("name")).setPhone(request.getParameter("phone")).setEmail(request.getParameter("email"));
-        clientService.addClient(client);
+        if(clientService.isRepeated(client) == false){clientService.addClient(client);}
         PageInfo<Client> pageInfo = clientService.getClientByPage(1);
         ModelAndView mv = new ModelAndView("/client/clientPage");
         mv.addObject("pageInfo",pageInfo);

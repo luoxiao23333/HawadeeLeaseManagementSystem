@@ -19,6 +19,9 @@ class HawadeeLeaseManagementSystemApplicationTests {
     private void setClientDao(ClientDao clientDao){
         this.clientDao = clientDao;
     }
+    @Autowired
+    MailService mailService;
+
 
     @Test
     void contextLoads() {
@@ -43,8 +46,6 @@ class HawadeeLeaseManagementSystemApplicationTests {
         }
     }
 
-    @Autowired
-    MailService mailService;
 
     @Test
     public void sendSimpleMailTest() {
@@ -52,4 +53,12 @@ class HawadeeLeaseManagementSystemApplicationTests {
         mailService.sendSimpleMail("3279826458@qq.com", "这是第一封邮件", "这是邮件内容");
     }
 
+    @Test
+    public void test3(){
+        Client client = new Client();
+        client.setName("杜小龙").setPhone("15282505597").setEmail("1635564377@qq.com");
+        Client test = clientDao.selectClient(client);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(test.getId());
+    }
 }
