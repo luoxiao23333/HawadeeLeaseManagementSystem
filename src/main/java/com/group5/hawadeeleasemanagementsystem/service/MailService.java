@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class MailService {
@@ -26,6 +30,7 @@ public class MailService {
 
     public void sendSimpleMail(String to, String subject, String content) {
         //创建一个简单文本邮件的对象
+
         SimpleMailMessage message = new SimpleMailMessage();
         //赋予相应的内容
         message.setTo(to);
@@ -34,5 +39,22 @@ public class MailService {
         message.setFrom(from);
         //将邮件对象赋予邮件发送器
         mailSender.send(message);
+    }
+
+
+    public void sendHtmlMail(String to, String subject, String content) {
+        MimeMessage message = mailSender.createMimeMessage();
+
+        try {
+            //true表示需要创建一个multipart message
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content, true);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+        }
     }
 }
