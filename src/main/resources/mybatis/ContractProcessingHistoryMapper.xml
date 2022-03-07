@@ -37,4 +37,8 @@
         from user as u inner join contract_processing_history as h on u.id = h.process_user_id
         where h.contract_id = #{contractId}
     </select>
+
+    <select id="getAllHistory" resultType="com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory">
+        select * from contract_processing_history;
+    </select>
 </mapper>
