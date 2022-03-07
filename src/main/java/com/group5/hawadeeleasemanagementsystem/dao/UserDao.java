@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserDao {
+    User getUserById(Integer uId);
     User verifyUser(User user);
     User getUserByDuty(Integer dutyId);
     void addUser(User user);
