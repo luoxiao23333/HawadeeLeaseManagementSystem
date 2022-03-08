@@ -12,7 +12,6 @@
   <div class="content-wrapper" style="min-height: 923px;">
     Welcome
     <span th:text="${session.user.name}"></span>
-
     <!-- 发起新合同 -->
     <div class="box-header with-border">
       <h3 class="box-title">New Comment</h3>
@@ -44,57 +43,44 @@
       </div>
       <!-- /.box-footer -->
     </form>
-
     <div class="box-header with-border">
       <h3 class="box-title">All Comments</h3>
     </div>
 
-    <div th:each="comment:${commentList}">
-      <div class="box box-default collapsed-box">
-        <div class="box-header with-border">
-          <h3 class="box-title" th:text="${comment.getContent()}"></h3>
+    <div class="box box-success" style="position: relative; left: 0px; top: 0px;">
+      <div class="box-header ui-sortable-handle" style="cursor: move;">
+        <i class="fa fa-comments-o"></i>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+        <h3 class="box-title">Chat</h3>
+
+        <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Status">
+          <div class="btn-group" data-toggle="btn-toggle">
+            <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i>
             </button>
+            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
           </div>
-          <!-- /.box-tools -->
         </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-
-          <div class="col-xs-12">
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title">Detail Information</h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                  <tbody>
-                  <tr>
-                    <th>ID</th>
-                    <th>Content</th>
-                    <th>Nickname</th>
-                  </tr>
-                  <tr>
-                    <td th:text="${comment.getCommentID}"></td>
-                    <td th:text="${comment.getContent()}"></td>
-                    <td th:text="${comment.getNickname()}"></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-
-        </div>
-        <!-- /.box-body -->
       </div>
+      <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="box-body chat" id="chat-box" style="overflow: hidden; width: auto; height: 250px;">
+        <!-- chat item -->
+        <div th:each="comment:${commentList}">
+          <div class="item">
+          <img src="p.jpg" class="offline">
+
+          <p class="message">
+            <a href="#" class="name">
+              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <td th:text="${comment.getCommentID()}">1</td></small>
+              <td th:text="${comment.getNickname()}">Alexander Pierce</td>
+            </a>
+            <td th:text="${comment.getContent()}">Alexander Pierce</td>
+          </p>
+        </div>
+        </div>
+        <!-- /.item -->
+      </div><div class="slimScrollBar" ></div>
+        <div class="slimScrollRail" ></div></div>
     </div>
-    
+
 
   </div>    
 </div>

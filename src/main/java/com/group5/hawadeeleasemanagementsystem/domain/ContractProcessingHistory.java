@@ -3,6 +3,7 @@ package com.group5.hawadeeleasemanagementsystem.domain;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Data
 public class ContractProcessingHistory {

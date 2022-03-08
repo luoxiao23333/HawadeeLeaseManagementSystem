@@ -51,6 +51,7 @@ public class ClientController {
     private String sendEmail(HttpServletRequest request){
         String subject = request.getParameter("subject");
         String content = request.getParameter("content");
+        System.out.println(content);
         clientService.sendEmail(subject,content);
         return "/client/emailPage";
     }

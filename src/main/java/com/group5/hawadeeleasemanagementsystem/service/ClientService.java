@@ -54,7 +54,7 @@ public class ClientService {
         Iterator<String> iterator = emailList.iterator();
         while (iterator.hasNext()){
             email = iterator.next();
-            mailService.sendSimpleMail(email,subject,content);
+            mailService.sendHtmlMail(email,subject,content);
         }
     }
 }
