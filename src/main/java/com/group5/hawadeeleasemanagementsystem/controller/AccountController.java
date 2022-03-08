@@ -61,8 +61,6 @@ public class AccountController {
         }
 
         session.setAttribute("user", user);
-        mv.addObject("contractHistoryChartData",
-                contractProcessingHistoryService.getProcessingHistoryChartData());
         mv.setViewName("/index");
         return mv;
 
