@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.time.Month;
 import java.time.Year;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 
 @Service
@@ -44,7 +46,7 @@ public class ContractProcessingHistoryService {
         contractProcessingHistoryDao.addNewRecord(contractId, status, reason, processUserId);
     }
 
-    LineChartData getProcessingHistoryChartData() throws Exception {
+    public LineChartData getProcessingHistoryChartData() throws Exception {
         List<ContractProcessingHistory> historyList = contractProcessingHistoryDao.getAllHistory();
         Map<YearMonth, Integer> ApprovedCount = new HashMap<>();
         Map<YearMonth, Integer> DeniedCount = new HashMap<>();
@@ -52,18 +54,20 @@ public class ContractProcessingHistoryService {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(history.getCreateDate());
             final int year = calendar.get(Calendar.YEAR);
-            final int month = calendar.get(Calendar.MONTH);
+            final int month = calendar.get(Calendar.MONTH) + 1;
             YearMonth date = YearMonth.of(year, month);
             if(Objects.equals(history.getStatus(), ContractProcessingHistory.Approved)){
-                ApprovedCount.put(date, ApprovedCount.getOrDefault(date, 0));
-                DeniedCount.getOrDefault(date, 0);
+                ApprovedCount.put(date, ApprovedCount.getOrDefault(date, 0) + 1);
+                DeniedCount.putIfAbsent(date, 0);
             }else if(Objects.equals(history.getStatus(), ContractProcessingHistory.Denied)){
-                DeniedCount.put(date, DeniedCount.getOrDefault(date, 0));
-                ApprovedCount.getOrDefault(date, 0);
+                DeniedCount.put(date, DeniedCount.getOrDefault(date, 0) + 1);
+                ApprovedCount.putIfAbsent(date, 0);
             }else{
                 throw new Exception("Unsupported Status");
             }
         }
+        System.out.println(ApprovedCount);
+        System.out.println(DeniedCount);
 
         LineChartData lineChartData = new LineChartData();
         List<String> xAxisData = new ArrayList<>();
@@ -72,7 +76,8 @@ public class ContractProcessingHistoryService {
         approveLineData.setLabel("Approved");
         List<Number> approvedDataset = new ArrayList<>();
         for(Map.Entry<YearMonth, Integer> record: ApprovedCount.entrySet()){
-            xAxisData.add(record.getKey().toString());
+            YearMonth date = record.getKey();
+            xAxisData.add(date.getYear() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
             approvedDataset.add(record.getValue());
         }
         approveLineData.setDataset(approvedDataset);

@@ -11,16 +11,31 @@
 
     <div class="content-wrapper" style="min-height: 923px;">
 
-        <div class="col-md-6">
+        <div class="col-md-12">
             <!-- LINE CHART -->
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">合同处理趋势图</h3>
 
+                    <div th:each="contractX, stat:${contractHistoryChartData.getXAxisData()}">
+                        <input th:id="'contractX'+${stat.index}" type="hidden"  th:value="${contractX}"/>
+                    </div>
+
+                    <div th:each="contractApprove, stat:${contractHistoryChartData.getDataList().get(0).getDataset()}">
+                        <input th:id="'Approve'+${stat.index}" type="hidden"  th:value="${contractApprove}"/>
+                    </div>
+
+                    <div th:each="contractDenied, stat:${contractHistoryChartData.getDataList().get(1).getDataset()}">
+                        <input th:id="'Denied'+${stat.index}" type="hidden"  th:value="${contractDenied}"/>
+                    </div>
+
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                            <i class="fa fa-times"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="box-body" style="">
@@ -42,7 +57,7 @@
             <!-- BAR CHART -->
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Bar Chart</h3>
+                    <h3 class="box-title">合同处理记录分析</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -53,6 +68,12 @@
                 <div class="box-body" style="">
                     <div class="chart">
                         <canvas id="pieChart" style="height: 229px; width: 549px;" width="686" height="286"></canvas>
+                    </div>
+                    <div id="contractPieChartLegend">
+                        <ul class="line-legend">
+                            <li><span style="background-color:#00a65a;">　</span> Approve</li>
+                            <li><span style="background-color:#f56954;">　</span> Denied</li>
+                        </ul>
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -68,14 +89,39 @@
 <div th:replace="common::jsHead"></div>
 <script>
     $(function () {
-        let approve = [65, 59, 80, 81, 56, 55, 40]
-        let denied = [28, 48, 40, 19, 86, 27, 90]
+        let approve = []
+        let denied = []
         let total = []
+        let v = []
+        let size = [[${contractHistoryChartData.getXAxisData().size()}]]
+        for(let i =0;i<size;++i){
+            let index = "#contractX" + i
+            let e = $(index).val()
+            v.push(e)
+        }
+
+        size = [[${contractHistoryChartData.getDataList().get(0).getDataset().size()}]]
+        for(let i = 0;i<size;++i){
+            let index = "#Approve" + i
+            let e = $(index).val()
+            approve.push(e)
+        }
+
+        size = [[${contractHistoryChartData.getDataList().get(1).getDataset().size()}]]
+        for(let i = 0;i<size;++i){
+            let index = "#Denied" + i
+            let e = $(index).val()
+            denied.push(e)
+        }
+
+        console.log(approve)
+        console.log(denied)
+
         for(let i = 0;i<approve.length;++i){
-            total.push(approve[i] + denied[i])
+            total.push(parseInt(approve[i]) + parseInt(denied[i]))
         }
         let contractLineChartData = {
-            labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels  : v,
             datasets: [
                 {
                     label               : 'Approve',
@@ -167,42 +213,26 @@
         // Get context with jQuery - using jQuery's .get() method.
         let pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         let pieChart       = new Chart(pieChartCanvas)
+        let approveTotal   = 0
+        let deniedTotal    = 0
+        for(let i=0;i<approve.length;++i){
+            approveTotal = approveTotal + parseInt(approve[i])
+        }
+        for(let i=0;i<denied.length;++i){
+            deniedTotal = deniedTotal + parseInt(denied[i])
+        }
         let PieData        = [
             {
-                value    : 700,
+                value    : deniedTotal,
                 color    : '#f56954',
                 highlight: '#f56954',
-                label    : 'Chrome'
+                label    : 'Denied'
             },
             {
-                value    : 500,
+                value    : approveTotal,
                 color    : '#00a65a',
                 highlight: '#00a65a',
-                label    : 'IE'
-            },
-            {
-                value    : 400,
-                color    : '#f39c12',
-                highlight: '#f39c12',
-                label    : 'FireFox'
-            },
-            {
-                value    : 600,
-                color    : '#00c0ef',
-                highlight: '#00c0ef',
-                label    : 'Safari'
-            },
-            {
-                value    : 300,
-                color    : '#3c8dbc',
-                highlight: '#3c8dbc',
-                label    : 'Opera'
-            },
-            {
-                value    : 100,
-                color    : '#d2d6de',
-                highlight: '#d2d6de',
-                label    : 'Navigator'
+                label    : 'Approved'
             }
         ]
         let pieOptions     = {
