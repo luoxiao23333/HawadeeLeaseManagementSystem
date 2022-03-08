@@ -46,6 +46,11 @@ public class ClientService {
     }
 
     /*
+    根据id删除客户
+     */
+    public void deleteById(Integer id){clientDao.deleteById(id);}
+
+    /*
     向所有客户群发邮件
      */
     public void sendEmail(String subject,String content){

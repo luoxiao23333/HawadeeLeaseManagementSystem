@@ -19,4 +19,8 @@
     <select id="selectClient" resultType="com.group5.hawadeeleasemanagementsystem.domain.Client">
         select * from client where email = "${email}"
     </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from client where id = ${id}
+    </delete>
 </mapper>
