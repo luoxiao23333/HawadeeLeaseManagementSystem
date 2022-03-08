@@ -3,8 +3,8 @@
 
 <mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.userRelDao">
 
-    <select id="getUserRel" resultType="com.group5.hawadeeleasemanagementsystem.domain.userRel">
-        select `id`,`colleague`,`leader`,`subordinate` from userRel where `id` = #{userId}
+    <select id="getRel" resultType="com.group5.hawadeeleasemanagementsystem.domain.userRel">
+        select `id` as userId , `colleague` as colleagueId ,`leader` as leaderId,`subordinate` as subordinateId from userRel where userRel.id = "${userId}"
     </select>
 
     <update id="updateColleague">
