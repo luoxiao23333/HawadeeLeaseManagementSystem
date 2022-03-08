@@ -23,4 +23,5 @@ public class ReimbursementInfo {
     private String content;
     private Date createDate;
     private String provFileLoc;
+    private String approvalFileLoc;
 }

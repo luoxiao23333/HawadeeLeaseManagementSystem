@@ -23,23 +23,23 @@
               method="post" enctype="multipart/form-data">
             <div class="box-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Title</label>
+                    <label class="col-sm-2 control-label">报销金额</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Title" name="title" required>
+                        <input type="text" class="form-control" placeholder="报销金额" name="title" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Content</label>
+                    <label class="col-sm-2 control-label">报销说明</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Content" name="content" required>
+                        <input type="text" class="form-control" placeholder="报销说明" name="content" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Reimbursement</label>
+                    <label class="col-sm-2 control-label">证明文件</label>
 
                     <div class="col-sm-10">
                         <input type="file" class="form-control" placeholder="Reimbursement File" name="file" required>
@@ -55,7 +55,7 @@
         </form>
 
         <div class="box-header with-border">
-            <h3 class="box-title">Reimbursement What I Promoted</h3>
+            <h3 class="box-title">已通过或处理中的报销</h3>
         </div>
 
         <div th:each="reimbursementInfo:${reimbursementPromoted}">
@@ -103,10 +103,21 @@
                                             th:text="${reimbursementInfo.getUser().getName()}"></td>
                                         <td th:if="${reimbursementInfo.getUser()}==null">No Handler</td>
                                         <td>
-                                            <form th:action="@{/reimbursement/download}">
-                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                            <form th:action="@{/reimbursement/downloadProveFile}">
+                                                <button type="submit" class="btn btn-block btn-info">Download Prove
+                                                    File
+                                                </button>
                                                 <input type="hidden" name="fileLoc"
                                                        th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form th:action="@{/reimbursement/downloadApprovalFile}">
+                                                <button type="submit" class="btn btn-block btn-info">Download Approval
+                                                    File
+                                                </button>
+                                                <input type="hidden" name="fileLocA"
+                                                       th:value="${reimbursementInfo.getReimbursement().getApprovalFileLoc()}">
                                             </form>
                                         </td>
                                     </tr>
@@ -160,7 +171,7 @@
         </div>
 
         <div class="box-header with-border">
-            <h3 class="box-title">Reimbursement What I Need to Process</h3>
+            <h3 class="box-title">需要我处理的报销</h3>
         </div>
 
         <div th:each="reimbursementInfo:${reimbursementNeedToProcess}">

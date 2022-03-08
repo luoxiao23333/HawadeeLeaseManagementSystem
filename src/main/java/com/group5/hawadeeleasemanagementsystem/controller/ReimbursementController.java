@@ -76,12 +76,14 @@ public class ReimbursementController {
         User user = (User) session.getAttribute("user");
 
         String fileLoc = fileService.save(file);
+        String approvalFileLoc = fileService.approve(user, reimbursementTitle, reimbursementContent);
 
         ReimbursementInfo reimbursement = new ReimbursementInfo();
         reimbursement.setContent(reimbursementContent);
         reimbursement.setTitle(reimbursementTitle);
         reimbursement.setPromoterId(user.getId());
         reimbursement.setProvFileLoc(fileLoc);
+        reimbursement.setApprovalFileLoc(approvalFileLoc);
         reimbursementInfoService.addNewReimbursement(reimbursement);
 
         ModelAndView mv = new ModelAndView("/reimbursement/reimbursementManagement");
@@ -103,10 +105,17 @@ public class ReimbursementController {
         return mv;
     }
 
-    @RequestMapping(value = "/reimbursement/download")
-    public ModelAndView download(@RequestParam(name = "fileLoc") String fileLoc,
-                                 HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/reimbursement/downloadProveFile")
+    public ModelAndView downloadProveFile(@RequestParam(name = "fileLoc") String fileLoc,
+                                          HttpServletResponse response) throws IOException {
         fileService.loadToServlet(fileLoc, response);
+        return new ModelAndView("/reimbursement/reimbursementManagement");
+    }
+
+    @RequestMapping(value = "/reimbursement/downloadApprovalFile")
+    public ModelAndView downloadApprovalFile(@RequestParam(name = "fileLocA") String fileLocA,
+                                          HttpServletResponse response) throws IOException {
+        fileService.loadToServlet(fileLocA, response);
         return new ModelAndView("/reimbursement/reimbursementManagement");
     }
 }

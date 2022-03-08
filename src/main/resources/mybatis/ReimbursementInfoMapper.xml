@@ -41,8 +41,8 @@
     </select>
 
     <insert id="addNewReimbursement">
-        insert into reimbursement_info (promoter_id,current_handler_id, title, content, file_loc) values
-            (${promoterId},${currentHandlerId},"${title}","${content}", "${provFileLoc}")
+        insert into reimbursement_info (promoter_id,current_handler_id, title, content, file_loc, approval_file_loc) values
+            (${promoterId},${currentHandlerId},"${title}","${content}", "${provFileLoc}", "${approvalFileLoc}")
     </insert>
 
     <update id="forwardReimbursement">

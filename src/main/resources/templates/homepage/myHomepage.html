@@ -66,96 +66,141 @@
             <h3 class="box-title">Personal Information</h3>
         </div>
 
-                <div class="box-header with-border">
-                    <h3 class="box-title" th:text="${user.getName()}"></h3>
+        <div class="box-header with-border">
+            <h3 class="box-title" th:text="${user.getName()}"></h3>
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                        </button>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">My Information</h3>
                     </div>
-                    <!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-
-                    <div class="col-xs-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <h3 class="box-title">My Information</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body table-responsive no-padding">
-                                <table class="table table-hover">
-                                    <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>School</th>
-                                        <th>Level</th>
-                                        <th>Age</th>
-                                        <th>Introduction</th>
-                                    </tr>
-                                    <td th:text="${user.getId()}"></td>
-                                    <td th:text="${user.getName()}"></td>
-                                    <td th:text="${userInfo.getSchool()}"></td>
-                                    <td th:text="${userInfo.getLevel()}"></td>
-                                    <td th:text="${userInfo.getAge()}"></td>
-                                    <td th:text="${userInfo.getSelfIntro()}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>School</th>
+                                <th>Level</th>
+                                <th>Age</th>
+                                <th>Introduction</th>
+                            </tr>
+                            <td th:text="${user.getId()}"></td>
+                            <td th:text="${user.getName()}"></td>
+                            <td th:text="${userInfo.getSchool()}"></td>
+                            <td th:text="${userInfo.getLevel()}"></td>
+                            <td th:text="${userInfo.getAge()}"></td>
+                            <td th:text="${userInfo.getSelfIntro()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
+                <!-- /.box -->
+            </div>
+
+        </div>
+        <!-- /.box-body -->
 
 
         <!-- try-->
         <html>
+        <!-- import CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <!-- import JavaScript -->
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
         <head>
             <title>个人信息</title>
             <meta charset="utf-8">
         </head>
         <body>
         <form>
-            <table border="1px" align="center"width="60%" height="70%">
+            <el-table
+                    :data="tableData"
+                    border
+                    style="width: 100%">
+                <el-table-column
+                        prop="date"
+                        label="Date"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="name"
+                        label="Name"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="address"
+                        label="Address">
+                </el-table-column>
+            </el-table>
+            <table border="1px" align="center" width="60%" height="70%">
                 <h1>工作信息</h1>
                 <tr><!--第1行开始-->
                     <th>上司</th>
                     <th>
-                        <input type="text" value= "1">
+                        <input type="text" value="1">
                     </th>
                 </tr><!--第1行结束-->
 
                 <tr><!--第2行开始-->
                     <th>下属</th>
                     <th>
-                        <input type="text" value="2" /><!-- 单选按钮的name要一样 -->
+                        <input type="text" value="2"/><!-- 单选按钮的name要一样 -->
                     </th>
                     <th>同事</th>
                     <th>
-                        <input type="text" value="3"  /><!-- input可以用单标签的形式 -->
+                        <input type="text" value="3"/><!-- input可以用单标签的形式 -->
                     </th>
                 </tr><!--第2行结束-->
 
                 <tr><!--第4行开始-->
                     <th>工作宣言</th>
                     <th colspan="3">
-                        <input type="text" th:value= "${userInfo.getSelfIntro()}" />
+                        <input type="text" th:value="${userInfo.getSelfIntro()}"/>
                     </th>
                 </tr><!--第4行结束-->
 
             </table>
         </form>
+        <script>
+            export default {
+                data() {
+                    return {
+                        tableData: [{
+                            date: '2016-05-03',
+                            name: 'Tom',
+                            address: 'No. 189, Grove St, Los Angeles'
+                        }, {
+                            date: '2016-05-02',
+                            name: 'Tom',
+                            address: 'No. 189, Grove St, Los Angeles'
+                        }, {
+                            date: '2016-05-04',
+                            name: 'Tom',
+                            address: 'No. 189, Grove St, Los Angeles'
+                        }, {
+                            date: '2016-05-01',
+                            name: 'Tom',
+                            address: 'No. 189, Grove St, Los Angeles'
+                        }]
+                    }
+                }
+            }
+        </script>
         </body>
         </html>
-
-
-
 
 
         <!--try-->
