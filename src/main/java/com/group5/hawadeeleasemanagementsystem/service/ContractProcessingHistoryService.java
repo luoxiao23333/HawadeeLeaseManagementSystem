@@ -6,12 +6,17 @@ import com.group5.hawadeeleasemanagementsystem.domain.ContractHistoryWithUser;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractInfo;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractWithUser;
+import com.group5.hawadeeleasemanagementsystem.domain.chartData.LineChartData;
+import com.group5.hawadeeleasemanagementsystem.domain.chartData.LineData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.*;
 
 @Service
 public class ContractProcessingHistoryService {
