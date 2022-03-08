@@ -13,6 +13,7 @@
             <result property="content" column="content"/>
             <result property="createDate" column="create_date"/>
             <result property="provFileLoc" column="file_loc" />
+            <result property="approvalFileLoc" column="approval_file_loc" />
         </association>
         <association property="user" javaType="com.group5.hawadeeleasemanagementsystem.domain.User">
             <id property="id" column="uid"/>
@@ -25,7 +26,7 @@
     <select id="getReimbursementUserPromoted" resultMap="WithUserResultMap">
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
-               c.promoter_id, c.status, c.file_loc,
+               c.promoter_id, c.status, c.file_loc, c.approval_file_loc,
                c.title, c.content, c.create_date
         from user as u right join reimbursement_info as c on u.id = c.current_handler_id
         where c.promoter_id = #{userId}

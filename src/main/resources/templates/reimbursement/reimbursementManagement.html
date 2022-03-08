@@ -110,12 +110,14 @@
                                                        th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">
                                             </form>
                                         </td>
+<!--                                        todo: 修改已经通过审批再展示此按钮，不会！！！-->
+                                        <!--                                        <td th:if="${reimbursementInfo.getReimbursement().getStatus()}==2">-->
+                                        <!--                                        <td th:if="${reimbursementHistory.getHistory().getStatus()}==1">-->
                                         <td>
                                             <form th:action="@{/reimbursement/downloadApprovalFile}">
-                                                <button type="submit" class="btn btn-block btn-info">Download Approval File
+                                                <button type="submit" class="btn btn-block btn-info">Download Approval
+                                                    File
                                                 </button>
-<!--                                                <input type="hidden" name="fileLocA"-->
-<!--                                                       th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">-->
                                                 <input type="hidden" name="fileLocA"
                                                        th:value="${reimbursementInfo.getReimbursement().getApprovalFileLoc()}">
                                             </form>
