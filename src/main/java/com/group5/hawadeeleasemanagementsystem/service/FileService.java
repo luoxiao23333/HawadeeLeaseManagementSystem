@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Service
 public class FileService {
-    public static final String FilePath = "D:\\code is here\\hawadeeFile";
+    public static final String FilePath = "D:\\code is here\\hawadeeFile\\";
 
     /**
      *
@@ -46,6 +46,7 @@ public class FileService {
     public void loadToServlet(String fileName, HttpServletResponse response)
             throws IOException {
         File file = new File(FileService.FilePath + fileName);
+        System.out.println("FileService.FilePath + fileName = " + FileService.FilePath + fileName);
         FileInputStream inputStream = new FileInputStream(file);
         response.reset();
         response.setHeader("content-disposition", "attachment;filename=" +
@@ -55,7 +56,7 @@ public class FileService {
     }
 
     public String approve(User user, String reimbursementTitle, String reimbursementContent) throws Exception {
-        String resultFileName = reimbursementContent + reimbursementTitle + UUID.randomUUID() + ".pdf";
+        String resultFileName = reimbursementTitle + UUID.randomUUID() + ".pdf";
         String resultFilePath = FileService.FilePath + resultFileName;
         String reimbursementAmount = reimbursementTitle;
         PDFService.write(resultFilePath, user, reimbursementAmount, reimbursementContent);

@@ -104,8 +104,7 @@
                                         <td th:if="${reimbursementInfo.getUser()}==null">No Handler</td>
                                         <td>
                                             <form th:action="@{/reimbursement/downloadProveFile}">
-                                                <button type="submit" class="btn btn-block btn-info">Download Prove
-                                                    File
+                                                <button type="submit" class="btn btn-block btn-info">Download Prove File
                                                 </button>
                                                 <input type="hidden" name="fileLoc"
                                                        th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">
@@ -113,9 +112,10 @@
                                         </td>
                                         <td>
                                             <form th:action="@{/reimbursement/downloadApprovalFile}">
-                                                <button type="submit" class="btn btn-block btn-info">Download Approval
-                                                    File
+                                                <button type="submit" class="btn btn-block btn-info">Download Approval File
                                                 </button>
+<!--                                                <input type="hidden" name="fileLocA"-->
+<!--                                                       th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">-->
                                                 <input type="hidden" name="fileLocA"
                                                        th:value="${reimbursementInfo.getReimbursement().getApprovalFileLoc()}">
                                             </form>
@@ -217,7 +217,7 @@
                                         <td th:text="${reimbursementInfo.getReimbursement().getCreateDate()}"></td>
                                         <td th:text="${reimbursementInfo.getUser().getName()}"></td>
                                         <td>
-                                            <form th:action="@{/reimbursement/download}">
+                                            <form th:action="@{/reimbursement/downloadProveFile}">
                                                 <button type="submit" class="btn btn-block btn-info">Download</button>
                                                 <input type="hidden" name="fileLoc"
                                                        th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">
