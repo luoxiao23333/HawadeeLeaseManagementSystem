@@ -16,7 +16,8 @@ import java.util.UUID;
 @Service
 public class FileService {
 
-    public static final String FilePath = "E:/hawadeeFile/";
+    public static final String FilePath = "//Users//bytedance//Desktop//hawadeeFile";
+
 
     private String getUniqueFileName(String prefix, String suffix) throws Exception {
         String fileName = prefix + UUID.randomUUID() + suffix;
