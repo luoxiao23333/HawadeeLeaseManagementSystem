@@ -15,11 +15,27 @@ import java.util.List;
 public class ProjectResService {
     private ProjectResDao projectResDao;
 
+    @Autowired
+    private void setProjectInfoDao(ProjectResDao projectResDao){
+        this.projectResDao = projectResDao;
+    }
+
 
     public void addNewProjectRes(ProjectRes projectRes){
         System.out.println("service");
         projectResDao.addNewProjectRes(projectRes);
     }
+
+    public List<ProjectRes> getProjectRess() {
+        List<ProjectRes> projectRess = projectResDao.getProjectRess();
+        return projectRess;
+    }
+
+    public void setProjectGrade(Integer projectResId,Integer grade) {
+        projectResDao.setGrade(projectResId, grade);
+        projectResDao.setStatus(projectResId,2);
+    }
+
 
 
 }

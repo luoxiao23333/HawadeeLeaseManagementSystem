@@ -35,7 +35,7 @@ public class ProjectController {
 
     @Autowired
     private void setUserService(ProjectResService projectResService){
-        this.projectResService = projectInfoService;
+        this.projectResService = projectResService;
     }
 
     private ProjectProcessingHistoryService projectInfoHistoryService;
@@ -53,6 +53,9 @@ public class ProjectController {
     private void updateProjectInfo(ModelAndView mv, User user){
         List<ProjectWithUser> projectsPromoted = projectInfoService.getProjectUserPromoted(user);
         List<ProjectWithUser> projectsNeedToProcess = projectInfoService.getProjectUserNeedToProcess(user);
+
+        List<ProjectRes> projectRess = projectResService.getProjectRess();
+
         Map<ProjectWithUser, List<ProjectHistoryWithUser>> projectPromotedProcessingHistoryMap =
                 projectInfoHistoryService.getProjectProcessingHistoryMap(projectsPromoted);
         Map<ProjectWithUser, List<ProjectHistoryWithUser>> projectNeedToProcessHistoryMap =
@@ -62,6 +65,7 @@ public class ProjectController {
         mv.addObject("projectNeedToProcess", projectInfoService.getProjectUserNeedToProcess(user));
         mv.addObject("projectPromotedProcessingHistoryMap", projectPromotedProcessingHistoryMap);
         mv.addObject("projectNeedToProcessHistoryMap", projectNeedToProcessHistoryMap);
+        mv.addObject("projectRess",projectRess);
     }
 
     @RequestMapping(value = "/project/projectManagement")
@@ -94,6 +98,15 @@ public class ProjectController {
     public ModelAndView projectSubmitRes(HttpSession session){
         User user = (User) session.getAttribute("user");
         ModelAndView mv = new ModelAndView("/project/projectSubmitRes");
+//        ModelAndView mv = new ModelAndView("/project/projectMnager");
+        this.updateProjectInfo(mv, user);
+        return mv;
+    }
+
+    @RequestMapping(value = "/project/projectResScore")
+    public ModelAndView projectResScore(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        ModelAndView mv = new ModelAndView("/project/projectResScore");
 //        ModelAndView mv = new ModelAndView("/project/projectMnager");
         this.updateProjectInfo(mv, user);
         return mv;
@@ -170,4 +183,18 @@ public class ProjectController {
 
         return mv;
     }
+
+    @RequestMapping(value = "/project/gradeProject")
+    public ModelAndView gradeProject(@RequestParam(name = "projectResId") Integer projectResId,
+                                     @RequestParam(name = "grade") Integer grade,
+                               HttpServletResponse response) throws IOException {
+        projectResService.setProjectGrade(projectResId,grade);
+        return new ModelAndView("/project/projectResScore");
+    }
+
+//    @RequestMapping(value = "/project/getRess")
+//    public getProjectRess (
+//                               HttpServletResponse response) throws IOException {
+//        return new ModelAndView("/project/projectManagement");
+//    }
 }
