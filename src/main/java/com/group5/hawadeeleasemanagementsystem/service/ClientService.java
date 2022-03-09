@@ -7,6 +7,7 @@ import com.group5.hawadeeleasemanagementsystem.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -59,7 +60,12 @@ public class ClientService {
         Iterator<String> iterator = emailList.iterator();
         while (iterator.hasNext()){
             email = iterator.next();
-            mailService.sendHtmlMail(email,subject,content);
+            try{
+                mailService.sendHtmlMail(email,subject,content);
+            } catch ( MessagingException e){
+                continue;
+            }
+
         }
     }
 }
