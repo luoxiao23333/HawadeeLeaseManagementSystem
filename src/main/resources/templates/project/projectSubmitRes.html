@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header th:replace="common::header"></header>
+    <aside th:replace="common::leftSide"></aside>
+
+    <div class="content-wrapper" style="min-height: 923px;">
+        <div class="box-header with-border">
+            <h3 class="box-title">中期检查</h3>
+        </div>
+
+        <div th:each="projectInfo:${projectPromoted}">
+            <div class="box box-default collapsed-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="${projectInfo.getProject().getTitle()}"></h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Detail Information</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Content</th>
+                                        <th>CreateDate</th>
+                                    </tr>
+                                    <tr>
+                                        <td th:text="${projectInfo.getProject().getId()}"></td>
+
+                                        <td th:text="${projectInfo.getProject().getContent()}"></td>
+                                        <td th:text="${projectInfo.getProject().getCreateDate()}"></td>
+
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+
+                                <form class="form-horizontal" action="#" th:action="@{/project/newProjectRes}"
+                                          method="post" enctype="multipart/form-data">
+
+                                    <input name="projectId" type="hidden" th:value="${projectInfo.getProject().getId()}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">res report</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="file" class="form-control" placeholder="Project File" name="file" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+</body>
+</html>
