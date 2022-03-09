@@ -40,6 +40,12 @@ public class ContractInfoService {
         this.dutyDao = dutyDao;
     }
 
+    private FileService fileService;
+    @Autowired
+    private void setFileService(FileService fileService) {
+        this.fileService = fileService;
+    }
+
     public List<ContractWithUser> getContractUserPromoted(User user) {
         List<ContractWithUser> contractsPromoted = contractInfoDao.getContractUserPromoted(user.getId());
         System.out.println(user.getId());
@@ -86,5 +92,14 @@ public class ContractInfoService {
         }
 
         contractProcessingHistoryDao.addNewRecord(contractId, status, reason, user.getId());
+    }
+
+    public void updateContentById(Integer contractId, String content) throws Exception {
+        String fileName = this.contractInfoDao.getContractById(contractId).getContentLoc();
+        this.fileService.saveTo(content, fileName);
+    }
+
+    public ContractInfo getContractById(Integer contractId){
+        return this.contractInfoDao.getContractById(contractId);
     }
 }
