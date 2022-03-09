@@ -9,45 +9,42 @@
   <header th:replace="common::header"></header>
   <aside th:replace="common::leftSide"></aside>
 
-  <div class="content-wrapper" style="min-height: 923px;">
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">推送邮件</h3>
-      </div>
-      <!-- /.box-header -->
-      <form th:action="@{/client/sendemail}" method="post">
-        <div class="box-body">
-          <div class="form-group">
-            <label>邮件主题</label>
-            <input class="form-control" style="height: 60px" name="subject">
-          </div>
+  <div class="content-wrapper" style="min-height: 923px;" >
+    <section class="content-header">
+      <h1>邮箱推送</h1>
+    </section>
+    <section class="content">
+      <div class="box box-info">
+        <form th:action="@{/client/sendemail}" method="post">
+          <div class="box-body">
+            <div class="form-group">
+              <label>邮件主题</label>
+              <input class="form-control" style="height: 60px; border-radius: 3px" name="subject">
+            </div>
 
 
-          <label>邮件内容</label>
-          <textarea id="editor1" name="content" rows="10" cols="80" style="visibility: hidden; display: none;">
+            <label>邮件内容</label>
+            <textarea id="editor1" name="content" rows="10" cols="80" style="visibility: hidden; display: none;">
                     </textarea>
 
 
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          <div class="pull-right">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
           </div>
-        </div>
-      </form>
-      <!-- /.box-footer -->
-    </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+            </div>
+          </div>
+        </form>
+        <!-- /.box-footer -->
+      </div>
+    </section>
+
   </div>
 
 </div>
 
 <div th:replace="common::jsHead"></div>
-
-<script th:src="@{/static/plugins/iCheck/icheck.min.js}"></script>
-<script th:src="@{/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
-<script th:src="@{/static/bower_components/ckeditor/ckeditor.js}"></script>
-
 
 <script>
   $(function () {
