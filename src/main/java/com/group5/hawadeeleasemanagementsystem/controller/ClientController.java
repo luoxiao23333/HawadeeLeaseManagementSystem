@@ -30,7 +30,6 @@ public class ClientController {
         return mv;
     }
 
-
     @RequestMapping("/add")
     private ModelAndView addClient(HttpServletRequest request){
         Client client = new Client();
@@ -41,6 +40,19 @@ public class ClientController {
         mv.addObject("pageInfo",pageInfo);
         return mv;
     }
+
+    @RequestMapping("/del")
+    private ModelAndView deleteClient(HttpServletRequest request){
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(request.getParameter("id"));
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        clientService.deleteById(id);
+        PageInfo<Client> pageInfo = clientService.getClientByPage(1);
+        ModelAndView mv = new ModelAndView("/client/clientPage");
+        mv.addObject("pageInfo",pageInfo);
+        return mv;
+    }
+
 
     @RequestMapping("emailPage")
     private String emailPage(){
