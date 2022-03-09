@@ -27,22 +27,22 @@ public class userInfoService {
     void setUserDao(UserDao userDao) {this.userDao = userDao;}
 
     public User getColleague(Integer id){
-        return  userDao.getUserById(userrelDao.getUserRel(id).getColleagueId());
+        return  userDao.getUserById(userrelDao.getRel(id).getColleagueId());
     }
 
     public User getLeader(Integer id){
-        return  userDao.getUserById(userrelDao.getUserRel(id).getLeaderId());
+        return  userDao.getUserById(userrelDao.getRel(id).getLeaderId());
     }
 
     public User getSub(Integer id){
-        return  userDao.getUserById(userrelDao.getUserRel(id).getSubordinateId());
+        return  userDao.getUserById(userrelDao.getRel(id).getSubordinateId());
     }
 
     public userInfo getUserInfo(Integer id){
         return userinfoDao.getUserInfo(id);
     }
 
-    public userRel getUserRel(Integer id){ return userrelDao.getUserRel(id); }
+    public userRel getUserRel(Integer id){ return userrelDao.getRel(id); }
 
     public void changeInfo(Integer id,Integer age,String school,Integer level,String selfIntro){
         userInfo userinfo = getUserInfo(id);

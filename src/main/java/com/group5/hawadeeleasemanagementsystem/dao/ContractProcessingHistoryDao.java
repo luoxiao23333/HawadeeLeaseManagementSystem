@@ -11,4 +11,5 @@ public interface ContractProcessingHistoryDao {
     List<ContractProcessingHistory> getContractProcessingHistoryByContractId(Integer contractId);
     void addNewRecord(Integer contractId, Integer status, String reason, Integer processUserId);
     List<ContractHistoryWithUser> getContractsWithUser(Integer contractId);
+    List<ContractProcessingHistory> getAllHistory();
 }

@@ -146,10 +146,10 @@ CREATE TABLE `reimbursement_processing_history`
 
 CREATE TABLE `userRel`
 (
-    `id`          int references `user` (id),
-    `colleague`   int references `user` (id),
-    `leader`      int references `user` (id),
-    `subordinate` int references `user` (id),
+    `id`          int references `user` (id) not null ,
+    `colleague`   int references `user` (id) not null ,
+    `leader`      int references `user` (id) not null ,
+    `subordinate` int references `user` (id) not null ,
     PRIMARY KEY (`id`) USING BTREE,
     INDEX `id2` (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -159,11 +159,11 @@ CREATE TABLE `userRel`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `userRel`
-VALUES (1, 2, 3, null);
+VALUES (1, 2, 3, 4);
 INSERT INTO `userRel`
-VALUES (2, 1, 3, null);
+VALUES (2, 1, 3, 4);
 INSERT INTO `userRel`
-VALUES (3, 2, 1, null);
+VALUES (3, 2, 1, 4);
 
 CREATE TABLE `userInfo`
 (
@@ -201,3 +201,54 @@ create table client
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = Dynamic;
+
+/* 新的表格放在这行上面 */
+
+/* 测试数据面板功能插入的合同 */
+insert into hawadee.user (hawadee.user.name, hawadee.user.password,hawadee.user.id)
+values ("Data","1234",4);
+insert into hawadee.contract_info(current_handler_id, status, title, content, id, promoter_id)
+VALUES (4,1,"Data Visualization","Data vv", 1, 4);
+
+insert into contract_processing_history(contract_id, process_user_id, reason, create_date, status) VALUES
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-02-01 00:00:00",1),
+(1, 4, "good", "2000-03-01 00:00:00",1),
+(1, 4, "good", "2000-04-01 00:00:00",1),
+(1, 4, "good", "2000-05-01 00:00:00",1),
+(1, 4, "good", "2000-06-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-03-01 00:00:00",1),
+(1, 4, "good", "2000-04-01 00:00:00",1),
+(1, 4, "good", "2000-05-01 00:00:00",1),
+(1, 4, "good", "2000-06-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-02-01 00:00:00",1),
+(1, 4, "good", "2000-02-01 00:00:00",1),
+(1, 4, "good", "2000-02-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-04-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-04-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-01-01 00:00:00",1),
+(1, 4, "good", "2000-04-01 00:00:00",1),
+(1, 4, "good", "2000-06-01 00:00:00",2),
+(1, 4, "good", "2000-01-01 00:00:00",2),
+(1, 4, "good", "2000-02-01 00:00:00",2),
+(1, 4, "good", "2000-03-01 00:00:00",2),
+(1, 4, "good", "2000-04-01 00:00:00",2),
+(1, 4, "good", "2000-05-01 00:00:00",2),
+(1, 4, "good", "2000-06-01 00:00:00",2),
+(1, 4, "good", "2000-06-01 00:00:00",2),
+(1, 4, "good", "2000-06-01 00:00:00",2),
+(1, 4, "good", "2000-07-01 00:00:00",2),
+(1, 4, "good", "2000-08-01 00:00:00",2),
+(1, 4, "good", "2000-01-01 00:00:00",2),
+(1, 4, "good", "2000-03-01 00:00:00",2);
+
+

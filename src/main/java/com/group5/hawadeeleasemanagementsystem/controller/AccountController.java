@@ -1,6 +1,7 @@
 package com.group5.hawadeeleasemanagementsystem.controller;
 
 import com.group5.hawadeeleasemanagementsystem.domain.User;
+import com.group5.hawadeeleasemanagementsystem.service.ContractProcessingHistoryService;
 import com.group5.hawadeeleasemanagementsystem.service.SMSService;
 import com.group5.hawadeeleasemanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class AccountController {
         this.userService = userService;
     }
 
+    ContractProcessingHistoryService contractProcessingHistoryService;
+    @Autowired
+    private void setContractProcessingHistoryService(ContractProcessingHistoryService contractProcessingHistoryService){
+        this.contractProcessingHistoryService = contractProcessingHistoryService;
+    }
+
     @RequestMapping(value = "/account/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView("/account/login");
@@ -43,7 +50,7 @@ public class AccountController {
     @RequestMapping(value = "/account/doLogin")
     public ModelAndView doLogin(@RequestParam String username,
                                 @RequestParam String password,
-                                HttpSession session) {
+                                HttpSession session) throws Exception {
         User user = userService.login(username, password);
         ModelAndView mv = new ModelAndView();
         // login fail
