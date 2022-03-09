@@ -146,10 +146,10 @@ CREATE TABLE `reimbursement_processing_history`
 
 CREATE TABLE `userRel`
 (
-    `id`          int references `user` (id),
-    `colleague`   int references `user` (id),
-    `leader`      int references `user` (id),
-    `subordinate` int references `user` (id),
+    `id`          int references `user` (id) not null ,
+    `colleague`   int references `user` (id) not null ,
+    `leader`      int references `user` (id) not null ,
+    `subordinate` int references `user` (id) not null ,
     PRIMARY KEY (`id`) USING BTREE,
     INDEX `id2` (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -159,11 +159,11 @@ CREATE TABLE `userRel`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `userRel`
-VALUES (1, 2, 3, null);
+VALUES (1, 2, 3, 4);
 INSERT INTO `userRel`
-VALUES (2, 1, 3, null);
+VALUES (2, 1, 3, 4);
 INSERT INTO `userRel`
-VALUES (3, 2, 1, null);
+VALUES (3, 2, 1, 4);
 
 CREATE TABLE `userInfo`
 (
