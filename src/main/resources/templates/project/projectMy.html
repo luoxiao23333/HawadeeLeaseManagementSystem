@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header th:replace="common::header"></header>
+    <aside th:replace="common::leftSide"></aside>
+
+    <div class="content-wrapper" style="min-height: 923px;">
+        <div class="box-header with-border">
+            <h3 class="box-title">Project What I Promoted</h3>
+        </div>
+
+        <div th:each="projectInfo:${projectPromoted}">
+            <div class="box box-default collapsed-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="${projectInfo.getProject().getTitle()}"></h3>
+                </div>
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Detail Information</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Current Status</th>
+                                        <th>Content</th>
+                                        <th>CreateDate</th>
+                                        <th>Current Handler</th>
+                                        <th>Project</th>
+                                    </tr>
+                                    <tr>
+                                        <td th:text="${projectInfo.getProject().getId()}"></td>
+                                        <td>
+                                                <span class="label label-primary"
+                                                      th:if="${projectInfo.getProject().getStatus()}==1">Processing</span>
+                                            <span class="label label-success"
+                                                  th:if="${projectInfo.getProject().getStatus()}==2">Finished</span>
+                                        </td>
+                                        <td th:text="${projectInfo.getProject().getContent()}"></td>
+                                        <td th:text="${projectInfo.getProject().getCreateDate()}"></td>
+                                        <td th:if="${projectInfo.getUser()}!=null" th:text="${projectInfo.getUser().getName()}"></td>
+                                        <td th:if="${projectInfo.getUser()}==null">No Handler</td>
+                                        <td>
+                                            <form th:action="@{/project/download}">
+                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                                <input type="hidden" name="fileLoc" th:value="${projectInfo.getProject().getFileLoc()}">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Process Track</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tbody><tr>
+                                        <th>ID</th>
+                                        <th>Reason</th>
+                                        <th>CreateDate</th>
+                                        <th>Status</th>
+                                        <th>Handler</th>
+                                    </tr>
+                                    <tr th:each="projectHistory:${projectPromotedProcessingHistoryMap.get(projectInfo)}">
+                                        <td th:text="${projectHistory.getHistory().getId()}"></td>
+                                        <td th:text="${projectHistory.getHistory().getReason()}"></td>
+                                        <td th:text="${projectHistory.getHistory().getCreateDate()}"></td>
+                                        <td>
+                                                <span class="label label-success"
+                                                      th:if="${projectHistory.getHistory().getStatus()}==1">Approved</span>
+                                            <span class="label label-danger"
+                                                  th:if="${projectHistory.getHistory().getStatus()}==2">Denied</span>
+                                        </td>
+                                        <td th:text="${projectHistory.getUser().getName()}"></td>
+                                    </tr>
+                                    </tbody></table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+</body>
+</html>

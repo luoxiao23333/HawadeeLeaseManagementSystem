@@ -93,10 +93,21 @@ create table project_info
 ) ENGINE = InnoDB,
   charset = UTF8;
 
+
+create table project_res
+(
+    `id`              int(10) primary key auto_increment,
+    `project_id`      int(10) references project_info (`id`) on update cascade on delete cascade,
+    `status`          int(2)        default 1, /* 1-processing 2-finished */
+    `grade`           int(10)        default 60,
+    `file_loc`        varchar(10000)
+) ENGINE = InnoDB,
+  charset UTF8;
+
 create table project_processing_history
 (
     `id`              int(10) primary key auto_increment,
-    `project_id`      int(10) references contract_info (`id`) on update cascade on delete cascade,
+    `project_id`      int(10) references project_info (`id`) on update cascade on delete cascade,
     `process_user_id` int(10) references user (`id`) on update cascade on delete cascade,
     `reason`          blob(65536),
     `create_date`     datetime default now(),
