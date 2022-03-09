@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface userRelDao {
-    userRel getUserRel(Integer userId);
+    userRel getRel(Integer userId);
     void updateColleague(Integer uId,Integer cId);
     void updateLeader(Integer uId,Integer lId);
     void updateSubordinate(Integer uId,Integer sId);
