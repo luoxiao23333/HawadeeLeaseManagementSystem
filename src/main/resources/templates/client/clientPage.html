@@ -10,12 +10,9 @@
     <aside th:replace="common::leftSide"></aside>
 
     <div class="content-wrapper" style="min-height: 923px;">
-        <section class="content-header">
-            <h1>客户管理</h1>
-        </section>
         <section class="content">
             <!-- 添加新客户 -->
-            <div class="box box-info" >
+            <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">添加客户</h3>
                 </div>
@@ -28,28 +25,31 @@
                             <label class="col-sm-2 control-label">Name</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="name" name="name" style="border-radius: 3px">
+                                <input type="text" class="form-control" placeholder="name" name="name"
+                                       style="border-radius: 3px">
                             </div>
                         </div>
                         <!--输入客户手机号码-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Phone</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Phone" name="phone" style="border-radius: 3px">
+                                <input type="text" class="form-control" placeholder="Phone" name="phone"
+                                       style="border-radius: 3px">
                             </div>
                         </div>
                         <!--输入客户邮箱-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" placeholder="Email" name="email" style="border-radius: 3px">
+                                <input type="email" class="form-control" placeholder="Email" name="email"
+                                       style="border-radius: 3px">
                             </div>
                         </div>
 
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right" >Submit</button>
+                        <button type="submit" class="btn btn-info pull-right">Submit</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
@@ -65,13 +65,26 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="example1_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 173.99px;">姓名</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 159.156px;">号码</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 115.75px;">邮箱</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 115.75px;">操作</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                            colspan="1" aria-label="Browser: activate to sort column ascending"
+                                            style="width: 173.99px;">姓名
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                            colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                            style="width: 159.156px;">号码
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                            colspan="1" aria-label="Engine version: activate to sort column ascending"
+                                            style="width: 115.75px;">邮箱
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                            colspan="1" aria-label="Engine version: activate to sort column ascending"
+                                            style="width: 115.75px;">操作
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody th:each="client:${pageInfo.list}">
@@ -82,34 +95,39 @@
                                         <td>
                                             <form th:action="@{/client/del}">
                                                 <input type="hidden" name="id" th:value="${client.getId()}">
-                                                <button type="submit" class="btn btn-block btn-danger btn-sm" style="width: 60px">Delete</button>
+                                                <button type="submit" class="btn btn-block btn-danger btn-sm"
+                                                        style="width: 60px">Delete
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
                                     </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">姓名</th>
-                                        <th rowspan="1" colspan="1">号码</th>
-                                        <th rowspan="1" colspan="1">联系方式</th>
-                                        <th rowspan="1" colspan="1">操作</th>
-                                    </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
-                        <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
-                        <a th:href="@{/client/clientPage}">首页</a>
-                        <a th:href="@{/client/clientPage(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
-                        <a th:href="@{/client/clientPage(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
-                        <a th:href="@{/client/clientPage(pageNum=${pageInfo.pages})}">尾页</a>
+
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span>
+                                    页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="btn-group">
+                                    <a th:href="@{/client/clientPage}"><button type="button" class="btn btn-default" style="color: #fff;background-color: #00c0ef">首页</button></a>
+                                    <a th:href="@{/client/clientPage(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}"><button type="button" class="btn btn-default" style="color: #fff;background-color: #00c0ef"><<</button></a>
+                                    <a th:href="@{/client/clientPage(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}"><button type="button" class="btn btn-default" style="color: #fff;background-color: #00c0ef">>></button></a>
+                                    <a th:href="@{/client/clientPage(pageNum=${pageInfo.pages})}"><button type="button" class="btn btn-default" style="color: #fff;background-color: #00c0ef">尾页</button></a>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
                 <!-- /.box-body -->
             </div>
 
-           \
+            \
         </section>
     </div>
 
