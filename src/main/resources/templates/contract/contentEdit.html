@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header th:replace="common::header"></header>
+    <aside th:replace="common::leftSide"></aside>
+
+
+    <div class="content-wrapper" style="min-height: 923px;">
+        <section class="content-header">
+            <h1>编辑合同内容</h1>
+        </section>
+        <section class="content">
+            <form th:action="@{/contract/doEditContent}" method="post">
+                <div class="box box-info">
+                    <div class="margin">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-success">保存</button>
+                        </div>
+                    </div>
+
+
+                    <div class="box box-body">
+                         <textarea id="editor" name="content" rows="10" cols="80" th:text="${defaultContent}"
+                                   style="visibility: hidden; display: none;"></textarea>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+<script>
+    $(function () {
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor', {height: '550px'})
+
+        //bootstrap WYSIHTML5 - text editor
+        $('.textarea').wysihtml5()
+    })
+</script>
+
+</body>
+</html>
