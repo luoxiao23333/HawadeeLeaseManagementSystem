@@ -145,7 +145,7 @@
             </div>
             <!-- /.nav-tabs-custom -->
 
-            <div class="post">
+            <div class="post" th:if="${colleague}!=null">
                 <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="../static/dist/img/user5-128x128.jpg" alt="user image">
                     <span class="username">
@@ -159,7 +159,7 @@
                 <p>work work hard,day day up</p>
             </div>
 
-            <div class="post">
+            <div class="post" th:if="${leader}!=null">
                 <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="../static/dist/img/user3-128x128.jpg" alt="user image">
                     <span class="username">
@@ -173,7 +173,7 @@
                 <p>I want to be a computer scientist</p>
             </div>
 
-            <div class="post">
+            <div class="post" th:if="${subordinate}!=null">
                 <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="../static/dist/img/user7-128x128.jpg" alt="user image">
                     <span class="username">

@@ -146,10 +146,10 @@ CREATE TABLE `reimbursement_processing_history`
 
 CREATE TABLE `userRel`
 (
-    `id`          int references `user` (id) not null ,
-    `colleague`   int references `user` (id) not null ,
-    `leader`      int references `user` (id) not null ,
-    `subordinate` int references `user` (id) not null ,
+    `id`          int references `user` (id),
+    `colleague`   int references `user` (id),
+    `leader`      int references `user` (id),
+    `subordinate` int references `user` (id),
     PRIMARY KEY (`id`) USING BTREE,
     INDEX `id2` (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -186,6 +186,8 @@ INSERT INTO `userInfo`
 VALUES (2, 'sjtu', 20, 18, 'work hard and you will get promoted');
 INSERT INTO `userInfo`
 VALUES (3, 'pku', 20, 20, 'i am really good at pua');
+INSERT INTO `userInfo`
+VALUES (4, 'jhu', 20, 20, 'I am Data');
 
 /*
 客户管理表,小龙部分
