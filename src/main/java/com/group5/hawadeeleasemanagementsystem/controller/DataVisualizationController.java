@@ -24,7 +24,7 @@ public class DataVisualizationController {
 
         User user = (User) session.getAttribute("user");
         if(!this.dataVisualizationService.isLegalUser(user)){
-            return new ModelAndView("/404");
+            return new ModelAndView("/error/404");
         }
 
         ModelAndView mv = new ModelAndView("/dataVisualization/comprehensivePanel");
