@@ -10,13 +10,15 @@
     <aside th:replace="common::leftSide"></aside>
 
     <div class="content-wrapper" style="min-height: 923px;">
-        Welcome
-        <span th:text="${session.user.name}"></span>
-
-        <!-- 发起新合同 -->
-        <div class="box-header with-border">
-            <h3 class="box-title">New Reimbursement</h3>
-        </div>
+        <section class="content-header">
+            <h1>报销管理</h1>
+        </section>
+        <section class="content">
+            <!-- 发起新合同 -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">费用报销</h3>
+                </div>
         <!-- /.box-header -->
         <!-- form start -->
         <form class="form-horizontal" action="#" th:action="@{/reimbursement/newReimbursement}"
@@ -55,10 +57,12 @@
             </div>
             <!-- /.box-footer -->
         </form>
+            </div>
 
-        <div class="box-header with-border">
-            <h3 class="box-title">已通过或处理中的报销</h3>
-        </div>
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">我发起的报销</h3>
+                </div>
 
         <div th:each="reimbursementInfo:${reimbursementPromoted}">
             <div class="box box-default collapsed-box">
@@ -77,14 +81,13 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Detail Information</h3>
+                                <h3 class="box-title">报销详细信息</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tbody>
                                     <tr>
-                                        <th>ID</th>
                                         <th>目前状态</th>
                                         <th>报销金额</th>
                                         <th>创建时间</th>
@@ -92,7 +95,6 @@
                                         <th>报销证明</th>
                                     </tr>
                                     <tr>
-                                        <td th:text="${reimbursementInfo.getReimbursement().getId()}"></td>
                                         <td>
                                                 <span class="label label-primary"
                                                       th:if="${reimbursementInfo.getReimbursement().getStatus()}==1">Processing</span>
@@ -100,13 +102,13 @@
                                                   th:if="${reimbursementInfo.getReimbursement().getStatus()}==2">Finished</span>
                                         </td>
                                         <td th:text="${reimbursementInfo.getReimbursement().getAmount()}"></td>
-                                        <td th:text="${reimbursementInfo.getReimbursement().getCreateDate()}"></td>
+                                        <td th:text="${reimbursementInfo.getReimbursement().getFormattedCreateTime()}"></td>
                                         <td th:if="${reimbursementInfo.getUser()}!=null"
                                             th:text="${reimbursementInfo.getUser().getName()}"></td>
                                         <td th:if="${reimbursementInfo.getUser()}==null">No Handler</td>
                                         <td>
                                             <form th:action="@{/reimbursement/downloadProveFile}">
-                                                <button type="submit" class="btn btn-block btn-info">Download Prove File
+                                                <button type="submit" class="btn btn-block btn-info">下载证明文件
                                                 </button>
                                                 <input type="hidden" name="fileLoc"
                                                        th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">
@@ -117,7 +119,7 @@
                                         <!--                                        <td th:if="${reimbursementHistory.getHistory().getStatus()}==1">-->
                                         <td th:if="${reimbursementInfo.getReimbursement().getStatus()}==2">
                                             <form th:action="@{/reimbursement/downloadApprovalFile}">
-                                                <button type="submit" class="btn btn-block btn-info">Download Approval
+                                                <button type="submit" class="btn btn-block btn-info">下载报销证明
                                                     File
                                                 </button>
                                                 <input type="hidden" name="fileLocA"
@@ -136,28 +138,26 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Process Track</h3>
+                                <h3 class="box-title">处理流程</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tbody>
                                     <tr>
-                                        <th>ID</th>
                                         <th>通过原因</th>
                                         <th>日期</th>
                                         <th>状态</th>
                                         <th>经办人</th>
                                     </tr>
                                     <tr th:each="reimbursementHistory:${reimbursementPromotedProcessingHistoryMap.get(reimbursementInfo)}">
-                                        <td th:text="${reimbursementHistory.getHistory().getId()}"></td>
                                         <td th:text="${reimbursementHistory.getHistory().getReason()}"></td>
-                                        <td th:text="${reimbursementHistory.getHistory().getCreateDate()}"></td>
+                                        <td th:text="${reimbursementHistory.getHistory().getFormattedCreateTime()}"></td>
                                         <td>
                                                 <span class="label label-success"
-                                                      th:if="${reimbursementHistory.getHistory().getStatus()}==1">Approved</span>
+                                                      th:if="${reimbursementHistory.getHistory().getStatus()}==1">同意</span>
                                             <span class="label label-danger"
-                                                  th:if="${reimbursementHistory.getHistory().getStatus()}==2">Denied</span>
+                                                  th:if="${reimbursementHistory.getHistory().getStatus()}==2">驳回</span>
                                         </td>
                                         <td th:text="${reimbursementHistory.getUser().getName()}"></td>
                                     </tr>
@@ -173,10 +173,12 @@
                 <!-- /.box-body -->
             </div>
         </div>
+            </div>
 
-        <div class="box-header with-border">
-            <h3 class="box-title">需要我处理的报销</h3>
-        </div>
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">待处理的报销申请</h3>
+                </div>
 
         <div th:each="reimbursementInfo:${reimbursementNeedToProcess}">
             <div class="box box-default collapsed-box">
@@ -213,16 +215,16 @@
                                         <td th:text="${reimbursementInfo.getReimbursement().getId()}"></td>
                                         <td>
                                                 <span class="label label-primary"
-                                                      th:if="${reimbursementInfo.getReimbursement().getStatus()}==1">Processing</span>
+                                                      th:if="${reimbursementInfo.getReimbursement().getStatus()}==1">处理中</span>
                                             <span class="label label-success"
-                                                  th:if="${reimbursementInfo.getReimbursement().getStatus()}==2">Finished</span>
+                                                  th:if="${reimbursementInfo.getReimbursement().getStatus()}==2">已完成</span>
                                         </td>
                                         <td th:text="${reimbursementInfo.getReimbursement().getContent()}"></td>
-                                        <td th:text="${reimbursementInfo.getReimbursement().getCreateDate()}"></td>
+                                        <td th:text="${reimbursementInfo.getReimbursement().getFormattedCreateTime()}"></td>
                                         <td th:text="${reimbursementInfo.getUser().getName()}"></td>
                                         <td>
                                             <form th:action="@{/reimbursement/downloadProveFile}">
-                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                                <button type="submit" class="btn btn-block btn-info">下载</button>
                                                 <input type="hidden" name="fileLoc"
                                                        th:value="${reimbursementInfo.getReimbursement().getProvFileLoc()}">
                                             </form>
@@ -275,7 +277,7 @@
                                     <tr th:each="reimbursementHistory:${reimbursementNeedToProcessHistoryMap.get(reimbursementInfo)}">
                                         <td th:text="${reimbursementHistory.getHistory().getId()}"></td>
                                         <td th:text="${reimbursementHistory.getHistory().getReason()}"></td>
-                                        <td th:text="${reimbursementHistory.getHistory().getCreateDate()}"></td>
+                                        <td th:text="${reimbursementHistory.getHistory().getFormattedCreateTime()}"></td>
                                         <td>
                                                 <span class="label label-success"
                                                       th:if="${reimbursementHistory.getHistory().getStatus()}==1">Approved</span>
@@ -299,6 +301,8 @@
 
             </div>
         </div>
+            </div>
+        </section>
 
     </div>
 

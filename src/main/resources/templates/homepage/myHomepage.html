@@ -21,17 +21,17 @@
 
                     <h3 class="profile-username text-center" th:text = "${user.getName()}"></h3>
 
-                    <p class="text-muted text-center">Software Engineer</p>
+                    <p class="text-muted text-center">软件开发工程师</p>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>User ID</b> <a class="pull-right" th:text = "${user.getId()}"></a>
+                            <b>用户ID</b> <a class="pull-right" th:text = "${user.getId()}"></a>
                         </li>
                         <li class="list-group-item">
-                            <b>User Phone</b> <a class="pull-right" th:text = "${user.getPhone()}"></a>
+                            <b>电话</b> <a class="pull-right" th:text = "${user.getPhone()}"></a>
                         </li>
                         <li class="list-group-item">
-                            <b>User Level</b> <a class="pull-right" th:text = "${userInfo.getLevel()}"></a>
+                            <b>职级</b> <a class="pull-right" th:text = "${userInfo.getLevel()}"></a>
                         </li>
                     </ul>
 
@@ -48,19 +48,19 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                    <strong><i class="fa fa-book margin-r-5"></i>毕业院校</strong>
 
                     <p class="text-muted" th:text = "${userInfo.getSchool()}"></p>
 
                     <hr>
 
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i>位置</strong>
 
                     <p class="text-muted">China, Chengdu</p>
 
                     <hr>
 
-                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                    <strong><i class="fa fa-pencil margin-r-5"></i>技能</strong>
 
                     <p>
                         <span class="label label-danger">UI Design</span>
@@ -72,7 +72,7 @@
 
                     <hr>
 
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i>Introduction</strong>
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i>介绍</strong>
 
                     <p th:text = "${userInfo.getSelfIntro()}"></p>
                 </div>
@@ -86,7 +86,7 @@
             <div class="nav-tabs-custom">
 
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">Settings</a></li>
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">设置</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -99,7 +99,7 @@
 
                             <div class="box-body">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Age</label>
+                                <label class="col-sm-2 control-label">年龄</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="age" name = "age" required>
@@ -107,7 +107,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Level</label>
+                                <label class="col-sm-2 control-label">职级</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="level" name = "level" required>
@@ -115,7 +115,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">School</label>
+                                <label class="col-sm-2 control-label">毕业院校</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="school" name = "school" required>
@@ -123,7 +123,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Introduction</label>
+                                <label class="col-sm-2 control-label">介绍</label>
 
                                 <div class="col-sm-10">
                                     <textarea class="form-control" id="introduction" placeholder="introduction" name = "introduction" required></textarea>
@@ -133,7 +133,7 @@
 
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Submit</button>
+                                <button type="submit" class="btn btn-info pull-right">提交修改</button>
                             </div>
 
                         </form>
@@ -153,7 +153,7 @@
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description" th:text = "${colleague.getPhone()}"></span>
-                    <span class ="description">my colleague</span>
+                    <span class ="description">我的校友</span>
                 </div>
                 <!-- /.user-block -->
                 <p>work work hard,day day up</p>
@@ -167,7 +167,7 @@
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description" th:text = "${leader.getPhone()}"></span>
-                    <span class ="description">my leader</span>
+                    <span class ="description">我的领导</span>
                 </div>
                 <!-- /.user-block -->
                 <p>I want to be a computer scientist</p>
@@ -181,7 +181,7 @@
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description" th:text = "${subordinate.getPhone()}"></span>
-                    <span class ="description">my subordinate</span>
+                    <span class ="description">我的下属</span>
                 </div>
                 <!-- /.user-block -->
                 <p>I hope there no bug in my program</p>

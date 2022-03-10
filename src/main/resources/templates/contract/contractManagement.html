@@ -120,7 +120,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
+                                                <td th:text="${contractInfo.getContract().getFormattedCreateTime()}"></td>
                                                 <td th:if="${contractInfo.getUser()}!=null"
                                                     th:text="${contractInfo.getUser().getName()}"></td>
                                                 <td th:if="${contractInfo.getUser()}==null">无</td>
@@ -158,7 +158,7 @@
                                             </tr>
                                             <tr th:each="contractHistory:${contractPromotedProcessingHistoryMap.get(contractInfo)}">
                                                 <td th:text="${contractHistory.getHistory().getReason()}"></td>
-                                                <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
+                                                <td th:text="${contractHistory.getHistory().getFormattedCreateTime()}"></td>
                                                 <td>
                                                         <span class="label label-success"
                                                               th:if="${contractHistory.getHistory().getStatus()}==1">同意</span>
@@ -230,7 +230,7 @@
                                                         <i class="fa fa-inbox"></i> View
                                                     </a>
                                                 </td>
-                                                <td th:text="${contractInfo.getContract().getCreateDate()}"></td>
+                                                <td th:text="${contractInfo.getContract().getFormattedCreateTime()}"></td>
                                                 <td th:text="${contractInfo.getUser().getName()}"></td>
                                                 <td>
                                                     <form th:action="@{/contract/download}">
@@ -287,7 +287,7 @@
                                             </tr>
                                             <tr th:each="contractHistory:${contractNeedToProcessHistoryMap.get(contractInfo)}">
                                                 <td th:text="${contractHistory.getHistory().getReason()}"></td>
-                                                <td th:text="${contractHistory.getHistory().getCreateDate()}"></td>
+                                                <td th:text="${contractHistory.getHistory().getFormattedCreateTime()}"></td>
                                                 <td>
                                                     <span class="label label-success"
                                                           th:if="${contractHistory.getHistory().getStatus()}==1">同意</span>

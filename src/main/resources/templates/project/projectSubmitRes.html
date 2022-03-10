@@ -31,22 +31,19 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Detail Information</h3>
+                                <h3 class="box-title">项目信息</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tbody>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Content</th>
-                                        <th>CreateDate</th>
+                                        <th>项目说明</th>
+                                        <th>创建日期</th>
                                     </tr>
                                     <tr>
-                                        <td th:text="${projectInfo.getProject().getId()}"></td>
-
                                         <td th:text="${projectInfo.getProject().getContent()}"></td>
-                                        <td th:text="${projectInfo.getProject().getCreateDate()}"></td>
+                                        <td th:text="${projectInfo.getProject().getFormattedCreateTime()}"></td>
 
 
                                     </tr>
@@ -60,7 +57,7 @@
 
                                     <input name="projectId" type="hidden" th:value="${projectInfo.getProject().getId()}">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">res report</label>
+                                        <label class="col-sm-2 control-label">项目成果</label>
 
                                         <div class="col-sm-10">
                                             <input type="file" class="form-control" placeholder="Project File" name="file" required>
@@ -69,7 +66,7 @@
 
                                     <!-- /.box-body -->
                                     <div class="box-footer">
-                                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                                        <button type="submit" class="btn btn-info pull-right">提交</button>
                                     </div>
 
                                 </form>

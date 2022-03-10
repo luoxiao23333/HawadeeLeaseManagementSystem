@@ -46,35 +46,33 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Detail Information</h3>
+                                <h3 class="box-title">项目信息</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tbody>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Current Status</th>
-                                        <th>Content</th>
-                                        <th>CreateDate</th>
-                                        <th>Current Handler</th>
-                                        <th>Project</th>
+                                        <th>项目状态</th>
+                                        <th>项目说明</th>
+                                        <th>创建日期</th>
+                                        <th>当前审批人</th>
+                                        <th>项目文件</th>
                                     </tr>
                                     <tr>
-                                        <td th:text="${projectInfo.getProject().getId()}"></td>
                                         <td>
                                                 <span class="label label-primary"
-                                                      th:if="${projectInfo.getProject().getStatus()}==1">Processing</span>
+                                                      th:if="${projectInfo.getProject().getStatus()}==1">进行中</span>
                                             <span class="label label-success"
-                                                  th:if="${projectInfo.getProject().getStatus()}==2">Finished</span>
+                                                  th:if="${projectInfo.getProject().getStatus()}==2">已完成</span>
                                         </td>
                                         <td th:text="${projectInfo.getProject().getContent()}"></td>
-                                        <td th:text="${projectInfo.getProject().getCreateDate()}"></td>
+                                        <td th:text="${projectInfo.getProject().getFormattedCreateTime()}"></td>
                                         <td th:if="${projectInfo.getUser()}!=null" th:text="${projectInfo.getUser().getName()}"></td>
                                         <td th:if="${projectInfo.getUser()}==null">No Handler</td>
                                         <td>
                                             <form th:action="@{/project/download}">
-                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                                <button type="submit" class="btn btn-block btn-info">下载</button>
                                                 <input type="hidden" name="fileLoc" th:value="${projectInfo.getProject().getFileLoc()}">
                                             </form>
                                         </td>
@@ -90,27 +88,25 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Process Track</h3>
+                                <h3 class="box-title">审批记录</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tbody><tr>
-                                        <th>ID</th>
-                                        <th>Reason</th>
-                                        <th>CreateDate</th>
-                                        <th>Status</th>
-                                        <th>Handler</th>
+                                        <th>审批理由</th>
+                                        <th>审批日期</th>
+                                        <th>审批结果</th>
+                                        <th>审批人</th>
                                     </tr>
                                     <tr th:each="projectHistory:${projectPromotedProcessingHistoryMap.get(projectInfo)}">
-                                        <td th:text="${projectHistory.getHistory().getId()}"></td>
                                         <td th:text="${projectHistory.getHistory().getReason()}"></td>
-                                        <td th:text="${projectHistory.getHistory().getCreateDate()}"></td>
+                                        <td th:text="${projectHistory.getHistory().getFormattedCreateTime()}"></td>
                                         <td>
                                                 <span class="label label-success"
-                                                      th:if="${projectHistory.getHistory().getStatus()}==1">Approved</span>
+                                                      th:if="${projectHistory.getHistory().getStatus()}==1">同意</span>
                                             <span class="label label-danger"
-                                                  th:if="${projectHistory.getHistory().getStatus()}==2">Denied</span>
+                                                  th:if="${projectHistory.getHistory().getStatus()}==2">驳回</span>
                                         </td>
                                         <td th:text="${projectHistory.getUser().getName()}"></td>
                                     </tr>

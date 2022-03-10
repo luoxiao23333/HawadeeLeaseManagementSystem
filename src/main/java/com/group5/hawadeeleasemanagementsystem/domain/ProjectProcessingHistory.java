@@ -2,7 +2,9 @@ package com.group5.hawadeeleasemanagementsystem.domain;
 
 import lombok.Data;
 
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 @Data
 public class ProjectProcessingHistory {
@@ -13,6 +15,10 @@ public class ProjectProcessingHistory {
     private Integer projectId;
     private String reason;
     private Date createDate;
+
+    public String getFormattedCreateTime(){
+        return DateFormat.getDateInstance(DateFormat.FULL, Locale.CHINA).format(this.getCreateDate());
+    }
 
     public static Integer getApproved() {
         return Approved;
