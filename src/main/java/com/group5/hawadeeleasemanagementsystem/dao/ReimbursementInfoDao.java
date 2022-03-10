@@ -12,6 +12,8 @@ public interface ReimbursementInfoDao {
 
     List<ReimbursementWithUser> getReimbursementUserNeedToProcess(Integer userId);
 
+    List<ReimbursementInfo> getAllReimbursement();
+
     void addNewReimbursement(ReimbursementInfo reimbursementInfo);
 
     void forwardReimbursement(Integer reimbursementInfoID, Integer dutyId);

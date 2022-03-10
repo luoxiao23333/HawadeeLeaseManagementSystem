@@ -4,22 +4,17 @@ import com.group5.hawadeeleasemanagementsystem.domain.*;
 import com.group5.hawadeeleasemanagementsystem.service.ReimbursementInfoService;
 import com.group5.hawadeeleasemanagementsystem.service.ReimbursementProcessingHistoryService;
 import com.group5.hawadeeleasemanagementsystem.service.FileService;
-import com.group5.hawadeeleasemanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -69,18 +64,18 @@ public class ReimbursementController {
     }
 
     @RequestMapping(value = "/reimbursement/newReimbursement")
-    public ModelAndView newReimbursement(@RequestParam(name = "title") String reimbursementTitle,
+    public ModelAndView newReimbursement(@RequestParam(name = "amount") Integer reimbursementAmount,
                                          @RequestParam(name = "content") String reimbursementContent,
                                          @RequestPart(name = "file") MultipartFile file,
                                          HttpSession session) throws Exception {
         User user = (User) session.getAttribute("user");
 
         String fileLoc = fileService.save(file);
-        String approvalFileLoc = fileService.approve(user, reimbursementTitle, reimbursementContent);
+        String approvalFileLoc = fileService.approve(user, reimbursementAmount, reimbursementContent);
 
         ReimbursementInfo reimbursement = new ReimbursementInfo();
         reimbursement.setContent(reimbursementContent);
-        reimbursement.setTitle(reimbursementTitle);
+        reimbursement.setAmount(reimbursementAmount);
         reimbursement.setPromoterId(user.getId());
         reimbursement.setProvFileLoc(fileLoc);
         reimbursement.setApprovalFileLoc(approvalFileLoc);

@@ -18,7 +18,7 @@ public class ReimbursementInfo {
     private Integer currentHandlerId;
     private Integer promoterId;
     private Integer status;
-    private String title;
+    private Integer amount;
     // private Integer type;
     private String content;
     private Date createDate;

@@ -26,7 +26,9 @@
                     <label class="col-sm-2 control-label">报销金额</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="报销金额" name="title" required>
+                        <label>
+                            <input type="number" min="0" class="form-control" placeholder="报销金额" name="amount" required>
+                        </label>
                     </div>
                 </div>
 
@@ -97,7 +99,7 @@
                                             <span class="label label-success"
                                                   th:if="${reimbursementInfo.getReimbursement().getStatus()}==2">Finished</span>
                                         </td>
-                                        <td th:text="${reimbursementInfo.getReimbursement().getTitle()}"></td>
+                                        <td th:text="${reimbursementInfo.getReimbursement().getAmount()}"></td>
                                         <td th:text="${reimbursementInfo.getReimbursement().getCreateDate()}"></td>
                                         <td th:if="${reimbursementInfo.getUser()}!=null"
                                             th:text="${reimbursementInfo.getUser().getName()}"></td>
@@ -179,7 +181,7 @@
         <div th:each="reimbursementInfo:${reimbursementNeedToProcess}">
             <div class="box box-default collapsed-box">
                 <div class="box-header with-border">
-                    <h3 class="box-title" th:text="${reimbursementInfo.getReimbursement().getTitle()}"></h3>
+                    <h3 class="box-title" th:text="${reimbursementInfo.getReimbursement().getAmount()}"></h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
