@@ -20,7 +20,8 @@ import java.util.UUID;
 
 @Service
 public class FileService {
-    public static final String FilePath = "E:\\hawadeeFile";
+    // 最后的斜杠不能少
+    public static final String FilePath = "D:\\code is here\\HawadeeLeaseManagementSystem\\hawadeeFile\\";
 
 
     private String getUniqueFileName(String prefix, String suffix) throws Exception {
