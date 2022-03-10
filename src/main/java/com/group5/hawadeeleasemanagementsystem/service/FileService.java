@@ -86,11 +86,10 @@ public class FileService {
         FileCopyUtils.copy(inputStream, outputStream);
     }
 
-    public String approve(User user, String reimbursementTitle, String reimbursementContent) throws Exception {
-        String resultFileName = reimbursementTitle + UUID.randomUUID() + ".pdf";
+    public String approve(User user, Integer reimbursementAmount, String reimbursementContent) throws Exception {
+        String resultFileName = reimbursementContent + UUID.randomUUID() + ".pdf";
         String resultFilePath = FileService.FilePath + resultFileName;
-        String reimbursementAmount = reimbursementTitle;
-        PDFService.write(resultFilePath, user, reimbursementAmount, reimbursementContent);
+        PDFService.write(resultFilePath, user, reimbursementAmount.toString(), reimbursementContent);
         return resultFileName;
     }
 }

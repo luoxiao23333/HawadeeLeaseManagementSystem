@@ -129,7 +129,7 @@ CREATE TABLE `reimbursement_info`
     `current_handler_id` int                                                       NULL     DEFAULT NULL,
     `promoter_id`        int                                                       NULL     DEFAULT NULL,
     `status`             int                                                       NOT NULL DEFAULT 1,
-    `title`              varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL,
+    `amount`             bigint                                                    NOT NULL,
     `content`            mediumblob                                                NULL,
     `file_loc`           varchar(10000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL     DEFAULT NULL,
     `create_date`        datetime                                                  NULL     DEFAULT CURRENT_TIMESTAMP,
