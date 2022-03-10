@@ -107,11 +107,11 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span>
                                     页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="btn-group">
                                     <a th:href="@{/client/clientPage}"><button type="button" class="btn btn-default" style="color: #fff;background-color: #00c0ef">首页</button></a>
                                     <a th:href="@{/client/clientPage(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}"><button type="button" class="btn btn-default" style="color: #fff;background-color: #00c0ef"><<</button></a>
@@ -127,7 +127,6 @@
                 <!-- /.box-body -->
             </div>
 
-            \
         </section>
     </div>
 
