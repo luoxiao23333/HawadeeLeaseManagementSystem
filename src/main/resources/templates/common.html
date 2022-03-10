@@ -416,8 +416,8 @@
                 </ul>
             </li>
 
-            <li class="header">数据面板</li>
-            <li class="active treeview">
+            <li class="header" th:if="${session.isShowDataVisualization}==true">数据面板</li>
+            <li class="active treeview" th:if="${session.isShowDataVisualization}==true">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>数据面板</span>
                     <span class="pull-right-container">

@@ -2,6 +2,7 @@ package com.group5.hawadeeleasemanagementsystem.controller;
 
 import com.group5.hawadeeleasemanagementsystem.domain.User;
 import com.group5.hawadeeleasemanagementsystem.service.ContractProcessingHistoryService;
+import com.group5.hawadeeleasemanagementsystem.service.DataVisualizationService;
 import com.group5.hawadeeleasemanagementsystem.service.SMSService;
 import com.group5.hawadeeleasemanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class AccountController {
         this.contractProcessingHistoryService = contractProcessingHistoryService;
     }
 
+    DataVisualizationService dataVisualizationService;
+    @Autowired
+    private void setDataVisualizationService(DataVisualizationService dataVisualizationService){
+        this.dataVisualizationService = dataVisualizationService;
+    }
+
     @RequestMapping(value = "/account/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView("/account/login");
@@ -61,6 +68,7 @@ public class AccountController {
         }
 
         session.setAttribute("user", user);
+        session.setAttribute("isShowDataVisualization", this.dataVisualizationService.isLegalUser(user));
         mv.setViewName("/index");
         return mv;
 

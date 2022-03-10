@@ -41,6 +41,10 @@
         where c.current_handler_id = #{userId}
     </select>
 
+    <select id="getAllReimbursement" resultType="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementInfo">
+        select * from reimbursement_info;
+    </select>
+
     <insert id="addNewReimbursement">
         insert into reimbursement_info (promoter_id,current_handler_id, amount, content, file_loc, approval_file_loc) values
             (${promoterId},${currentHandlerId},"${amount}","${content}", "${provFileLoc}", "${approvalFileLoc}")
