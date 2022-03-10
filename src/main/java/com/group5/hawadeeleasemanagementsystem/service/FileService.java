@@ -22,39 +22,25 @@ import java.util.UUID;
 public class FileService {
     public static final String FilePath = "E:\\hawadeeFile";
 
-    /**
-     *
-     * @param file file to save
-     * @return save location
-     */
-    public String save(MultipartFile file) throws Exception{
-        String fileName = UUID.randomUUID() + file.getOriginalFilename();
+
+    private String getUniqueFileName(String prefix, String suffix) throws Exception {
+        String fileName = prefix + UUID.randomUUID() + suffix;
         File directory = new File(FileService.FilePath);
-        if(!directory.exists()){
+        if (!directory.exists()) {
             boolean isCreate = directory.mkdir();
-            if(!isCreate){
+            if (!isCreate) {
                 throw new Exception("File create failed");
             }
         }
-
-        private String getUniqueFileName(String prefix, String suffix) throws Exception {
-            String fileName = prefix + UUID.randomUUID() + suffix;
-            File directory = new File(FileService.FilePath);
-            if(!directory.exists()) {
-                boolean isCreate = directory.mkdir();
-                if (!isCreate) {
-                    throw new Exception("File create failed");
-                }
-            }
-            return fileName;
-        }
+        return fileName;
+    }
 
     /**
      *
      * @param file file to save
      * @return save location
      */
-    public String save(MultipartFile file) throws Exception{
+    public String save(MultipartFile file) throws Exception {
         String fileName = this.getUniqueFileName("", file.getOriginalFilename());
         File localFile = new File(FileService.FilePath + fileName);
         file.transferTo(localFile);
@@ -62,7 +48,7 @@ public class FileService {
     }
 
     public String save(String fileContent, String prefix, String suffix) throws Exception {
-        String fileName = this.getUniqueFileName(prefix,suffix);
+        String fileName = this.getUniqueFileName(prefix, suffix);
         System.out.println(fileName);
         FileWriter writer = new FileWriter(FileService.FilePath + fileName);
         writer.write("");
