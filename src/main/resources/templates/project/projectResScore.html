@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header th:replace="common::header"></header>
+    <aside th:replace="common::leftSide"></aside>
+
+    <div class="content-wrapper" style="min-height: 923px;">
+
+        <h3 class="box-title">项目评分</h3>
+
+
+        <div th:each="projectRes:${projectRess}">
+
+
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">待评分项目</h3>
+                </div>
+
+                <form class="form-horizontal" action="#" th:action="@{/project/gradeProject}"
+                      method="post">
+
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>report</th>
+                                        <th>grade</th>
+                                        <th>submit</th>
+                                    </tr>
+                                    <tr>
+                                        <td th:text="${projectRes.getProjectId()}"></td>
+                                        <td>
+                                            <form th:action="@{/project/download}">
+                                                <button type="submit" class="btn btn-block btn-info">Download</button>
+                                                <input type="hidden" name="fileLoc" th:value="${projectRes.getFileLoc()}">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" placeholder="Grade，填0-100的数字" name="grade" required>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="box-footer">
+                                                <button type="submit" class="btn btn-info pull-left">Submit</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+
+
+                <input type="hidden" name="projectResId" th:value="${projectRes.getId()}">
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+</body>
+</html>

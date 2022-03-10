@@ -4,6 +4,7 @@ import com.group5.hawadeeleasemanagementsystem.domain.*;
 import com.group5.hawadeeleasemanagementsystem.service.ProjectInfoService;
 import com.group5.hawadeeleasemanagementsystem.service.ProjectProcessingHistoryService;
 import com.group5.hawadeeleasemanagementsystem.service.FileService;
+import com.group5.hawadeeleasemanagementsystem.service.ProjectResService;
 import com.group5.hawadeeleasemanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,15 @@ import java.util.Map;
 @Controller
 public class ProjectController {
     private ProjectInfoService projectInfoService;
+    private ProjectResService projectResService;
     @Autowired
     private void setUserService(ProjectInfoService projectInfoService){
         this.projectInfoService = projectInfoService;
+    }
+
+    @Autowired
+    private void setUserService(ProjectResService projectResService){
+        this.projectResService = projectResService;
     }
 
     private ProjectProcessingHistoryService projectInfoHistoryService;
@@ -46,6 +53,9 @@ public class ProjectController {
     private void updateProjectInfo(ModelAndView mv, User user){
         List<ProjectWithUser> projectsPromoted = projectInfoService.getProjectUserPromoted(user);
         List<ProjectWithUser> projectsNeedToProcess = projectInfoService.getProjectUserNeedToProcess(user);
+
+        List<ProjectRes> projectRess = projectResService.getProjectRess();
+
         Map<ProjectWithUser, List<ProjectHistoryWithUser>> projectPromotedProcessingHistoryMap =
                 projectInfoHistoryService.getProjectProcessingHistoryMap(projectsPromoted);
         Map<ProjectWithUser, List<ProjectHistoryWithUser>> projectNeedToProcessHistoryMap =
@@ -55,12 +65,48 @@ public class ProjectController {
         mv.addObject("projectNeedToProcess", projectInfoService.getProjectUserNeedToProcess(user));
         mv.addObject("projectPromotedProcessingHistoryMap", projectPromotedProcessingHistoryMap);
         mv.addObject("projectNeedToProcessHistoryMap", projectNeedToProcessHistoryMap);
+        mv.addObject("projectRess",projectRess);
     }
 
     @RequestMapping(value = "/project/projectManagement")
     public ModelAndView projectManagement(HttpSession session){
         User user = (User) session.getAttribute("user");
         ModelAndView mv = new ModelAndView("/project/projectManagement");
+//        ModelAndView mv = new ModelAndView("/project/projectMnager");
+        this.updateProjectInfo(mv, user);
+        return mv;
+    }
+
+    @RequestMapping(value = "/project/projectMy")
+    public ModelAndView projectMy(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        ModelAndView mv = new ModelAndView("/project/projectMy");
+        this.updateProjectInfo(mv, user);
+        return mv;
+    }
+
+    @RequestMapping(value = "/project/projectApprove")
+    public ModelAndView projectApprove(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        ModelAndView mv = new ModelAndView("/project/projectApprove");
+//        ModelAndView mv = new ModelAndView("/project/projectMnager");
+        this.updateProjectInfo(mv, user);
+        return mv;
+    }
+
+    @RequestMapping(value = "/project/projectSubmitRes")
+    public ModelAndView projectSubmitRes(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        ModelAndView mv = new ModelAndView("/project/projectSubmitRes");
+//        ModelAndView mv = new ModelAndView("/project/projectMnager");
+        this.updateProjectInfo(mv, user);
+        return mv;
+    }
+
+    @RequestMapping(value = "/project/projectResScore")
+    public ModelAndView projectResScore(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        ModelAndView mv = new ModelAndView("/project/projectResScore");
 //        ModelAndView mv = new ModelAndView("/project/projectMnager");
         this.updateProjectInfo(mv, user);
         return mv;
@@ -115,4 +161,40 @@ public class ProjectController {
         projectInfoService.deleteProject(projectId);
         return new ModelAndView("/project/projectManagement");
     }
+
+    @RequestMapping(value = "/project/newProjectRes")
+    public ModelAndView newProjectRes(
+                                    @RequestParam(name = "projectId") Integer projectId,
+                                   @RequestPart(name = "file") MultipartFile file,
+                                   HttpSession session) throws Exception {
+        System.out.println("hello");
+        User user = (User) session.getAttribute("user");
+
+        String fileLoc = fileService.save(file);
+
+        ProjectRes projectRes = new ProjectRes();
+        projectRes.setProjectId(projectId);
+        projectRes.setFileLoc(fileLoc);
+        projectResService.addNewProjectRes(projectRes);
+
+        ModelAndView mv = new ModelAndView("/project/projectManagement");
+
+        this.updateProjectInfo(mv, user);
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/project/gradeProject")
+    public ModelAndView gradeProject(@RequestParam(name = "projectResId") Integer projectResId,
+                                     @RequestParam(name = "grade") Integer grade,
+                               HttpServletResponse response) throws IOException {
+        projectResService.setProjectGrade(projectResId,grade);
+        return new ModelAndView("/project/projectResScore");
+    }
+
+//    @RequestMapping(value = "/project/getRess")
+//    public getProjectRess (
+//                               HttpServletResponse response) throws IOException {
+//        return new ModelAndView("/project/projectManagement");
+//    }
 }

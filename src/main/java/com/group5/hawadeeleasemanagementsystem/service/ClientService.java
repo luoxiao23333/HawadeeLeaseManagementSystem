@@ -7,6 +7,7 @@ import com.group5.hawadeeleasemanagementsystem.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +47,11 @@ public class ClientService {
     }
 
     /*
+    根据id删除客户
+     */
+    public void deleteById(Integer id){clientDao.deleteById(id);}
+
+    /*
     向所有客户群发邮件
      */
     public void sendEmail(String subject,String content){
@@ -54,7 +60,12 @@ public class ClientService {
         Iterator<String> iterator = emailList.iterator();
         while (iterator.hasNext()){
             email = iterator.next();
-            mailService.sendHtmlMail(email,subject,content);
+            try{
+                mailService.sendHtmlMail(email,subject,content);
+            } catch ( MessagingException e){
+                continue;
+            }
+
         }
     }
 }

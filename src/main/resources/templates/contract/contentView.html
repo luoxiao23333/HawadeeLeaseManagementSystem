@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common::linkHead"></head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header th:replace="common::header"></header>
+    <aside th:replace="common::leftSide"></aside>
+
+    <div class="content-wrapper" style="min-height: 923px;">
+        <section class="content-header">
+            <h1>合同说明</h1>
+        </section>
+        <section class="content">
+            <div class="box box-body">
+                <div th:utext="${content}"></div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<div th:replace="common::jsHead"></div>
+
+</body>
+</html>

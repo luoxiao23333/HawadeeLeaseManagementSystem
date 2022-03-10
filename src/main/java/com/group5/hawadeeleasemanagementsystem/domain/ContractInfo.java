@@ -15,7 +15,7 @@ public class ContractInfo {
     private Integer promoterId;
     private Integer status;
     private String title;
-    private String content;
+    private String contentLoc;
     private Date createDate;
     private String fileLoc;
 }

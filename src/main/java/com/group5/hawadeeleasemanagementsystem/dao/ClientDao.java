@@ -9,4 +9,5 @@ public interface ClientDao {
     Client selectClient(Client client);
     List<Client> getClients();
     List<String> getAllEmail();
+    void deleteById(Integer id);
 }

@@ -9,207 +9,186 @@
     <header th:replace="common::header"></header>
     <aside th:replace="common::leftSide"></aside>
 
-    <div class="content-wrapper" style="min-height: 923px;">
-        Welcome
-        <span th:text="${session.user.name}"></span>
+    <div class="content-wrapper">
 
-        <!-- 发起新合同 -->
-        <div class="box-header with-border">
-            <h3 class="box-title">Set HomePage</h3>
-        </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form class="form-horizontal" action="#" th:action="@{/homepage/setInfo}"
-              method="post" enctype="multipart/form-data">
-            <div class="box-body">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Age</label>
+        <!-- model 1 -->
+        <div class="col-md-3">
 
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Age" name="age" required>
-                    </div>
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="../static/dist/img/user2-160x160.jpg" alt="User profile picture">
+
+                    <h3 class="profile-username text-center" th:text = "${user.getName()}"></h3>
+
+                    <p class="text-muted text-center">Software Engineer</p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>User ID</b> <a class="pull-right" th:text = "${user.getId()}"></a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>User Phone</b> <a class="pull-right" th:text = "${user.getPhone()}"></a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>User Level</b> <a class="pull-right" th:text = "${userInfo.getLevel()}"></a>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary btn-block"><b>Like</b></a>
                 </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Level</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Level" name="level" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">School</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="School" name="school" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Introduction</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Introduction" name="introduction" required>
-                    </div>
-                </div>
-
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">Submit</button>
-            </div>
-            <!-- /.box-footer -->
-        </form>
+            <!-- /.box -->
 
-        <div class="box-header with-border">
-            <h3 class="box-title">Personal Information</h3>
-        </div>
-
-        <div class="box-header with-border">
-            <h3 class="box-title" th:text="${user.getName()}"></h3>
-
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-            </div>
-            <!-- /.box-tools -->
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">My Information</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>School</th>
-                                <th>Level</th>
-                                <th>Age</th>
-                                <th>Introduction</th>
-                            </tr>
-                            <td th:text="${user.getId()}"></td>
-                            <td th:text="${user.getName()}"></td>
-                            <td th:text="${userInfo.getSchool()}"></td>
-                            <td th:text="${userInfo.getLevel()}"></td>
-                            <td th:text="${userInfo.getAge()}"></td>
-                            <td th:text="${userInfo.getSelfIntro()}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">About Me</h3>
                 </div>
-                <!-- /.box -->
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+
+                    <p class="text-muted" th:text = "${userInfo.getSchool()}"></p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                    <p class="text-muted">China, Chengdu</p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+
+                    <p>
+                        <span class="label label-danger">UI Design</span>
+                        <span class="label label-success">Coding</span>
+                        <span class="label label-info">Java</span>
+                        <span class="label label-warning">C++</span>
+                        <span class="label label-primary">Node.js</span>
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i>Introduction</strong>
+
+                    <p th:text = "${userInfo.getSelfIntro()}"></p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- model 1 -->
+
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">Settings</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+
+                    <div class="tab-pane active" id="settings">
+
+                        <form class="form-horizontal" action="#" th:action="@{/homepage/setInfo}"
+                              method="post" enctype="multipart/form-data">
+
+                            <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Age</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="age" name = "age" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Level</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="level" name = "level" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">School</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="school" name = "school" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Introduction</label>
+
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="introduction" placeholder="introduction" name = "introduction" required></textarea>
+                                </div>
+                            </div>
+                            </div>
+
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-info pull-right">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+
+            <div class="post" th:if="${colleague}!=null">
+                <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="../static/dist/img/user5-128x128.jpg" alt="user image">
+                    <span class="username">
+                          <a href="#" th:text = "${colleague.getName()}"></a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                    <span class="description" th:text = "${colleague.getPhone()}"></span>
+                    <span class ="description">my colleague</span>
+                </div>
+                <!-- /.user-block -->
+                <p>work work hard,day day up</p>
             </div>
 
+            <div class="post" th:if="${leader}!=null">
+                <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="../static/dist/img/user3-128x128.jpg" alt="user image">
+                    <span class="username">
+                          <a href="#" th:text = "${leader.getName()}"></a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                    <span class="description" th:text = "${leader.getPhone()}"></span>
+                    <span class ="description">my leader</span>
+                </div>
+                <!-- /.user-block -->
+                <p>I want to be a computer scientist</p>
+            </div>
+
+            <div class="post" th:if="${subordinate}!=null">
+                <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="../static/dist/img/user7-128x128.jpg" alt="user image">
+                    <span class="username">
+                          <a href="#" th:text = "${subordinate.getName()}"></a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                    <span class="description" th:text = "${subordinate.getPhone()}"></span>
+                    <span class ="description">my subordinate</span>
+                </div>
+                <!-- /.user-block -->
+                <p>I hope there no bug in my program</p>
+            </div>
         </div>
-        <!-- /.box-body -->
-
-
-        <!-- try-->
-        <html>
-        <!-- import CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-        <!-- import JavaScript -->
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-        <head>
-            <title>个人信息</title>
-            <meta charset="utf-8">
-        </head>
-        <body>
-        <form>
-            <el-table
-                    :data="tableData"
-                    border
-                    style="width: 100%">
-                <el-table-column
-                        prop="date"
-                        label="Date"
-                        width="180">
-                </el-table-column>
-                <el-table-column
-                        prop="name"
-                        label="Name"
-                        width="180">
-                </el-table-column>
-                <el-table-column
-                        prop="address"
-                        label="Address">
-                </el-table-column>
-            </el-table>
-            <table border="1px" align="center" width="60%" height="70%">
-                <h1>工作信息</h1>
-                <tr><!--第1行开始-->
-                    <th>上司</th>
-                    <th>
-                        <input type="text" value="1">
-                    </th>
-                </tr><!--第1行结束-->
-
-                <tr><!--第2行开始-->
-                    <th>下属</th>
-                    <th>
-                        <input type="text" value="2"/><!-- 单选按钮的name要一样 -->
-                    </th>
-                    <th>同事</th>
-                    <th>
-                        <input type="text" value="3"/><!-- input可以用单标签的形式 -->
-                    </th>
-                </tr><!--第2行结束-->
-
-                <tr><!--第4行开始-->
-                    <th>工作宣言</th>
-                    <th colspan="3">
-                        <input type="text" th:value="${userInfo.getSelfIntro()}"/>
-                    </th>
-                </tr><!--第4行结束-->
-
-            </table>
-        </form>
-        <script>
-            export default {
-                data() {
-                    return {
-                        tableData: [{
-                            date: '2016-05-03',
-                            name: 'Tom',
-                            address: 'No. 189, Grove St, Los Angeles'
-                        }, {
-                            date: '2016-05-02',
-                            name: 'Tom',
-                            address: 'No. 189, Grove St, Los Angeles'
-                        }, {
-                            date: '2016-05-04',
-                            name: 'Tom',
-                            address: 'No. 189, Grove St, Los Angeles'
-                        }, {
-                            date: '2016-05-01',
-                            name: 'Tom',
-                            address: 'No. 189, Grove St, Los Angeles'
-                        }]
-                    }
-                }
-            }
-        </script>
-        </body>
-        </html>
-
-
-        <!--try-->
 
     </div>
-</div>
-
-<div th:replace="common::jsHead"></div>
-
 </div>
 </body>
 

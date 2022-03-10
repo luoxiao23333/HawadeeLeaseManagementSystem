@@ -18,6 +18,10 @@ public class UserService {
         this.userDao = userDao;
     }
 
+    public User getUserById(Integer id){
+        return userDao.getUserById(id);
+    }
+
     public User login(String name, String password){
         User user = new User();
         user.setPassword(password);

@@ -13,4 +13,6 @@ public interface ContractInfoDao {
     void forwardContract(Integer contractId, Integer dutyId);
     void finishContract(Integer contractId);
     void removeContract(Integer contractId);
+    void updateContentById(Integer contractId, String contentLoc);
+    ContractInfo getContractById(Integer contractId);
 }

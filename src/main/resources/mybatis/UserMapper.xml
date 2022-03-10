@@ -4,7 +4,7 @@
 <mapper namespace="com.group5.hawadeeleasemanagementsystem.dao.UserDao">
 
     <select id="getUserById" resultType="com.group5.hawadeeleasemanagementsystem.domain.User">
-        select `id`, `name`, `password` from `user` where`id` = "${uId}"
+        select `id`, `name`, `password`,`phone` from `user` where`id` = "${uId}"
     </select>
 
     <select id="verifyUser" resultType="com.group5.hawadeeleasemanagementsystem.domain.User">

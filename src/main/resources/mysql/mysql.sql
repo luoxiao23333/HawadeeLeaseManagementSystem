@@ -62,7 +62,7 @@ create table contract_info
     `promoter_id`        int(10) references user (id) on update cascade,
     `status`             int(2)        not null default 1, /* 1-processing 2-finished */
     `title`              varchar(1000) not null,
-    `content`            blob(65536),
+    `content_loc`        varchar(1000) not null,
     `file_loc`           varchar(10000),
     `create_date`        datetime               default now()
 ) ENGINE = InnoDB,
@@ -93,10 +93,21 @@ create table project_info
 ) ENGINE = InnoDB,
   charset = UTF8;
 
+
+create table project_res
+(
+    `id`              int(10) primary key auto_increment,
+    `project_id`      int(10) references project_info (`id`) on update cascade on delete cascade,
+    `status`          int(2)        default 1, /* 1-processing 2-finished */
+    `grade`           int(10)        default 60,
+    `file_loc`        varchar(10000)
+) ENGINE = InnoDB,
+  charset UTF8;
+
 create table project_processing_history
 (
     `id`              int(10) primary key auto_increment,
-    `project_id`      int(10) references contract_info (`id`) on update cascade on delete cascade,
+    `project_id`      int(10) references project_info (`id`) on update cascade on delete cascade,
     `process_user_id` int(10) references user (`id`) on update cascade on delete cascade,
     `reason`          blob(65536),
     `create_date`     datetime default now(),
@@ -159,11 +170,11 @@ CREATE TABLE `userRel`
   ROW_FORMAT = Dynamic;
 
 INSERT INTO `userRel`
-VALUES (1, 2, 3, null);
+VALUES (1, 2, 3, 4);
 INSERT INTO `userRel`
-VALUES (2, 1, 3, null);
+VALUES (2, 1, 3, 4);
 INSERT INTO `userRel`
-VALUES (3, 2, 1, null);
+VALUES (3, 2, 1, 4);
 
 CREATE TABLE `userInfo`
 (
@@ -186,6 +197,8 @@ INSERT INTO `userInfo`
 VALUES (2, 'sjtu', 20, 18, 'work hard and you will get promoted');
 INSERT INTO `userInfo`
 VALUES (3, 'pku', 20, 20, 'i am really good at pua');
+INSERT INTO `userInfo`
+VALUES (4, 'jhu', 20, 20, 'I am Data');
 
 /*
 客户管理表,小龙部分
@@ -207,8 +220,8 @@ create table client
 /* 测试数据面板功能插入的合同 */
 insert into hawadee.user (hawadee.user.name, hawadee.user.password,hawadee.user.id)
 values ("Data","1234",4);
-insert into hawadee.contract_info(current_handler_id, status, title, content, id, promoter_id)
-VALUES (4,1,"Data Visualization","Data vv", 1, 4);
+insert into hawadee.contract_info(current_handler_id, status, title, content_loc, id, promoter_id)
+VALUES (4,1,"Data Visualization","Data vis test", 1, 4);
 
 insert into contract_processing_history(contract_id, process_user_id, reason, create_date, status) VALUES
 (1, 4, "good", "2000-01-01 00:00:00",1),

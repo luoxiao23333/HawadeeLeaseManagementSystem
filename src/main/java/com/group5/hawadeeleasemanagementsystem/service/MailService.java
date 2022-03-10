@@ -1,5 +1,6 @@
 package com.group5.hawadeeleasemanagementsystem.service;
 
+import com.sun.mail.smtp.SMTPSendFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -42,19 +43,14 @@ public class MailService {
     }
 
 
-    public void sendHtmlMail(String to, String subject, String content) {
+    public void sendHtmlMail(String to, String subject, String content) throws MessagingException{
         MimeMessage message = mailSender.createMimeMessage();
-
-        try {
             //true表示需要创建一个multipart message
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content, true);
-
             mailSender.send(message);
-        } catch (MessagingException e) {
-        }
     }
 }

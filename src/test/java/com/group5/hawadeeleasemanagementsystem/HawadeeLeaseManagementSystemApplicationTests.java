@@ -2,7 +2,9 @@ package com.group5.hawadeeleasemanagementsystem;
 
 import com.group5.hawadeeleasemanagementsystem.dao.ClientDao;
 import com.group5.hawadeeleasemanagementsystem.dao.UserDao;
+import com.group5.hawadeeleasemanagementsystem.dao.userRelDao;
 import com.group5.hawadeeleasemanagementsystem.domain.Client;
+import com.group5.hawadeeleasemanagementsystem.domain.userRel;
 import com.group5.hawadeeleasemanagementsystem.service.MailService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,19 @@ class HawadeeLeaseManagementSystemApplicationTests {
     @Autowired
     MailService mailService;
 
+    userRelDao userrelDao;
+
+    @Autowired
+    void setUserRelDao(userRelDao userrelDao) {this.userrelDao = userrelDao;}
 
     @Test
     void contextLoads() {
+    }
+
+    @Test
+    void test4() {
+        userRel userrel = userrelDao.getRel(2);
+        System.out.println(userrel == null);
     }
 
 
