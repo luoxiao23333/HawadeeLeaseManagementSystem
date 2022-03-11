@@ -22,26 +22,26 @@
                     <div class="box-body">
                         <!--输入客户姓名-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Name</label>
+                            <label class="col-sm-2 control-label">姓名</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="name" name="name"
+                                <input type="text" class="form-control" placeholder="姓名" name="name"
                                        style="border-radius: 3px">
                             </div>
                         </div>
                         <!--输入客户手机号码-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Phone</label>
+                            <label class="col-sm-2 control-label">电话</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Phone" name="phone"
+                                <input type="text" class="form-control" placeholder="电话" name="phone"
                                        style="border-radius: 3px">
                             </div>
                         </div>
                         <!--输入客户邮箱-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Email</label>
+                            <label class="col-sm-2 control-label">邮箱</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" placeholder="Email" name="email"
+                                <input type="email" class="form-control" placeholder="邮箱" name="email"
                                        style="border-radius: 3px">
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right">Submit</button>
+                        <button type="submit" class="btn btn-info pull-right">提交</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
@@ -96,7 +96,7 @@
                                             <form th:action="@{/client/del}">
                                                 <input type="hidden" name="id" th:value="${client.getId()}">
                                                 <button type="submit" class="btn btn-block btn-danger btn-sm"
-                                                        style="width: 60px">Delete
+                                                        style="width: 60px">删除
                                                 </button>
                                             </form>
                                         </td>
