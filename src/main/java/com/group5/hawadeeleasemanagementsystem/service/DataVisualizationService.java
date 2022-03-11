@@ -1,7 +1,12 @@
 package com.group5.hawadeeleasemanagementsystem.service;
 
 import com.group5.hawadeeleasemanagementsystem.dao.ContractProcessingHistoryDao;
+import com.group5.hawadeeleasemanagementsystem.dao.DutyDao;
+import com.group5.hawadeeleasemanagementsystem.dao.ReimbursementInfoDao;
 import com.group5.hawadeeleasemanagementsystem.domain.ContractProcessingHistory;
+import com.group5.hawadeeleasemanagementsystem.domain.Duty;
+import com.group5.hawadeeleasemanagementsystem.domain.ReimbursementInfo;
+import com.group5.hawadeeleasemanagementsystem.domain.User;
 import com.group5.hawadeeleasemanagementsystem.domain.chartData.LineChartData;
 import com.group5.hawadeeleasemanagementsystem.domain.chartData.LineData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +24,26 @@ public class DataVisualizationService {
         this.contractProcessingHistoryDao = contractProcessingHistoryDao;
     }
 
+    ReimbursementInfoDao reimbursementInfoDao;
+    @Autowired
+    private void setContractProcessingHistoryDao(ReimbursementInfoDao reimbursementInfoDao){
+        this.reimbursementInfoDao = reimbursementInfoDao;
+    }
+
+    DutyDao dutyDao;
+    @Autowired
+    private void setDutyDao(DutyDao dutyDao){
+        this.dutyDao = dutyDao;
+    }
+
+    public boolean isLegalUser(User user){
+        return this.dutyDao.getDutyByUserId(user.getId()).get(0).equals(Duty.GeneralManager);
+    }
+
     public LineChartData getProcessingHistoryChartData() throws Exception {
         List<ContractProcessingHistory> historyList = contractProcessingHistoryDao.getAllHistory();
-        Map<YearMonth, Integer> ApprovedCount = new HashMap<>();
-        Map<YearMonth, Integer> DeniedCount = new HashMap<>();
+        Map<YearMonth, Integer> ApprovedCount = new TreeMap<>();
+        Map<YearMonth, Integer> DeniedCount = new TreeMap<>();
         for(ContractProcessingHistory history: historyList){
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(history.getCreateDate());
@@ -65,6 +86,53 @@ public class DataVisualizationService {
         dataList.add(deniedLineData);
 
         lineChartData.setDataList(dataList);
+        return lineChartData;
+    }
+
+    public LineChartData getReimbursementChartData(){
+        List<ReimbursementInfo> reimbursementInfoList = this.reimbursementInfoDao.getAllReimbursement();
+        LineChartData lineChartData = new LineChartData();
+        List<String> xAxisData = new ArrayList<>();
+
+        LineData currentDataList = new LineData();
+        LineData totalDataList = new LineData();
+        currentDataList.setLabel("当前报销金额");
+        totalDataList.setLabel("累积报销金额");
+
+        Map<YearMonth, List<ReimbursementInfo>> dateReimbursementMap = new TreeMap<>();
+        for(ReimbursementInfo reimbursementInfo: reimbursementInfoList){
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(reimbursementInfo.getCreateDate());
+            YearMonth yearMonth = YearMonth.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
+            if(dateReimbursementMap.containsKey(yearMonth)){
+                dateReimbursementMap.get(yearMonth).add(reimbursementInfo);
+            }else{
+                List<ReimbursementInfo> list = new ArrayList<>();
+                list.add(reimbursementInfo);
+                dateReimbursementMap.put(yearMonth, list);
+            }
+        }
+
+        List<Number> currentDataset = new ArrayList<>();
+        List<Number> totalDataset = new ArrayList<>();
+        int total = 0;
+        for(Map.Entry<YearMonth, List<ReimbursementInfo>> record:dateReimbursementMap.entrySet()){
+            YearMonth date = record.getKey();
+            xAxisData.add(date.getYear() + " " + date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+            int current = 0;
+            for(ReimbursementInfo reimbursementInfo: record.getValue()){
+                current += reimbursementInfo.getAmount();
+            }
+            total += current;
+            currentDataset.add(current);
+            totalDataset.add(total);
+        }
+
+        currentDataList.setDataset(currentDataset);
+        totalDataList.setDataset(totalDataset);
+
+        lineChartData.setXAxisData(xAxisData);
+        lineChartData.setDataList(Arrays.asList(currentDataList, totalDataList));
         return lineChartData;
     }
 }

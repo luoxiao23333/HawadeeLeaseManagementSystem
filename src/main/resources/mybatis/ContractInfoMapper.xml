@@ -10,7 +10,7 @@
             <result property="promoterId" column="promoter_id"/>
             <result property="status" column="status"/>
             <result property="title" column="title"/>
-            <result property="content" column="content"/>
+            <result property="contentLoc" column="content_loc"/>
             <result property="createDate" column="create_date"/>
             <result property="fileLoc" column="file_loc" />
         </association>
@@ -26,7 +26,7 @@
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
                c.promoter_id, c.status, c.file_loc,
-               c.title, c.content, c.create_date
+               c.title, c.content_loc, c.create_date
         from user as u right join contract_info as c on u.id = c.current_handler_id
         where c.promoter_id = #{userId}
     </select>
@@ -35,14 +35,14 @@
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
                c.promoter_id, c.status, c.file_loc,
-               c.title, c.content, c.create_date
+               c.title, c.create_date, c.content_loc
         from user as u inner join contract_info as c on u.id = c.current_handler_id
         where c.current_handler_id = #{userId}
     </select>
 
     <insert id="addNewContract">
-        insert into contract_info (promoter_id,current_handler_id, title, content, file_loc) values
-        (${promoterId},${currentHandlerId},"${title}","${content}", "${fileLoc}")
+        insert into contract_info (promoter_id,current_handler_id, title, content_loc, file_loc) values
+        (${promoterId},${currentHandlerId},"${title}","${contentLoc}", "${fileLoc}")
     </insert>
 
     <update id="forwardContract">
@@ -57,6 +57,14 @@
     <delete id="removeContract">
         delete from hawadee.contract_info where id = #{contractId}
     </delete>
+
+    <update id="updateContentById">
+        update hawadee.contract_info set content_loc = #{contentLoc} where hawadee.contract_info.id = #{contractId}
+    </update>
+
+    <select id="getContractById" resultType="com.group5.hawadeeleasemanagementsystem.domain.ContractInfo">
+        select * from hawadee.contract_info where id = #{contractId}
+    </select>
 </mapper>
 
 

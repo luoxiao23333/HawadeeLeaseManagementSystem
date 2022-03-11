@@ -9,10 +9,11 @@
             <result property="currentHandlerId" column="current_handler_id"/>
             <result property="promoterId" column="promoter_id"/>
             <result property="status" column="status"/>
-            <result property="title" column="title"/>
+            <result property="amount" column="amount"/>
             <result property="content" column="content"/>
             <result property="createDate" column="create_date"/>
             <result property="provFileLoc" column="file_loc" />
+            <result property="approvalFileLoc" column="approval_file_loc" />
         </association>
         <association property="user" javaType="com.group5.hawadeeleasemanagementsystem.domain.User">
             <id property="id" column="uid"/>
@@ -25,8 +26,8 @@
     <select id="getReimbursementUserPromoted" resultMap="WithUserResultMap">
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
-               c.promoter_id, c.status, c.file_loc,
-               c.title, c.content, c.create_date
+               c.promoter_id, c.status, c.file_loc, c.approval_file_loc,
+               c.amount, c.content, c.create_date
         from user as u right join reimbursement_info as c on u.id = c.current_handler_id
         where c.promoter_id = #{userId}
     </select>
@@ -35,14 +36,18 @@
         select u.id as uid, u.name, u.password, u.phone,
                c.id as cid, c.current_handler_id,
                c.promoter_id, c.status, c.file_loc,
-               c.title, c.content, c.create_date
+               c.amount, c.content, c.create_date
         from user as u inner join reimbursement_info as c on u.id = c.current_handler_id
         where c.current_handler_id = #{userId}
     </select>
 
+    <select id="getAllReimbursement" resultType="com.group5.hawadeeleasemanagementsystem.domain.ReimbursementInfo">
+        select * from reimbursement_info;
+    </select>
+
     <insert id="addNewReimbursement">
-        insert into reimbursement_info (promoter_id,current_handler_id, title, content, file_loc) values
-            (${promoterId},${currentHandlerId},"${title}","${content}", "${provFileLoc}")
+        insert into reimbursement_info (promoter_id,current_handler_id, amount, content, file_loc, approval_file_loc) values
+            (${promoterId},${currentHandlerId},"${amount}","${content}", "${provFileLoc}", "${approvalFileLoc}")
     </insert>
 
     <update id="forwardReimbursement">

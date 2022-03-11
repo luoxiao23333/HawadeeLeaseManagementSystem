@@ -2,7 +2,9 @@ package com.group5.hawadeeleasemanagementsystem.domain;
 
 import lombok.Data;
 
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 @Data
 public class ReimbursementInfo {
@@ -18,9 +20,14 @@ public class ReimbursementInfo {
     private Integer currentHandlerId;
     private Integer promoterId;
     private Integer status;
-    private String title;
+    private Integer amount;
     // private Integer type;
     private String content;
     private Date createDate;
     private String provFileLoc;
+    private String approvalFileLoc;
+
+    public String getFormattedCreateTime(){
+        return DateFormat.getDateInstance(DateFormat.FULL, Locale.CHINA).format(this.getCreateDate());
+    }
 }

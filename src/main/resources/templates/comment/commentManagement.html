@@ -6,88 +6,97 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  <header th:replace="common::header"></header>
-  <aside th:replace="common::leftSide"></aside>
+    <header th:replace="common::header"></header>
+    <aside th:replace="common::leftSide"></aside>
 
-  <div class="content-wrapper" style="min-height: 923px;">
-    Welcome
-    <span th:text="${session.user.name}"></span>
-    <!-- 发起新合同 -->
-    <div class="box-header with-border">
-      <h3 class="box-title">New Comment</h3>
+    <div class="content-wrapper" style="min-height: 923px;">
+        <section class="content-header">
+            <h1>留言管理</h1>
+        </section>
+        <section class="content">
+            <!-- 发起新合同 -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">新的留言</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" action="#" th:action="@{/comment/newComment}"
+                      method="post" enctype="multipart/form-data">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">匿名昵称</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="nickname" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评论内容</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="content" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">发送</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+
+            <div class="box box-info">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <i class="fa fa-comments-o"></i>
+
+                        <h3 class="box-title">所有留言</h3>
+
+                        <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
+                            <div class="btn-group" data-toggle="btn-toggle">
+                                <button type="button" class="btn btn-default btn-sm active"><i
+                                        class="fa fa-square text-green"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm"><i
+                                        class="fa fa-square text-red"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body chat" id="chat-box">
+                        <!-- chat item -->
+                        <div th:each="comment:${commentList}">
+                            <div class="item">
+                                <img src="../static/dist/img/user2-160x160.jpg" class="offline">
+
+                                <p class="message">
+                                    <a href="#" class="name">
+                                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+                                            <td th:text="${comment.getCommentID()}">1</td>
+                                        </small>
+                                        <td th:text="${comment.getNickname()}">Alexander Pierce</td>
+                                    </a>
+                                <td th:text="${comment.getContent()}">Alexander Pierce</td>
+                                </p>
+                            </div>
+                            <!-- /.item -->
+                        </div>
+                        <!-- /.chat --
+                      </div>
+                      <!-- /.box (chat box) -->
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <!-- /.box-header -->
-    <!-- form start -->
-    <form class="form-horizontal" action="#" th:action="@{/comment/newComment}"
-          method="post" enctype="multipart/form-data">
-      <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">nickname</label>
-
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="nickname" name="nickname" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Content</label>
-
-          <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Content" name="content" required>
-          </div>
-        </div>
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        <button type="submit" class="btn btn-info pull-right">Submit</button>
-      </div>
-      <!-- /.box-footer -->
-    </form>
-    <div class="box-header with-border">
-      <h3 class="box-title">All Comments</h3>
-    </div>
-
-    <div class="box box-success" style="position: relative; left: 0px; top: 0px;">
-      <div class="box-header ui-sortable-handle" style="cursor: move;">
-        <i class="fa fa-comments-o"></i>
-
-        <h3 class="box-title">Chat</h3>
-
-        <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Status">
-          <div class="btn-group" data-toggle="btn-toggle">
-            <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i>
-            </button>
-            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="box-body chat" id="chat-box" style="overflow: hidden; width: auto; height: 250px;">
-        <!-- chat item -->
-        <div th:each="comment:${commentList}">
-          <div class="item">
-          <img src="p.jpg" class="offline">
-
-          <p class="message">
-            <a href="#" class="name">
-              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <td th:text="${comment.getCommentID()}">1</td></small>
-              <td th:text="${comment.getNickname()}">Alexander Pierce</td>
-            </a>
-            <td th:text="${comment.getContent()}">Alexander Pierce</td>
-          </p>
-        </div>
-        </div>
-        <!-- /.item -->
-      </div><div class="slimScrollBar" ></div>
-        <div class="slimScrollRail" ></div></div>
-    </div>
-
-
-  </div>    
 </div>
 
 <div th:replace="common::jsHead"></div>
 
-</div>
 </body>
 
 </html>

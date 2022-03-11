@@ -314,7 +314,7 @@
                 <img th:src="@{/static/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p th:text="'Welcome ' + ${session.user.getName()}">Alexander Pierce</p>
+                <p th:text="'欢迎 ' + ${session.user.getName()}">Alexander Pierce</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -367,7 +367,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a th:href="@{/project/projectManagement}"><i class="fa fa-fw fa-folder-open"></i>项目申请/审批</a></li>
+                    <li class="active"><a th:href="@{/project/projectMy}"><i class="fa fa-circle-o"></i>我的项目</a></li>
+                    <li class="active"><a th:href="@{/project/projectManagement}"><i class="fa fa-circle-o"></i>立项申请</a></li>
+                    <li class="active"><a th:href="@{/project/projectApprove}"><i class="fa fa-circle-o"></i>立项审批</a></li>
+                    <li class="active"><a th:href="@{/project/projectSubmitRes}"><i class="fa fa-circle-o"></i>成果提交</a></li>
+                    <li class="active"><a th:href="@{/project/projectResScore}"><i class="fa fa-circle-o"></i>成果评级</a></li>
                 </ul>
             </li>
 
@@ -412,8 +416,8 @@
                 </ul>
             </li>
 
-            <li class="header">数据面板</li>
-            <li class="active treeview">
+            <li class="header" th:if="${session.isShowDataVisualization}==true">数据面板</li>
+            <li class="active treeview" th:if="${session.isShowDataVisualization}==true">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>数据面板</span>
                     <span class="pull-right-container">
@@ -475,6 +479,9 @@
     <script th:src="@{/static/dist/js/demo.js}"></script>
     <!-- ChartJS -->
     <script th:src="@{/static/bower_components/chart.js/Chart.js}"></script>
+    <script th:src="@{/static/plugins/iCheck/icheck.min.js}"></script>
+    <script th:src="@{/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+    <script th:src="@{/static/bower_components/ckeditor/ckeditor.js}"></script>
 </div>
 
 </body>
