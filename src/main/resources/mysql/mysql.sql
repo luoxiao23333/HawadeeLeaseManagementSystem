@@ -197,10 +197,16 @@ create table client
     phone varchar(200)  null,
     email varchar(500)  null
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 4
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci
   ROW_FORMAT = Dynamic;
+insert into client (name, phone, email) values ("杜小龙","15282505597","1635564377@qq.com"),
+                                               ("樊杨","15282505597","642782632@qq.com"),
+                                               ("罗霄","15282505597","2362844711@qq.com"),
+                                               ("汤智妍","1282505597","1295884532@qq.com"),
+                                               ("李政霖","15282505597","1125806272@qq.com"),
+                                               ("刘君昊","15282505597","992364620@qq.com");
 
 /* 新的表格放在这行上面 */
 
