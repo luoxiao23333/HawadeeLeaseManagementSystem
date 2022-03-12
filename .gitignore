@@ -32,3 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 src/main/java/com/group5/hawadeeleasemanagementsystem/service/FileService.java
+src/main/resources/application.properties
+src/main/java/com/group5/hawadeeleasemanagementsystem/service/FileService.java
