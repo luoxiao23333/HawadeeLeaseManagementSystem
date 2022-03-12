@@ -3,6 +3,7 @@ package com.group5.hawadeeleasemanagementsystem.service;
 import com.group5.hawadeeleasemanagementsystem.domain.User;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -21,7 +22,7 @@ import java.util.UUID;
 @Service
 public class FileService {
     // 最后的斜杠不能少
-    public static final String FilePath = "//Users//bytedance//Desktop//hawadeeFile";
+    public static final String FilePath = "E:/hawadeeFile/";
 
 
     private String getUniqueFileName(String prefix, String suffix) throws Exception {

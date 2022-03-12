@@ -69,7 +69,7 @@ public class AccountController {
 
         session.setAttribute("user", user);
         session.setAttribute("isShowDataVisualization", this.dataVisualizationService.isLegalUser(user));
-        mv.setViewName("/index");
+        mv.setViewName("redirect:/display/homepage");
         return mv;
 
     }
